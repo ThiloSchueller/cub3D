@@ -8,7 +8,7 @@ LIBFT = libft/libft.a
 MLX_DIR = ./mlx
 MLX = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 VPATH = $(SOURCE_DIR):$(INCLUDE_DIR)
-SOURCES = main.c
+SOURCES = main.c parser.c
 HEADERS = cub3D.h
 OBJ = $(addprefix $(OBJECT_DIR)/, $(SOURCES:.c=.o))
 
