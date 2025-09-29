@@ -1,0 +1,6 @@
+.vscode
+*.o
+libft/libft.a
+libft/*.o
+mlx
+cub3D
