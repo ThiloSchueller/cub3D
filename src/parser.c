@@ -6,27 +6,24 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/09/29 17:59:42 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/09/29 18:39:38 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../inc/cub3D.h"
 
-	// fd = open("read_line.txt", O_RDONLY);
-	// printf("Hello World!\n");
-	// str = get_next_line(fd);
-	// while (str != NULL)
-	// {
-	// 	printf("%s", str);
-	// 	str = get_next_line(fd);
-	// }
-	// return (0);
-
-
 void	parser(int fd)
 {
+	char	*str;
+
 	printf("%d\n", fd);
 	printf("Hello World!\n");
+	str = get_next_line(fd);
+	while (str != NULL)
+	{
+		printf("%s", str);
+		str = get_next_line(fd);
+	}
 }
 
 
@@ -53,3 +50,18 @@ void	parser(int fd)
 // GNL → gives you one line at a time
 
 // Parser → decides what that line means and stores it in the right place
+
+
+//check the validity of maps
+// when we have unregular maps
+// we still need to store those maps as rectengular map
+// we will just store spaces instead
+
+//Since some rows are shorter than the maximum width, you usually pad them with spaces when storing in your 2D array.
+
+// char **map; // map[height][width]
+
+// for each row {
+//     copy characters
+//     pad the rest with ' ' or '1' (depending on your approach)
+// }
