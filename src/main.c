@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/09/29 18:00:26 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/09/30 15:27:57 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -40,11 +40,48 @@ int	check_file(char *file)
 	return (fd);
 }
 
+void	init_data(t_config *data)
+{
+    if (!data)
+        return;
+
+    // Flags
+    data->no_set = 0;
+    data->so_set = 0;
+    data->we_set = 0;
+    data->ea_set = 0;
+    data->floor_set = 0;
+    data->ceil_set = 0;
+    data->map_set = 0;
+
+    // Texture paths
+    data->texture_no = NULL;
+    data->texture_so = NULL;
+    data->texture_we = NULL;
+    data->texture_ea = NULL;
+
+    // Colors
+    data->floor_color = -1;
+    data->ceiling_color = -1;
+
+    // Map
+    data->map = NULL;
+    data->map_width = 0;
+    data->map_height = 0;
+
+    // Player
+    data->player_x = -1;
+    data->player_y = -1;
+    data->player_dir = '\0';
+}
+
 int	main(int argc, char *argv[])
 {
-	int	fd;
+	int			fd;
+	t_config	*data;
 
 	fd = 0;
+	data = NULL;
 	if (argc != 2)
 	{
 		printf("Invalid arguments\n");
@@ -52,6 +89,9 @@ int	main(int argc, char *argv[])
 	}
 	fd = check_file(argv[1]);
 	if (fd > 2)
-		parser(fd);
+	{
+		init_data(data);
+		parser(fd, data);
+	}
 	return (0);
 }

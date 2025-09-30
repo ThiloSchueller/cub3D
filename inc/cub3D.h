@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/09/29 18:35:59 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/09/30 15:33:53 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,6 +21,13 @@
 
 typedef struct s_config
 {
+	int		no_set;
+	int		so_set;
+	int		we_set;
+	int		ea_set;
+	int		floor_set;
+	int		ceil_set;
+	int		map_set;
 	char	*texture_no;	// path to north texture
 	char	*texture_so;	// path to south texture
 	char	*texture_we;	// path to west texture
@@ -40,7 +47,16 @@ typedef struct s_config
 
 //main.c
 int		check_file(char *file);
+void	init_data(t_config *data);
 
 //parser.c
-void	parser(int fd);
+int		starts_with(char *line, char *str);
+void	parser(int fd, t_config *data);
+int		check_valid_path(char *path);
+int		parse_texture(char *line, t_config *data);
+int		check_validity_input(char *str);
+int		color_to_hex(int red, int green, int blue);
+int		color_str_to_int(char *str);
+int		parse_color(char *line, t_config *data);
+void	parse_element(char *line, t_config *data);
 #endif
