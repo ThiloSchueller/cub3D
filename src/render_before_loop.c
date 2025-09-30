@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/09/30 16:12:05 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:17:35 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,27 @@ int	render_background(t_vars *vars)
 
 int	render_minimap(t_vars *vars)
 {
-	(void)vars;
-	// int	x;
-	// int	y;
-	// int	scale;
+	int	x;
+	int	y;
+	int	scale;
 
-	// scale = 5;
-	// x = 0;
-	// y = 0;
-	// while (x < width * scale)
-	// {
-	// 	while (y < height * scale)
-	// 	{
-	// 		if (value(y/scale) == wall)
-	// 			mlx_put_pixel(vars->minimap, x , 0 , 0x00000055);
-	// 		else if (value == player)
-	// 			mlx_put_pixel(vars->minimap, x , 0 , 0xFF000055);
-	// 		else
-	// 			mlx_put_pixel(vars->minimap, x , 0 , 0xFFFFFF55);
-	// 		y++;
-	// 	}
-	// 	y = 0;
-	// 	x++;
-	// }
+	scale = 5;
+	x = 0;
+	y = 0;
+	while (x < width * scale)
+	{
+		while (y < height * scale)
+		{
+			if (value(y/scale) == wall)
+				mlx_put_pixel(vars->minimap, x , 0 , 0x00000055);
+			else if (value == player)
+				mlx_put_pixel(vars->minimap, x , 0 , 0xFF000055);
+			else
+				mlx_put_pixel(vars->minimap, x , 0 , 0xFFFFFF55);
+			y++;
+		}
+		y = 0;
+		x++;
+	}
 	return (0);
 }
