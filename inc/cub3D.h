@@ -6,18 +6,24 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/09/30 16:00:44 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:09:13 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include "../libft/libft.h"
-# include "../libft/get_next_line.h"
+ #define HEIGHT 600
+ #define WIDTH 800
+ #include <stdlib.h>
+ #include <unistd.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <fcntl.h>
+ #include "../mlx/include/MLX42/MLX42.h"
+ #include "../libft/libft.h"
+ #include "../libft/ft_printf.h"
+ #include "../libft/get_next_line.h"
 
 typedef struct s_config
 {
@@ -45,6 +51,14 @@ typedef struct s_config
 	char	player_dir;		// 'N', 'S', 'E', or 'W'
 }	t_config;
 
+ typedef struct s_vars
+ {
+	mlx_t	*mlx;
+	mlx_image_t	*background;
+	mlx_image_t *minimap;
+	t_config	config;
+ }	t_vars;
+
 //main.c
 int		check_file(char *file);
 void	init_data(t_config *data);
@@ -59,31 +73,11 @@ int		color_to_hex(int red, int green, int blue);
 int		color_str_to_int(char *str);
 int		parse_color(char *line, t_config *data);
 void	parse_element(char *line, t_config *data);
-#endif
-#ifndef CUB3D_H
-# define CUB3D_H
-
- #define HEIGHT 600
- #define WIDTH 800
- #include <stdlib.h>
- #include <unistd.h>
- #include <stdio.h>
- #include <stdlib.h>
- #include <fcntl.h>
- #include "../mlx/include/MLX42/MLX42.h"
- #include "../libft/libft.h"
- #include "../libft/ft_printf.h"
- #include "../libft/get_next_line.h"
-
- typedef struct s_vars
- {
-	mlx_t	*mlx;
-	mlx_image_t	*background;
-	mlx_image_t *minimap;
- }	t_vars;
 
  void	ft_hook(mlx_key_data_t keydata, void *param);
  int	render_background(t_vars *vars);
  int	render_minimap(t_vars *vars);
- 
 #endif
+
+
+
