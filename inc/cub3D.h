@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/09/29 18:05:16 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/09/30 15:11:36 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@
  typedef struct s_vars
  {
 	mlx_t	*mlx;
-	mlx_image_t	*img;
+	mlx_image_t	*background;
+	mlx_image_t *minimap;
  }	t_vars;
 
+ void	ft_hook(mlx_key_data_t keydata, void *param);
+ int	render_background(t_vars *vars);
+ int	render_minimap(t_vars *vars);
+ 
 #endif

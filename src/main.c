@@ -1,18 +1,5 @@
 #include "cub3D.h"
 
-void	ft_hook(mlx_key_data_t keydata, void *param)
-{
-	t_vars	*vars;
-
-	vars = (t_vars *)param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-	//free;
-	mlx_terminate(vars->mlx);
-	exit(EXIT_SUCCESS);
-	} 
-}
-
 int main()
 {
 	t_vars	vars;
@@ -21,13 +8,16 @@ int main()
 	if (!vars.mlx)
 	ft_putendl_fd("Error\n", 2);
 	mlx_key_hook(vars.mlx, &ft_hook, &vars);
-	vars.img = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
-	for (int i = 0; i < 300; i++){
-		for (int j = 0; j <300; j++){
-				mlx_put_pixel(vars.img, i, j, 0xFF0000);
-		}
-	}
-	mlx_put_pixel(vars.img, 300, 300, 0x00FF00);
+	vars.background = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
+	ft_memset(vars.background->pixels, 255, WIDTH * HEIGHT * sizeof(int32_t));
+	mlx_image_to_window(vars.mlx, vars.background, 0, 0);
+	vars.background->instances->z = 1;
+	render_background(&vars);
+	vars.minimap = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(vars.mlx, vars.minimap, 30, 30);
+	vars.minimap->instances->z = 2;
+
+	render_minimap(&vars);
 	mlx_loop(vars.mlx);
 
 	//mlx_terminate(vars.mlx);
