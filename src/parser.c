@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/09/30 15:45:40 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/09/30 18:12:51 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -29,46 +29,65 @@ void	parser(int fd, t_config *data)
 	str = get_next_line(fd);
 	while (str != NULL)
 	{
-		printf("%s\n", str);
 		parse_element(str, data);
 		free(str);
 		str = get_next_line(fd);
 	}
 }
 
+char	*ft_strdup_n(const char *s1)
+{
+	char	*p;
+
+	p = (char *) malloc((ft_strlen(s1)) * sizeof(char));
+	if (p == NULL)
+		return (0);
+	ft_memcpy(p, s1, ft_strlen(s1) - 1);
+	p[ft_strlen(s1)] = '\0';
+	return (p);
+}
+
+//we need this helper_function to not include the \n
+//when we look at the validity of the path
+
 int	check_valid_path(char *path)
 {
-	if (access(path, X_OK) == 0)
+	char	*valid_path;
+
+	valid_path = ft_strdup_n(path);
+	if (access(valid_path, R_OK) == 0)
 		return (1);
+	printf("Invalid_path\n");
 	return (-1);
 }
 
 int	parse_texture(char *line, t_config *data)
 {
-	if (check_valid_path(&line[3]) < 0)
+	char *path;
+
+	path = ft_strdup(line + 3);
+	if (check_valid_path(path) < 0)
 		return (-1);
-	if (starts_with(line, "NO ") == 1 && !data->no_set)
+	if (starts_with(line, "NO") == 1 && data->no_set == 0)
 	{
-		data->texture_no = ft_strdup(&line[3]);
+		data->texture_no = ft_strdup(line + 3);
 		data->no_set = 1;
 	}
 	else if (starts_with(line, "SO ") && !data->so_set)
 	{
-		data->texture_so = ft_strdup(&line[3]);
+		data->texture_so = ft_strdup(&line[4]);
 		data->so_set = 1;
 	}
 	else if (starts_with(line, "WE ") && !data->we_set)
 	{
-		data->texture_we = ft_strdup(&line[3]);
+		data->texture_we = ft_strdup(&line[4]);
 		data->we_set = 1;
 	}
 	else if (starts_with(line, "EA ") && !data->ea_set)
 	{
-		data->texture_ea = ft_strdup(&line[3]);
+		data->texture_ea = ft_strdup(&line[4]);
 		data->ea_set = 1;
 	}
-	else
-		return (-1);
 	return (0);
 }
 
@@ -150,11 +169,18 @@ void	parse_element(char *line, t_config *data)
 	check = 0;
 	if (starts_with(line, "NO ") == 1 || starts_with(line, "SO ") == 1
 		|| starts_with(line, "WE ") == 1 || starts_with(line, "EA ") == 1)
+	{
+		printf("check_texture\n");
 		check = parse_texture(line, data);
+	}
 	else if (starts_with(line, "F ") == 1 || starts_with(line, "C ") == 1)
+	{
+		printf("check_color\n");
 		check = parse_color(line, data);
+	}
 	if (check < 0)
 		printf("Invalid data, need to free\n");
+	printf("parse successfull\n");
 }
 
 //All required elements are present**.

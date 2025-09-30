@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/09/30 16:09:13 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:11:28 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -66,6 +66,7 @@ void	init_data(t_config *data);
 //parser.c
 int		starts_with(char *line, char *str);
 void	parser(int fd, t_config *data);
+char	*ft_strdup_n(const char *s1);
 int		check_valid_path(char *path);
 int		parse_texture(char *line, t_config *data);
 int		check_validity_input(char *str);
