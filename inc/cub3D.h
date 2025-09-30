@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/09/30 16:09:13 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:57:27 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
  #define HEIGHT 600
  #define WIDTH 800
+ #define PI 3.1415926535
+ #define FOV 120
  #include <stdlib.h>
  #include <unistd.h>
  #include <stdio.h>
@@ -56,6 +58,7 @@ typedef struct s_config
 	mlx_t	*mlx;
 	mlx_image_t	*background;
 	mlx_image_t *minimap;
+	mlx_image_t *walls;
 	t_config	config;
  }	t_vars;
 

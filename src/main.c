@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/09/30 16:06:48 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:28:26 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,26 @@ void	init_data(t_config *data)
 
 int	main(int argc, char *argv[])
 {
-	int			fd;
-	t_config	*data;
+	// int			fd;
+	// t_config	*data;
 
-	fd = 0;
-	data = NULL;
-	if (argc != 2)
-	{
-		printf("Invalid arguments\n");
-		return (1);
-	}
-	fd = check_file(argv[1]);
-	if (fd > 2)
-	{
-		init_data(data);
-		parser(fd, data);
-	}
+	// fd = 0;
+	// data = NULL;
+	// if (argc != 2)
+	// {
+	// 	printf("Invalid arguments\n");
+	// 	return (1);
+	// }
+	// fd = check_file(argv[1]);
+	// if (fd > 2)
+	// {
+	// 	init_data(data);
+	// 	parser(fd, data);
+	// }
 	//return (0);
+
+	(void)argv;
+	(void)argc;
 	t_vars	vars;
 
 	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);

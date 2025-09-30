@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:31:03 by tschulle          #+#    #+#             */
-/*   Updated: 2025/09/30 15:31:05 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:37:42 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
 	//free;
-	mlx_terminate(vars->mlx);
-	exit(EXIT_SUCCESS);
+		mlx_terminate(vars->mlx);
+		exit(EXIT_SUCCESS);
 	} 
 }
