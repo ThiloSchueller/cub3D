@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:52:55 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 13:53:29 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/01 14:24:43 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -35,22 +35,22 @@ int	parse_texture(char *line, t_config *data)
 		return (-1);
 	if (starts_with(line, "NO") == 1 && data->no_set == 0)
 	{
-		data->texture_no = ft_strdup(line + 3);
+		data->texture_no = ft_strdup_no_newline(line + 3);
 		data->no_set = 1;
 	}
 	else if (starts_with(line, "SO ") && !data->so_set)
 	{
-		data->texture_so = ft_strdup(&line[4]);
+		data->texture_so = ft_strdup_no_newline(line + 3);
 		data->so_set = 1;
 	}
 	else if (starts_with(line, "WE ") && !data->we_set)
 	{
-		data->texture_we = ft_strdup(&line[4]);
+		data->texture_we = ft_strdup_no_newline(line + 3);
 		data->we_set = 1;
 	}
 	else if (starts_with(line, "EA ") && !data->ea_set)
 	{
-		data->texture_ea = ft_strdup(&line[4]);
+		data->texture_ea = ft_strdup_no_newline(line + 3);
 		data->ea_set = 1;
 	}
 	else

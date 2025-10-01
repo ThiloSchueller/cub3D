@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 14:16:01 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/01 14:32:42 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -24,6 +24,17 @@ void	parser(int fd, t_config *data)
 		free(str);
 		str = get_next_line(fd);
 	}
+	if (data->stop == 0)
+	{
+		printf("parse successfull\n");
+		printf("\n");
+		printf("NO: %s\n", data->texture_no);
+		printf("SO: %s\n", data->texture_so);
+		printf("WE: %s\n", data->texture_we);
+		printf("EA: %s\n", data->texture_ea);
+		printf("floor color: %x\n", data->floor_color);
+		printf("ceiling color: %x\n", data->ceiling_color);
+	}
 }
 
 void	parse_element(char *line, t_config *data)
@@ -33,22 +44,16 @@ void	parse_element(char *line, t_config *data)
 	check = 0;
 	if (starts_with(line, "NO ") == 1 || starts_with(line, "SO ") == 1
 		|| starts_with(line, "WE ") == 1 || starts_with(line, "EA ") == 1)
-	{
-		printf("check_texture\n");
 		check = parse_texture(line, data);
-	}
 	else if (starts_with(line, "F ") == 1 || starts_with(line, "C ") == 1)
-	{
-		printf("check_color\n");
 		check = parse_color(line, data);
-	}
 	if (check < 0)
 	{
 		data->stop = 1;
 		printf("Ivalid input\n");
+		//I need to free what I already allocated in my struct
 		return ;
 	}
-	printf("parse successfull\n");
 }
 
 //All required elements are present**.
