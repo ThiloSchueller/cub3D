@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 14:32:42 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/01 17:23:18 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -20,12 +20,17 @@ void	parser(int fd, t_config *data)
 	while (str != NULL && data->stop == 0)
 	{
 		if (str[0] != '\n')
+		{
+			if (is_map_line(str))
+				parse_map(ft_strdup_no_newline(str), data);
 			parse_element(str, data);
+		}
 		free(str);
 		str = get_next_line(fd);
 	}
 	if (data->stop == 0)
 	{
+		create_empty_map(data);
 		printf("parse successfull\n");
 		printf("\n");
 		printf("NO: %s\n", data->texture_no);
@@ -34,6 +39,9 @@ void	parser(int fd, t_config *data)
 		printf("EA: %s\n", data->texture_ea);
 		printf("floor color: %x\n", data->floor_color);
 		printf("ceiling color: %x\n", data->ceiling_color);
+		printf("map_width: %d\n", data->map_width);
+		printf("map_height: %d\n", data->map_height);
+		print_map(data);
 	}
 }
 

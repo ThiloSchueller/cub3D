@@ -6,24 +6,24 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/01 14:00:10 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/01 17:37:25 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
- #define HEIGHT 600
- #define WIDTH 800
- #include <stdlib.h>
- #include <unistd.h>
- #include <stdio.h>
- #include <stdlib.h>
- #include <fcntl.h>
- #include "../mlx/include/MLX42/MLX42.h"
- #include "../libft/libft.h"
- #include "../libft/ft_printf.h"
- #include "../libft/get_next_line.h"
+# define HEIGHT 600
+# define WIDTH 800
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include "../mlx/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
+# include "../libft/ft_printf.h"
+# include "../libft/get_next_line.h"
 
 typedef struct s_config
 {
@@ -74,6 +74,11 @@ int		parse_color(char *line, t_config *data);
 int		starts_with(char *line, char *str);
 char	*ft_strdup_no_newline(const char *s1);
 //parser_map.c
+int		is_map_line(char *line);
+void	parse_map(char *line, t_config *data);
+void	free_row(char **map, int i);
+void	create_empty_map(t_config *data);
+void	print_map(t_config *data);
 //parser_textures.c
 int		check_valid_path(char *path);
 int		parse_texture(char *line, t_config *data);
