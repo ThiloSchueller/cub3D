@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 13:55:03 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/01 14:16:01 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,7 +19,8 @@ void	parser(int fd, t_config *data)
 	str = get_next_line(fd);
 	while (str != NULL && data->stop == 0)
 	{
-		parse_element(str, data);
+		if (str[0] != '\n')
+			parse_element(str, data);
 		free(str);
 		str = get_next_line(fd);
 	}

@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:54:16 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 13:54:31 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/01 14:12:03 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -61,13 +61,17 @@ int	color_str_to_int(char *str)
 
 int	parse_color(char *line, t_config *data)
 {
-	int	color;
+	int		color;
+	char	*str;
 
-	if (check_validity_input(&line[2]) < 0)
+	str = ft_strdup_no_newline(&line[2]);
+	if (check_validity_input(str) < 0 || color_str_to_int(str) < 0)
+	{
+		free(str);
 		return (-1);
-	color = color_str_to_int(&line[2]);
-	if (color < 0)
-		return (-1);
+	}
+	color = color_str_to_int(str);
+	free(str);
 	if (starts_with(line, "F ") == 1 && !data->floor_set)
 	{
 		data->floor_color = color;
