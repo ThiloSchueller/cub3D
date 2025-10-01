@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/09/30 16:28:26 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:32:58 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	main(int argc, char *argv[])
 	(void)argc;
 	t_vars	vars;
 
+	vars.view_angle = 0.0;
 	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!vars.mlx)
 	ft_putendl_fd("Error\n", 2);

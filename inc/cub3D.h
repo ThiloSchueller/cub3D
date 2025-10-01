@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/09/30 16:57:27 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/01 16:48:04 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
  #define HEIGHT 600
  #define WIDTH 800
+ #define SCALE 20
  #define PI 3.1415926535
  #define FOV 120
  #include <stdlib.h>
@@ -22,6 +23,7 @@
  #include <stdio.h>
  #include <stdlib.h>
  #include <fcntl.h>
+ #include <math.h>
  #include "../mlx/include/MLX42/MLX42.h"
  #include "../libft/libft.h"
  #include "../libft/ft_printf.h"
@@ -53,6 +55,12 @@ typedef struct s_config
 	char	player_dir;		// 'N', 'S', 'E', or 'W'
 }	t_config;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
  typedef struct s_vars
  {
 	mlx_t	*mlx;
@@ -60,6 +68,11 @@ typedef struct s_config
 	mlx_image_t *minimap;
 	mlx_image_t *walls;
 	t_config	config;
+	char		**smap; //scaled map;
+	int			smap_width;
+	int			smap_height;
+	float		view_angle;
+	t_point		pos;
  }	t_vars;
 
 //main.c
@@ -80,6 +93,9 @@ void	parse_element(char *line, t_config *data);
  void	ft_hook(mlx_key_data_t keydata, void *param);
  int	render_background(t_vars *vars);
  int	render_minimap(t_vars *vars);
+ int	render_minimap_rays(t_vars *vars, float angle);
+ int	render_minimap_view(t_vars *vars);
+ char 	**calc_smap(t_vars *vars);
 #endif
 
 
