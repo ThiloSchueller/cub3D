@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/09/30 18:11:28 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/01 14:00:10 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -27,6 +27,7 @@
 
 typedef struct s_config
 {
+	int		stop;			// when we have duplicate, no need to continue
 	int		no_set;
 	int		so_set;
 	int		we_set;
@@ -63,17 +64,23 @@ typedef struct s_config
 int		check_file(char *file);
 void	init_data(t_config *data);
 
-//parser.c
-int		starts_with(char *line, char *str);
-void	parser(int fd, t_config *data);
-char	*ft_strdup_n(const char *s1);
-int		check_valid_path(char *path);
-int		parse_texture(char *line, t_config *data);
+//parser
+//parser_colours.c
 int		check_validity_input(char *str);
 int		color_to_hex(int red, int green, int blue);
 int		color_str_to_int(char *str);
 int		parse_color(char *line, t_config *data);
+//parser_helper.c
+int		starts_with(char *line, char *str);
+char	*ft_strdup_no_newline(const char *s1);
+//parser_map.c
+//parser_textures.c
+int		check_valid_path(char *path);
+int		parse_texture(char *line, t_config *data);
+//parser.c
+void	parser(int fd, t_config *data);
 void	parse_element(char *line, t_config *data);
+
 
  void	ft_hook(mlx_key_data_t keydata, void *param);
  int	render_background(t_vars *vars);

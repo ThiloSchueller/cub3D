@@ -2,5 +2,5 @@ NO ./textures/north.png
 SO ./textures/south.png
 WE ./textures/west.png
 EA ./textures/east.png
-F 220,100,0
-C 100,100,100
+NO ./textures/north.png
+NO ./textures/north.png
