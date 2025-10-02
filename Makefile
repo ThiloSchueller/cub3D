@@ -10,8 +10,14 @@ MLX = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 VPATH = $(SOURCE_DIR):$(INCLUDE_DIR)
 SOURCES = 	main.c \
 			parser.c \
-			render_before_loop.c \
-			hook.c
+			render.c \
+			hook.c \
+			keys_arrows.c \
+			keys_wasd.c \
+			exit.c \
+			minimap.c \
+			images.c
+
 HEADERS = cub3D.h
 OBJ = $(addprefix $(OBJECT_DIR)/, $(SOURCES:.c=.o))
 

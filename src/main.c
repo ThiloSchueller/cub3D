@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 15:32:58 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:46:49 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,25 +98,38 @@ int	main(int argc, char *argv[])
 	(void)argv;
 	(void)argc;
 	t_vars	vars;
+	t_texture textures;
+	vars.config.map_width = 5;
+	vars.config.map_height = 5;
+	vars.config.map = (char *[]){"11111", "10P01", "10101", "10001", "11111"};
 
-	vars.view_angle = 0.0;
 	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!vars.mlx)
-	ft_putendl_fd("Error\n", 2);
-	mlx_key_hook(vars.mlx, &ft_hook, &vars);
-	vars.background = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
-	ft_memset(vars.background->pixels, 255, WIDTH * HEIGHT * sizeof(int32_t));
-	mlx_image_to_window(vars.mlx, vars.background, 0, 0);
-	vars.background->instances->z = 1;
-	render_background(&vars);
-	vars.minimap = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(vars.mlx, vars.minimap, 30, 30);
-	vars.minimap->instances->z = 2;
-
-	render_minimap(&vars);
+		ft_exit(ERROR_MLX, &vars);
+	ft_get_textures(&textures);
+	ft_textures_to_images(&textures, &vars);
+	mlx_key_hook(vars.mlx, &ft_key_hook, &vars);
+	mlx_loop_hook(vars.mlx, &ft_loop_hook, &vars);
+	init_vars(&vars);
+	render(&vars);
 	mlx_loop(vars.mlx);
-
 	//mlx_terminate(vars.mlx);
 }
 
+int	init_vars(t_vars * vars)
+{
+	vars->smap = calc_smap(vars);
+	vars->background = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
+	vars->minimap = mlx_new_image(vars->mlx, WIDTH -30, HEIGHT -30);
+	vars->walls = mlx_new_image (vars->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(vars->mlx, vars->background, 0, 0);
+	mlx_image_to_window(vars->mlx, vars->minimap, 30, 30);
+	mlx_image_to_window(vars->mlx, vars->walls, 0, 0);
+	vars->view_angle = 0.0; //should be depending on SWEN maybe exxtra func
+	vars->background->instances->z = 1;
+	vars->minimap->instances->z = 2;
+	vars->walls->instances->z = 3;
+	return (0);
+}
 
+	//ft_memset(vars.background->pixels, 255, WIDTH * HEIGHT * sizeof(int32_t));

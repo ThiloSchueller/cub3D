@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/01 16:48:04 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:56:19 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
  #define WIDTH 800
  #define SCALE 20
  #define PI 3.1415926535
- #define FOV 120
+ #define FOV 60
+ #define ERROR_MLX 10
  #include <stdlib.h>
  #include <unistd.h>
  #include <stdio.h>
@@ -55,11 +56,33 @@ typedef struct s_config
 	char	player_dir;		// 'N', 'S', 'E', or 'W'
 }	t_config;
 
+typedef struct	s_texture
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+}	t_texture;
+
+typedef struct s_image
+{
+	mlx_image_t	*north;
+	mlx_image_t	*south;
+	mlx_image_t	*west;
+	mlx_image_t	*east;
+}	t_image;
+
 typedef struct s_point
 {
 	int	x;
 	int	y;
 }	t_point;
+
+typedef struct s_fpoint //float point;
+{
+	float x;
+	float y;
+}	t_fpoint;
 
  typedef struct s_vars
  {
@@ -73,6 +96,8 @@ typedef struct s_point
 	int			smap_height;
 	float		view_angle;
 	t_point		pos;
+	t_fpoint 	fpos;
+	t_image		images;
  }	t_vars;
 
 //main.c
@@ -90,12 +115,27 @@ int		color_str_to_int(char *str);
 int		parse_color(char *line, t_config *data);
 void	parse_element(char *line, t_config *data);
 
- void	ft_hook(mlx_key_data_t keydata, void *param);
+void	ft_get_textures(t_texture *textures);
+void	ft_textures_to_images(t_texture *textures, t_vars *vars);
+ int	init_vars(t_vars *vars);
+ void	ft_key_hook(mlx_key_data_t keydata, void *param);
+ void	ft_loop_hook(void *param);
+ void	left_key(t_vars *vars);
+ void	right_key(t_vars *vars);
+ void	w_key(t_vars *vars);
+ void	s_key(t_vars *vars);
+ void	a_key(t_vars *vars);
+ void	d_key(t_vars *vars);
+ int	render(t_vars *vars);
  int	render_background(t_vars *vars);
  int	render_minimap(t_vars *vars);
+ int	render_walls(t_vars *vars);
  int	render_minimap_rays(t_vars *vars, float angle);
  int	render_minimap_view(t_vars *vars);
- char 	**calc_smap(t_vars *vars);
+ char	**calc_smap(t_vars *vars);
+ int	ft_exit(int code, t_vars *vars);
+ void	move_2d(t_vars *vars, double dx, double dy);
+ 
 #endif
 
 
