@@ -101,7 +101,7 @@ int	main(int argc, char *argv[])
 	t_texture textures;
 	vars.config.map_width = 5;
 	vars.config.map_height = 5;
-	vars.config.map = (char *[]){"11111", "10P01", "10101", "10001", "11111"};
+	vars.config.map = (char *[]){"11111", "10P01", "10101", "11001", "11111"};
 
 	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!vars.mlx)
@@ -127,8 +127,8 @@ int	init_vars(t_vars * vars)
 	mlx_image_to_window(vars->mlx, vars->walls, 0, 0);
 	vars->view_angle = 0.0; //should be depending on SWEN maybe exxtra func
 	vars->background->instances->z = 1;
-	vars->minimap->instances->z = 2;
-	vars->walls->instances->z = 3;
+	vars->minimap->instances->z = 3;
+	vars->walls->instances->z = 2;
 	return (0);
 }
 

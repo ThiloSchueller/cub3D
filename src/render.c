@@ -61,11 +61,36 @@ int	render_minimap(t_vars *vars)
 
 int	render_walls(t_vars *vars)
 {
-	//continue here;
-	//do rays like 2d
-	//calc distance
+	int	x;
+	int y;
+	int h;
+	int	i;
+	int j;
 
-	(void)vars;
+	i = 0;
+	j = 0;
+	x = 0;
+	while (i < WIDTH)
+	{
+		while (j < HEIGHT)
+		{
+			mlx_put_pixel(vars->walls, i, j, 0x00000000);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	while (x < WIDTH)
+	{
+		h = calculate_height(vars, x);
+		y = HEIGHT / 2 - h / 2;
+		while(y < HEIGHT / 2 + h / 2)
+		{
+			mlx_put_pixel(vars->walls, x, y, 0xFF00FFFF);
+			y++;
+		}
+		x++;
+	}
 	return (0);
 }
 

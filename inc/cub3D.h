@@ -135,6 +135,12 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  char	**calc_smap(t_vars *vars);
  int	ft_exit(int code, t_vars *vars);
  void	move_2d(t_vars *vars, double dx, double dy);
+ int	calculate_height(t_vars *vars, int x);
+ float	calculate_angle(t_vars *vars, int x);
+ float	calculate_distance(t_vars *vars, float angle);
+ float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
+ float	quadrant4(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
+ float	distance_two_points(t_fpoint p, t_fpoint q);
  
 #endif
 

@@ -16,7 +16,8 @@ SOURCES = 	main.c \
 			keys_wasd.c \
 			exit.c \
 			minimap.c \
-			images.c
+			images.c \
+			calc1.c
 
 HEADERS = cub3D.h
 OBJ = $(addprefix $(OBJECT_DIR)/, $(SOURCES:.c=.o))
