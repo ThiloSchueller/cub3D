@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/06 11:29:36 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 13:10:38 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -91,7 +91,7 @@ typedef struct s_fpoint //float point;
 	mlx_image_t	*background;
 	mlx_image_t *minimap;
 	mlx_image_t *walls;
-	t_config	config;
+	t_config	*config;
 	char		**smap; //scaled map;
 	int			smap_width;
 	int			smap_height;

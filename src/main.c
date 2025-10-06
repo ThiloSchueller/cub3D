@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 12:52:21 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 13:10:40 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
@@ -111,6 +111,7 @@ int	main(int argc, char *argv[])
 	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!vars.mlx)
 		ft_exit(ERROR_MLX, &vars);
+	vars.config = data;
 	ft_get_textures(&textures);
 	ft_textures_to_images(&textures, &vars);
 	mlx_key_hook(vars.mlx, &ft_key_hook, &vars);
