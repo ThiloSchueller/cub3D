@@ -35,8 +35,8 @@ float	calculate_distance(t_vars *vars, float angle)
 	// ray_pos.x += dx;
 	// ray_pos.y += dy;
 	distance = sqrt((ray_pos.x - vars->fpos.x) * (ray_pos.x - vars->fpos.x) 
-				+ (ray_pos.y - vars->fpos.y) * (ray_pos.y - vars->fpos.y))
-				 + precise_hit(ray_pos, vars, dx, dy);
+				+ (ray_pos.y - vars->fpos.y) * (ray_pos.y - vars->fpos.y));
+				// + precise_hit(ray_pos, vars, dx, dy);
 	return (distance);
 	//return (distance * cos(angle -vars->view_angle)); //fisheye correction, but segaults becuase disctance get higher then HEIGHT but probably becuase of fault distance calc
 }
@@ -53,35 +53,35 @@ int	calculate_height(t_vars *vars, int x)
 	return ((int)wall_height);
 }
 
- float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy)
- {
-	float	re;
-	if (vars->view_angle > 3 / 2 * PI && vars->view_angle < 2 * PI) //soll gar nicht um view angle ghen sonder um ray angle
-	{
-		re = quadrant4(ray_pos, vars, dx, dy);
-	}
-	return(re);
- }
+//  float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy)
+//  {
+// 	float	re;
+// 	if (vars->view_angle > 3 / 2 * PI && vars->view_angle < 2 * PI) //soll gar nicht um view angle ghen sonder um ray angle
+// 	{
+// 		re = quadrant4(ray_pos, vars, dx, dy);
+// 	}
+// 	return(re);
+//  }
 
-float	distance_two_points(t_fpoint p, t_fpoint q)
-{
-	float re;
+// float	distance_two_points(t_fpoint p, t_fpoint q)
+// {
+// 	float re;
 
-	re = sqrt((q.x - p.x) * (q.x - p.x) + (q.y - q.y) * (q.y - q.y));
-	return (re);
-}
+// 	re = sqrt((q.x - p.x) * (q.x - p.x) + (q.y - q.y) * (q.y - q.y));
+// 	return (re);
+// }
 
-float	quadrant4(t_fpoint ray_pos, t_vars *vars, float dx, float dy)
-{
-	float corrected = 0;
-	float factor;
-	float distance;
+// float	quadrant4(t_fpoint ray_pos, t_vars *vars, float dx, float dy)
+// {
+// 	float corrected = 0;
+// 	float factor;
+// 	float distance;
 
-	(void) vars;
-	distance = distance_two_points(ray_pos, (t_fpoint){ray_pos.x + dx, ray_pos.y +dy});
-	factor = (floor(ray_pos.x + dx) - ray_pos.x) / dx;
-	if (factor > 0)
-		corrected = factor * distance;
-	printf("%f\n", corrected);
-	return (corrected);
-}
+// 	(void) vars;
+// 	distance = distance_two_points(ray_pos, (t_fpoint){ray_pos.x + dx, ray_pos.y +dy});
+// 	factor = (floor(ray_pos.x + dx) - ray_pos.x) / dx;
+// 	if (factor > 0)
+// 		corrected = factor * distance;
+// 	printf("%f\n", corrected);
+// 	return (corrected);
+// }
