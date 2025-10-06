@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/02 17:56:19 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/06 11:29:36 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -32,6 +32,7 @@
 
 typedef struct s_config
 {
+	int		stop;			// when we have duplicate, no need to continue
 	int		no_set;
 	int		so_set;
 	int		we_set;
@@ -104,15 +105,29 @@ typedef struct s_fpoint //float point;
 int		check_file(char *file);
 void	init_data(t_config *data);
 
-//parser.c
-int		starts_with(char *line, char *str);
-void	parser(int fd, t_config *data);
-int		check_valid_path(char *path);
-int		parse_texture(char *line, t_config *data);
+//parser
+//parser_colours.c
 int		check_validity_input(char *str);
 int		color_to_hex(int red, int green, int blue);
 int		color_str_to_int(char *str);
 int		parse_color(char *line, t_config *data);
+//parser_helper.c
+int		starts_with(char *line, char *str);
+char	*ft_strdup_no_newline(const char *s1);
+//parser_map.c
+int		is_map_line(char *line);
+void	parse_map(char *line, t_config *data);
+void	free_row(char **map, int i);
+void	create_empty_map(t_config *data);
+void	print_map(t_config *data);
+//parser_textures.c
+int		check_valid_path(char *path);
+int		parse_texture(char *line, t_config *data);
+//parser.c
+int		ft_memcpy_map(void *dst, const void *src, size_t n);
+void	compare_update_map(char *line, t_config *data);
+void	parser_map_2nd_round(t_config *data, char *file);
+void	parser(int fd, t_config *data, char *file);
 void	parse_element(char *line, t_config *data);
 
 void	ft_get_textures(t_texture *textures);

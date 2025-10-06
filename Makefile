@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) #-fsanitize=address -g -static-libsan
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) #-fsanitize=address -g #-static-libsan
 SOURCE_DIR = src
 OBJECT_DIR = obj
 INCLUDE_DIR = inc
@@ -10,6 +10,10 @@ MLX = $(MLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 VPATH = $(SOURCE_DIR):$(INCLUDE_DIR)
 SOURCES = 	main.c \
 			parser.c \
+			parser_colours.c \
+			parser_helper.c \
+			parser_map.c \
+			parser_textures.c \
 			render.c \
 			hook.c \
 			keys_arrows.c \
