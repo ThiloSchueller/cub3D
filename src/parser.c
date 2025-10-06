@@ -6,13 +6,73 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 17:23:18 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 11:08:25 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../inc/cub3D.h"
 
-void	parser(int fd, t_config *data)
+int	ft_memcpy_map(void *dst, const void *src, size_t n)
+{
+	size_t	i;
+	char	*strs;
+	char	*strd;
+
+	i = 0;
+	strs = (char *)src;
+	strd = (char *)dst;
+	if (dst == 0 && src == 0)
+		return (-1);
+	// printf("%s\n", strs);
+	while (i < n)
+	{
+		if (!(strs[i] == ' ' || strs[i] == '1' || strs[i] == '0'
+				|| strs[i] == 'N' || strs[i] == 'S'
+				|| strs[i] == 'W' || strs[i] == 'E'))
+		{
+			printf("Invalid\n");
+			return (-1);
+		}
+		strd[i] = strs[i];
+		i++;
+	}
+	return (1);
+}
+
+void	compare_update_map(char *line, t_config *data)
+{
+	static int	i = 0;
+
+	if (ft_memcpy_map(data->map[i], line, ft_strlen(line)) < 0)
+	{
+		printf("Invalid input\n");
+		//free_map;
+	}
+	data->map[i][ft_strlen(line)] = '\0';
+	i++;
+}
+
+void	parser_map_2nd_round(t_config *data, char *file)
+{
+	int		fd;
+	char	*str;
+
+	fd = open(file, O_RDONLY);
+	str = get_next_line(fd);
+	while (str != NULL && data->stop == 0)
+	{
+		if (str[0] != '\n')
+		{
+			if (is_map_line(str))
+				compare_update_map(ft_strdup_no_newline(str), data);
+		}
+		free(str);
+		str = get_next_line(fd);
+	}
+	close (fd);
+}
+
+void	parser(int fd, t_config *data, char *file)
 {
 	char	*str;
 
@@ -28,19 +88,24 @@ void	parser(int fd, t_config *data)
 		free(str);
 		str = get_next_line(fd);
 	}
+	close (fd);
 	if (data->stop == 0)
 	{
 		create_empty_map(data);
+		parser_map_2nd_round(data, file);
 		printf("parse successfull\n");
 		printf("\n");
 		printf("NO: %s\n", data->texture_no);
 		printf("SO: %s\n", data->texture_so);
 		printf("WE: %s\n", data->texture_we);
 		printf("EA: %s\n", data->texture_ea);
+		printf("\n");
 		printf("floor color: %x\n", data->floor_color);
 		printf("ceiling color: %x\n", data->ceiling_color);
+		printf("\n");
 		printf("map_width: %d\n", data->map_width);
 		printf("map_height: %d\n", data->map_height);
+		printf("\n");
 		print_map(data);
 	}
 }

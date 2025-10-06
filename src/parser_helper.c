@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:51:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 13:52:24 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 09:48:27 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -35,7 +35,7 @@ char	*ft_strdup_no_newline(const char *s1)
 	if (p == NULL)
 		return (0);
 	ft_memcpy(p, s1, len);
-	p[ft_strlen(s1)] = '\0';
+	p[len] = '\0';
 	return (p);
 }
 

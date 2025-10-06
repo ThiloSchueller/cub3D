@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/09/30 17:31:20 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 11:10:52 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -85,7 +85,7 @@ int	main(int argc, char *argv[])
 	if (!data)
 	{
 		perror("malloc");
-		return 1;
+		return (1);
 	}
 	if (argc != 2)
 	{
@@ -96,28 +96,28 @@ int	main(int argc, char *argv[])
 	if (fd > 2)
 	{
 		init_data(data);
-		parser(fd, data);
+		parser(fd, data, argv[1]);
 	}
-	//return (0);
-	// t_vars	vars;
+	return (0);
+	t_vars	vars;
 
-	// vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
-	// if (!vars.mlx)
-	// ft_putendl_fd("Error\n", 2);
-	// mlx_key_hook(vars.mlx, &ft_hook, &vars);
-	// vars.background = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
-	// ft_memset(vars.background->pixels, 255, WIDTH * HEIGHT * sizeof(int32_t));
-	// mlx_image_to_window(vars.mlx, vars.background, 0, 0);
-	// vars.background->instances->z = 1;
-	// render_background(&vars);
-	// vars.minimap = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
-	// mlx_image_to_window(vars.mlx, vars.minimap, 30, 30);
-	// vars.minimap->instances->z = 2;
+	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
+	if (!vars.mlx)
+	ft_putendl_fd("Error\n", 2);
+	mlx_key_hook(vars.mlx, &ft_hook, &vars);
+	vars.background = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
+	ft_memset(vars.background->pixels, 255, WIDTH * HEIGHT * sizeof(int32_t));
+	mlx_image_to_window(vars.mlx, vars.background, 0, 0);
+	vars.background->instances->z = 1;
+	render_background(&vars);
+	vars.minimap = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(vars.mlx, vars.minimap, 30, 30);
+	vars.minimap->instances->z = 2;
 
-	// render_minimap(&vars);
-	// mlx_loop(vars.mlx);
+	render_minimap(&vars);
+	mlx_loop(vars.mlx);
 
-	//mlx_terminate(vars.mlx);
+	mlx_terminate(vars.mlx);
 }
 
 
