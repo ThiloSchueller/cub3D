@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:16:27 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 12:50:21 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 13:11:42 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -79,6 +79,8 @@ void	print_map(t_config *data)
 	int	j;
 
 	i = 0;
+	if (data->map == NULL)
+		return ;
 	while (i < data->map_height)
 	{
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 12:52:28 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 13:12:03 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -39,17 +39,21 @@ int	ft_memcpy_map(void *dst, const void *src, size_t n)
 	return (1);
 }
 
-void	compare_update_map(char *line, t_config *data)
+int	compare_update_map(char *line, t_config *data)
 {
 	static int	i = 0;
 
 	if (ft_memcpy_map(data->map[i], line, ft_strlen(line)) < 0)
 	{
 		printf("Invalid input\n");
+		free_row(data->map, data->map_height);
+		data->map = NULL;
+		return (-1);
 		//free_map;
 	}
 	data->map[i][ft_strlen(line)] = '\0';
 	i++;
+	return (1);
 }
 
 void	parser_map_2nd_round(t_config *data, char *file)
@@ -64,7 +68,14 @@ void	parser_map_2nd_round(t_config *data, char *file)
 		if (str[0] != '\n')
 		{
 			if (is_map_line(str))
-				compare_update_map(ft_strdup_no_newline(str), data);
+			{
+				if (compare_update_map(ft_strdup_no_newline(str), data) < 0)
+				{
+					free(str);
+					close(fd);
+					return ;
+				}
+			}
 		}
 		free(str);
 		str = get_next_line(fd);
