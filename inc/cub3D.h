@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/06 13:10:38 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/06 17:21:03 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
  #include <stdlib.h>
  #include <fcntl.h>
  #include <math.h>
+ #include <stdbool.h>
  #include "../mlx/include/MLX42/MLX42.h"
  #include "../libft/libft.h"
  #include "../libft/ft_printf.h"
@@ -85,6 +86,15 @@ typedef struct s_fpoint //float point;
 	float y;
 }	t_fpoint;
 
+ typedef struct	s_hit_info
+ {
+	float		distance;
+	float		percent_of_hit;
+	float		height;//used?
+	t_fpoint	hit; //used?
+	bool		vertical_hit;
+ }	t_hit_info;
+ 
  typedef struct s_vars
  {
 	mlx_t	*mlx;
@@ -99,6 +109,8 @@ typedef struct s_fpoint //float point;
 	t_point		pos;
 	t_fpoint 	fpos;
 	t_image		images;
+	t_texture	*textures;
+	t_hit_info	hit_info; //not here
  }	t_vars;
 
 //main.c
@@ -130,7 +142,7 @@ void	parser_map_2nd_round(t_config *data, char *file);
 void	parser(int fd, t_config *data, char *file);
 void	parse_element(char *line, t_config *data);
 
-void	ft_get_textures(t_texture *textures);
+void	ft_get_textures(t_vars *vars);
 void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  int	init_vars(t_vars *vars);
  void	ft_key_hook(mlx_key_data_t keydata, void *param);
@@ -148,6 +160,7 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  int	render_minimap_rays(t_vars *vars, float angle);
  int	render_minimap_view(t_vars *vars);
  char	**calc_smap(t_vars *vars);
+ bool	is_player_char(char c);
  int	ft_exit(int code, t_vars *vars);
  void	move_2d(t_vars *vars, double dx, double dy);
  int	calculate_height(t_vars *vars, int x);
@@ -156,6 +169,9 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
  float	quadrant4(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
  float	distance_two_points(t_fpoint p, t_fpoint q);
+ t_hit_info	calc_hit(t_vars *vars, float angle, t_fpoint ray_pos);
+ float	normalise_angle(float angle);
+ t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
  
 #endif
 

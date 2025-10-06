@@ -21,7 +21,8 @@ SOURCES = 	main.c \
 			exit.c \
 			minimap.c \
 			images.c \
-			calc1.c
+			calc1.c \
+			helpers.c
 
 HEADERS = cub3D.h
 OBJ = $(addprefix $(OBJECT_DIR)/, $(SOURCES:.c=.o))
