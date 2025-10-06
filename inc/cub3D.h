@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/06 13:06:44 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 13:25:18 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -91,7 +91,7 @@ typedef struct s_fpoint //float point;
 	mlx_image_t	*background;
 	mlx_image_t *minimap;
 	mlx_image_t *walls;
-	t_config	config;
+	t_config	*config;
 	char		**smap; //scaled map;
 	int			smap_width;
 	int			smap_height;
