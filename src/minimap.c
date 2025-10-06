@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:00:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/02 17:55:58 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/06 12:01:27 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3D.h"
 
@@ -69,7 +69,7 @@ char **calc_smap(t_vars *vars)
 		smap[x] = malloc((vars->smap_width + 1 )* sizeof(char));
 		while (y < vars->smap_height)
 		{
-			if (vars->config.map[x / SCALE][y / SCALE] == 'P')
+			if (vars->config.map[x / SCALE][y / SCALE] == 'E')
 			{
 				if (x % SCALE == ( SCALE / 2) && y % SCALE == (SCALE / 2))
 				{

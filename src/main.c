@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 11:26:32 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 12:52:21 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -42,66 +42,71 @@ int	check_file(char *file)
 
 void	init_data(t_config *data)
 {
-    if (!data)
-        return;
 
     // Flags
-    data->no_set = 0;
-    data->so_set = 0;
-    data->we_set = 0;
-    data->ea_set = 0;
-    data->floor_set = 0;
-    data->ceil_set = 0;
-    data->map_set = 0;
+	data->stop = 0;
+	data->no_set = 0;
+	data->so_set = 0;
+	data->we_set = 0;
+	data->ea_set = 0;
+	data->floor_set = 0;
+	data->ceil_set = 0;
+	data->map_set = 0;
 
     // Texture paths
-    data->texture_no = NULL;
-    data->texture_so = NULL;
-    data->texture_we = NULL;
-    data->texture_ea = NULL;
+	data->texture_no = NULL;
+	data->texture_so = NULL;
+	data->texture_we = NULL;
+	data->texture_ea = NULL;
 
     // Colors
-    data->floor_color = -1;
-    data->ceiling_color = -1;
+	data->floor_color = -1;
+	data->ceiling_color = -1;
 
     // Map
-    data->map = NULL;
-    data->map_width = 0;
-    data->map_height = 0;
+	data->map = NULL;
+	data->map_width = 0;
+	data->map_height = 0;
 
     // Player
-    data->player_x = -1;
-    data->player_y = -1;
-    data->player_dir = '\0';
+	data->player_x = -1;
+	data->player_y = -1;
+	data->player_dir = '\0';
 }
 
 int	main(int argc, char *argv[])
 {
-	// int			fd;
-	// t_config	*data;
+	int			fd;
+	t_config	*data;
 
-	// fd = 0;
-	// data = NULL;
-	// if (argc != 2)
-	// {
-	// 	printf("Invalid arguments\n");
-	// 	return (1);
-	// }
-	// fd = check_file(argv[1]);
-	// if (fd > 2)
-	// {
-	// 	init_data(data);
-	// 	parser(fd, data);
-	// }
+	fd = 0;
+	data = NULL;
+	data = malloc(sizeof(t_config));
+	if (!data)
+	{
+		perror("malloc");
+		return (1);
+	}
+	if (argc != 2)
+	{
+		printf("Invalid arguments\n");
+		return (1);
+	}
+	fd = check_file(argv[1]);
+	if (fd > 2)
+	{
+		init_data(data);
+		parser(fd, data, argv[1]);
+	}
 	//return (0);
 
-	(void)argv;
-	(void)argc;
+	//(void)argv;
+	//(void)argc;
 	t_vars	vars;
 	t_texture textures;
-	vars.config.map_width = 5;
-	vars.config.map_height = 5;
-	vars.config.map = (char *[]){"11111", "10P01", "10101", "11001", "11111"};
+	// vars.config.map_width = 5;
+	// vars.config.map_height = 5;
+	// vars.config.map = (char *[]){"11111", "10P01", "10101", "11001", "11111"};
 
 	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!vars.mlx)

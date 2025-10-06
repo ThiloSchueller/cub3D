@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) #-fsanitize=address -g #-static-libsan
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -fsanitize=address -g #-static-libsan
 SOURCE_DIR = src
 OBJECT_DIR = obj
 INCLUDE_DIR = inc

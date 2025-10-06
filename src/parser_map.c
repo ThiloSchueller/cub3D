@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:16:27 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 10:25:05 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/06 12:50:21 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -47,11 +47,12 @@ void	create_empty_map(t_config *data)
 	int		i;
 	int		j;
 
-	i = -1;
+	i = 0;
 	map = malloc(sizeof(char *) * data->map_height);
+	// I removed the map_height + 1
 	if (!map)
 		return ;
-	while (i++ < data->map_height)
+	while (i < data->map_height)
 	{
 		map[i] = malloc(sizeof(char) * (data->map_width + 1));
 		if (!map[i])
@@ -66,7 +67,9 @@ void	create_empty_map(t_config *data)
 			j++;
 		}
 		map[i][j] = '\0';
+		i++;
 	}
+	//map[i] = NULL;
 	data->map = map;
 }
 
