@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/02 18:01:03 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:42:14 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	render_background(t_vars *vars)
 		while (y < HEIGHT)
 		{
 			if (y < HEIGHT / 2)
-				mlx_put_pixel(vars->background, x, y, 0xFFFFFF); //colors from read
+				mlx_put_pixel(vars->background, x, y, vars->config->ceiling_color);
 			else
-				mlx_put_pixel(vars->background, x, y, 177000);
+				mlx_put_pixel(vars->background, x, y, vars->config->floor_color); //ADD OPACITY? so 0xffffffff, istead of 0xffffff
 			y++;
 		}
 		y = 0;
@@ -91,6 +91,8 @@ int	render_walls(t_vars *vars)
 		}
 		x++;
 	}
+	//printf("%hhu\n", vars->images.east->pixels[1]);
+	//mlx_put_pixel(vars->walls, 300, 400, vars->images.west->pixels[1800]);
 	return (0);
 }
 

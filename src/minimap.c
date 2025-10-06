@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:00:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/06 13:11:41 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/06 14:02:34 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	render_minimap_rays(t_vars *vars, float angle)
 	ray = vars->pos;
 	x = ray.x;
 	y = ray.y;
-	printf("ray.x = %d, ray.y = %d\n", ray.x, ray.y);
-	printf("vars->pos.y = %d, vars->pos.y = %d\n", vars->pos.x, vars->pos.y);
 	while ((vars->smap[ray.x][ray.y + (int)copysign(1.0, dy)] != '1') &&
 	 (vars->smap[ray.x + (int)copysign(1.0, dx)][ray.y] != '1'))
 	{
@@ -63,7 +61,6 @@ char **calc_smap(t_vars *vars)
 	y = 0;
 	vars->smap_width = SCALE * vars->config->map_width;
 	vars->smap_height = SCALE * vars->config->map_height;
-	printf("height is %d\n", vars->config->map_height);
 	smap = malloc(((SCALE * vars->config->map_height) + 1)* sizeof(char *));
 	if (smap == NULL)
 		return (NULL);
@@ -72,7 +69,7 @@ char **calc_smap(t_vars *vars)
 		smap[x] = malloc((vars->smap_width + 1 )* sizeof(char));
 		while (y < vars->smap_height)
 		{
-			if (vars->config->map[x / SCALE][y / SCALE] == 'E')
+			if (is_player_char(vars->config->map[x / SCALE][y / SCALE]) == true)
 			{
 				if (x % SCALE == ( SCALE / 2) && y % SCALE == (SCALE / 2))
 				{

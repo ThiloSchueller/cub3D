@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 13:10:40 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:30:49 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,15 @@ int	main(int argc, char *argv[])
 		init_data(data);
 		parser(fd, data, argv[1]);
 	}
-	//return (0);
-
-	//(void)argv;
-	//(void)argc;
 	t_vars	vars;
-	t_texture textures;
-	// vars.config.map_width = 5;
-	// vars.config.map_height = 5;
-	// vars.config.map = (char *[]){"11111", "10P01", "10101", "11001", "11111"};
-
+	//t_texture textures;
+	vars.textures = malloc(sizeof(t_texture));
 	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!vars.mlx)
 		ft_exit(ERROR_MLX, &vars);
 	vars.config = data;
-	ft_get_textures(&textures);
-	ft_textures_to_images(&textures, &vars);
+	ft_get_textures(&vars);
+	ft_textures_to_images(vars.textures, &vars);
 	mlx_key_hook(vars.mlx, &ft_key_hook, &vars);
 	mlx_loop_hook(vars.mlx, &ft_loop_hook, &vars);
 	init_vars(&vars);
@@ -139,3 +132,6 @@ int	init_vars(t_vars * vars)
 }
 
 	//ft_memset(vars.background->pixels, 255, WIDTH * HEIGHT * sizeof(int32_t));
+		// vars.config.map_width = 5;
+	// vars.config.map_height = 5;
+	// vars.config.map = (char *[]){"11111", "10P01", "10101", "11001", "11111"};
