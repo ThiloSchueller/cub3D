@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/06 17:21:03 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/07 10:59:45 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  void	move_2d(t_vars *vars, double dx, double dy);
  int	calculate_height(t_vars *vars, int x);
  float	calculate_angle(t_vars *vars, int x);
- float	calculate_distance(t_vars *vars, float angle);
+ t_hit_info	calculate_distance(t_vars *vars, float angle);
  float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
  float	quadrant4(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
  float	distance_two_points(t_fpoint p, t_fpoint q);
