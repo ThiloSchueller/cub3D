@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/06 13:25:18 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/07 11:45:19 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -117,14 +117,15 @@ char	*ft_strdup_no_newline(const char *s1);
 //parser_map.c
 int		is_map_line(char *line);
 void	parse_map(char *line, t_config *data);
-void	free_row(char **map, int i);
+void	free_map(char **map);
 void	create_empty_map(t_config *data);
 void	print_map(t_config *data);
 //parser_textures.c
 int		check_valid_path(char *path);
 int		parse_texture(char *line, t_config *data);
 //parser.c
-int		ft_memcpy_map(void *dst, const void *src, size_t n);
+int		copy_line(char *dst, char *src);
+// int		ft_memcpy_map(void *dst, const void *src, size_t n);
 int		compare_update_map(char *line, t_config *data);
 void	parser_map_2nd_round(t_config *data, char *file);
 void	parser(int fd, t_config *data, char *file);

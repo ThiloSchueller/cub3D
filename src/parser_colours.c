@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:54:16 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 14:12:03 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/07 11:26:00 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -54,8 +54,18 @@ int	color_str_to_int(char *str)
 	green = ft_atoi(rgb[1]);
 	blue = ft_atoi(rgb[2]);
 	if (red > 255 || green > 255 || blue > 255)
+	{
+		free(rgb[0]);
+		free(rgb[1]);
+		free(rgb[2]);
+		free(rgb);
 		return (-1);
+	}
 	color = color_to_hex(red, green, blue);
+	free(rgb[0]);
+	free(rgb[1]);
+	free(rgb[2]);
+	free(rgb);
 	return (color);
 }
 

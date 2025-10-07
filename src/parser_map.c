@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:16:27 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 13:11:42 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/07 11:57:35 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -34,10 +34,15 @@ void	parse_map(char *line, t_config *data)
 	free(line);
 }
 
-void	free_row(char **map, int i)
+void	free_map(char **map)
 {
-	while (--i >= 0)
-		free(map[i]);
+	int	i;
+
+	i = 0;
+	if (!map)
+		return ;
+	while (map[i])
+		free(map[i++]);
 	free(map);
 }
 
@@ -48,8 +53,7 @@ void	create_empty_map(t_config *data)
 	int		j;
 
 	i = 0;
-	map = malloc(sizeof(char *) * data->map_height);
-	// I removed the map_height + 1
+	map = malloc(sizeof(char *) * (data->map_height + 1));
 	if (!map)
 		return ;
 	while (i < data->map_height)
@@ -57,19 +61,16 @@ void	create_empty_map(t_config *data)
 		map[i] = malloc(sizeof(char) * (data->map_width + 1));
 		if (!map[i])
 		{
-			free_row(map, i);
+			free_map(map);
 			return ;
 		}
 		j = 0;
 		while (j < data->map_width)
-		{
-			map[i][j] = '0';
-			j++;
-		}
+			map[i][j++] = ' ';
 		map[i][j] = '\0';
 		i++;
 	}
-	//map[i] = NULL;
+	map[i] = NULL;
 	data->map = map;
 }
 

@@ -6,34 +6,27 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 13:12:03 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/07 12:01:01 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../inc/cub3D.h"
 
-int	ft_memcpy_map(void *dst, const void *src, size_t n)
+int	copy_line(char *dst, char *src)
 {
-	size_t	i;
-	char	*strs;
-	char	*strd;
+	int	i;
 
 	i = 0;
-	strs = (char *)src;
-	strd = (char *)dst;
-	if (dst == 0 && src == 0)
-		return (-1);
-	// printf("%s\n", strs);
-	while (i < n)
+	while (src[i] != '\0')
 	{
-		if (!(strs[i] == ' ' || strs[i] == '1' || strs[i] == '0'
-				|| strs[i] == 'N' || strs[i] == 'S'
-				|| strs[i] == 'W' || strs[i] == 'E'))
+		if (!(src[i] == ' ' || src[i] == '1' || src[i] == '0'
+				|| src[i] == 'N' || src[i] == 'S'
+				|| src[i] == 'W' || src[i] == 'E'))
 		{
 			printf("Invalid\n");
 			return (-1);
 		}
-		strd[i] = strs[i];
+		dst[i] = src[i];
 		i++;
 	}
 	return (1);
@@ -43,15 +36,11 @@ int	compare_update_map(char *line, t_config *data)
 {
 	static int	i = 0;
 
-	if (ft_memcpy_map(data->map[i], line, ft_strlen(line)) < 0)
+	if (copy_line(data->map[i], line) < 0)
 	{
 		printf("Invalid input\n");
-		free_row(data->map, data->map_height);
-		data->map = NULL;
 		return (-1);
-		//free_map;
 	}
-	data->map[i][ft_strlen(line)] = '\0';
 	i++;
 	return (1);
 }
@@ -60,6 +49,7 @@ void	parser_map_2nd_round(t_config *data, char *file)
 {
 	int		fd;
 	char	*str;
+	char	*line;
 
 	fd = open(file, O_RDONLY);
 	str = get_next_line(fd);
@@ -69,12 +59,15 @@ void	parser_map_2nd_round(t_config *data, char *file)
 		{
 			if (is_map_line(str))
 			{
-				if (compare_update_map(ft_strdup_no_newline(str), data) < 0)
+				line = ft_strdup_no_newline(str);
+				if (compare_update_map(line, data) < 0)
 				{
+					free(line);
 					free(str);
 					close(fd);
 					return ;
 				}
+				free(line);
 			}
 		}
 		free(str);
@@ -104,6 +97,7 @@ void	parser(int fd, t_config *data, char *file)
 	{
 		create_empty_map(data);
 		parser_map_2nd_round(data, file);
+		printf("%s\n", file);
 		printf("parse successfull\n");
 		printf("\n");
 		printf("NO: %s\n", data->texture_no);

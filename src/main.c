@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 13:10:40 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/07 11:45:51 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../inc/cub3D.h"
 
@@ -97,28 +97,29 @@ int	main(int argc, char *argv[])
 	{
 		init_data(data);
 		parser(fd, data, argv[1]);
+		free_map(data->map);
 	}
 	//return (0);
 
 	//(void)argv;
 	//(void)argc;
-	t_vars	vars;
-	t_texture textures;
+	// t_vars	vars;
+	// t_texture textures;
 	// vars.config.map_width = 5;
 	// vars.config.map_height = 5;
 	// vars.config.map = (char *[]){"11111", "10P01", "10101", "11001", "11111"};
 
-	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
-	if (!vars.mlx)
-		ft_exit(ERROR_MLX, &vars);
-	vars.config = data;
-	ft_get_textures(&textures);
-	ft_textures_to_images(&textures, &vars);
-	mlx_key_hook(vars.mlx, &ft_key_hook, &vars);
-	mlx_loop_hook(vars.mlx, &ft_loop_hook, &vars);
-	init_vars(&vars);
-	render(&vars);
-	mlx_loop(vars.mlx);
+	// vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
+	// if (!vars.mlx)
+	// 	ft_exit(ERROR_MLX, &vars);
+	// vars.config = data;
+	// ft_get_textures(&textures);
+	// ft_textures_to_images(&textures, &vars);
+	// mlx_key_hook(vars.mlx, &ft_key_hook, &vars);
+	// mlx_loop_hook(vars.mlx, &ft_loop_hook, &vars);
+	// init_vars(&vars);
+	// render(&vars);
+	// mlx_loop(vars.mlx);
 	//mlx_terminate(vars.mlx);
 }
 
