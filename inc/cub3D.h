@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/07 11:45:19 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/07 13:27:06 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -52,8 +52,8 @@ typedef struct s_config
 	int		map_width;		// length of the longest row (number of columns)
 	int		map_height;		// number of rows
 
-	int		player_x;		// x coordinate
-	int		player_y;		// y coordinate
+	int		x_position;
+	int		y_position;
 	char	player_dir;		// 'N', 'S', 'E', or 'W'
 }	t_config;
 
@@ -124,8 +124,7 @@ void	print_map(t_config *data);
 int		check_valid_path(char *path);
 int		parse_texture(char *line, t_config *data);
 //parser.c
-int		copy_line(char *dst, char *src);
-// int		ft_memcpy_map(void *dst, const void *src, size_t n);
+int		copy_line(char *dst, char *src, t_config *data);
 int		compare_update_map(char *line, t_config *data);
 void	parser_map_2nd_round(t_config *data, char *file);
 void	parser(int fd, t_config *data, char *file);

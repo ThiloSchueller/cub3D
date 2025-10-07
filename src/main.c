@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/07 11:45:51 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/07 13:35:12 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -69,8 +69,8 @@ void	init_data(t_config *data)
 	data->map_height = 0;
 
     // Player
-	data->player_x = -1;
-	data->player_y = -1;
+	data->x_position = -1;
+	data->y_position = -1;
 	data->player_dir = '\0';
 }
 
@@ -97,7 +97,13 @@ int	main(int argc, char *argv[])
 	{
 		init_data(data);
 		parser(fd, data, argv[1]);
-		free_map(data->map);
+		if (data->stop != 0)
+		{
+			printf("Invalid file.cub\n");
+			free_map(data->map);
+			return (1);
+		}
+		// free_map(data->map); we also need this when we finish the game
 	}
 	//return (0);
 

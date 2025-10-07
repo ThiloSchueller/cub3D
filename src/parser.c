@@ -6,15 +6,15 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/07 12:01:01 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/07 13:57:35 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../inc/cub3D.h"
 
-int	copy_line(char *dst, char *src)
+int	copy_line(char *dst, char *src, t_config *data)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (src[i] != '\0')
@@ -22,9 +22,13 @@ int	copy_line(char *dst, char *src)
 		if (!(src[i] == ' ' || src[i] == '1' || src[i] == '0'
 				|| src[i] == 'N' || src[i] == 'S'
 				|| src[i] == 'W' || src[i] == 'E'))
-		{
-			printf("Invalid\n");
 			return (-1);
+		if (src[i] == 'N' || src[i] == 'S' || src[i] == 'W' || src[i] == 'E')
+		{
+			if (ft_strlen(&data->player_dir) > 0)
+				return (-1);
+			data->player_dir = src[i];
+			data->x_position = i;
 		}
 		dst[i] = src[i];
 		i++;
@@ -36,11 +40,10 @@ int	compare_update_map(char *line, t_config *data)
 {
 	static int	i = 0;
 
-	if (copy_line(data->map[i], line) < 0)
-	{
-		printf("Invalid input\n");
+	if (copy_line(data->map[i], line, data) < 0)
 		return (-1);
-	}
+	if (data->x_position != -1 && data->y_position == -1)
+		data->y_position = i;
 	i++;
 	return (1);
 }
@@ -62,6 +65,7 @@ void	parser_map_2nd_round(t_config *data, char *file)
 				line = ft_strdup_no_newline(str);
 				if (compare_update_map(line, data) < 0)
 				{
+					data->stop = 1;
 					free(line);
 					free(str);
 					close(fd);
@@ -97,9 +101,9 @@ void	parser(int fd, t_config *data, char *file)
 	{
 		create_empty_map(data);
 		parser_map_2nd_round(data, file);
-		printf("%s\n", file);
-		printf("parse successfull\n");
-		printf("\n");
+	}
+	if (data->stop == 0)
+	{
 		printf("NO: %s\n", data->texture_no);
 		printf("SO: %s\n", data->texture_so);
 		printf("WE: %s\n", data->texture_we);
@@ -111,6 +115,9 @@ void	parser(int fd, t_config *data, char *file)
 		printf("map_width: %d\n", data->map_width);
 		printf("map_height: %d\n", data->map_height);
 		printf("\n");
+		printf("x_position: %i\n", data->x_position);
+		printf("y_position: %i\n", data->y_position);
+		printf("direction: %c\n", data->player_dir);
 		print_map(data);
 	}
 }
@@ -128,7 +135,6 @@ void	parse_element(char *line, t_config *data)
 	if (check < 0)
 	{
 		data->stop = 1;
-		printf("Ivalid input\n");
 		//I need to free what I already allocated in my struct
 		return ;
 	}
