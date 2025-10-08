@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/07 10:59:45 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/08 18:03:17 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,10 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  t_hit_info	calc_hit(t_vars *vars, float angle, t_fpoint ray_pos);
  float	normalise_angle(float angle);
  t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
+ bool	confirm_hit_x(float x_to_hit,float y_hit,float angle, t_vars *vars);
+ bool	confirm_hit_y(float x_hit,float y_to_hit,float angle, t_vars *vars);
+
+
  
 #endif
 

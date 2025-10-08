@@ -41,6 +41,7 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 		printf("estimated distance was %f\n", distance_two_points(vars->fpos, (t_fpoint){ray_pos.x, ray_pos.y}));
 		printf("estimated hit point was x: %f\n", ray_pos.x);
 		printf("estimated hit point was y: %f\n", ray_pos.y);
+		//printf("the value is %c \n", vars->smap[79][20]);
 	}
 	// printf("%f\n", tan(PI / 4));
 	// distance = sqrt((ray_pos.x - vars->fpos.x) * (ray_pos.x - vars->fpos.x) 
@@ -118,24 +119,21 @@ t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_
 	t_hit_info	hit_info;
 
 	m = -tan(angle);
+	// if (fabs(cos(angle)) < 0.0001) // vertical ray
+  	//   m = 1e6; // or some large number
 	c = vars->fpos.y - (m * vars->fpos.x);
 	x_hit = (y_to_hit - c) / m;
 	y_hit = m * x_to_hit + c;
 	distance_vertical = distance_two_points(vars->fpos, (t_fpoint){x_to_hit, y_hit});
 	distance_horizontal = distance_two_points(vars->fpos, (t_fpoint){x_hit, y_to_hit});
-	// && ((vars->smap[(int)x_hit][(int)y_to_hit] == '1') || (vars->smap[(int)ceil(x_hit)][(int)y_to_hit] == '1')))
-	if ((distance_vertical > distance_horizontal) && (x_hit < x_to_hit)) //kuerzere auser verrechnet make function check for correctnes
-	{
+	if ((distance_horizontal <= distance_vertical) && confirm_hit_x(x_to_hit, y_hit, normalise_angle(angle), vars)) //maybe <=
 		hit_info.distance = distance_horizontal;
-		hit_info.vertical_hit = false;
-		hit_info.percent_of_hit = fmod(x_hit, 1);
-	}
-	else
-	{
-		hit_info.distance = distance_vertical;
-		hit_info.vertical_hit = true;
-		hit_info.percent_of_hit = fmod(y_hit, 1);
-	}
+	else if (distance_horizontal < distance_vertical)
+	 	hit_info.distance = distance_vertical;
+	if ((distance_horizontal >= distance_vertical) && confirm_hit_y(x_hit, y_to_hit, normalise_angle(angle), vars))
+	 	hit_info.distance = distance_vertical;
+	else if (distance_horizontal > distance_vertical)
+	 	hit_info.distance = distance_horizontal;
 	if (fabs(angle - normalise_angle(vars->view_angle)) < 0.02)
 	{
 		printf("calculated Steigung is %f\n", m);
@@ -155,4 +153,24 @@ float	distance_two_points(t_fpoint p, t_fpoint q)
 
 	re = sqrt((q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y));
 	return (re);
+}
+
+bool	confirm_hit_x(float x_to_hit,float y_hit,float angle, t_vars *vars)
+{
+	if ((vars->smap[(int)x_to_hit][(int)y_hit] == '1') && (angle < PI || angle > 1.5 * PI)) 
+		return (true);
+	else if (vars->smap[(int)x_to_hit - 1][(int)(y_hit)] == '1')
+		return (true);
+	return (false);
+}
+bool	confirm_hit_y(float x_hit,float y_to_hit,float angle, t_vars *vars)
+{
+	// if (y_to_hit < 0 || y_to_hit > (vars->smap_width))
+	// 	return (false);
+	printf("%f\n", y_to_hit);
+	if ((vars->smap[(int)x_hit][(int)y_to_hit] == '1') && angle > PI)
+		return (true);
+	else if (vars->smap[(int)x_hit][(int)y_to_hit - 1] == '1')
+		return (true);
+	return (false);
 }
