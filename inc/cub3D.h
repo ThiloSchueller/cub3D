@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/07 13:27:06 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/08 13:32:09 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -129,6 +129,16 @@ int		compare_update_map(char *line, t_config *data);
 void	parser_map_2nd_round(t_config *data, char *file);
 void	parser(int fd, t_config *data, char *file);
 void	parse_element(char *line, t_config *data);
+//parser_checker_map.c
+char	**map_copy(t_config *data);
+void	print_copy(char **map);
+void	check_map(t_config *data);
+int		check_outside_walls(char **map);
+int		check_last_wall(char **map);
+int		player_position(char **map);
+int		zero_touch_space(char **map);
+int		player(char **map, t_config *data);
+int		check_conditions_map(char **map, t_config *data);
 
 void	ft_get_textures(t_texture *textures);
 void	ft_textures_to_images(t_texture *textures, t_vars *vars);

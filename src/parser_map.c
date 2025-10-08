@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:16:27 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/07 11:57:35 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/08 12:26:57 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -17,7 +17,7 @@ int	is_map_line(char *line)
 	int	i;
 
 	i = 0;
-	if (line[i] != ' ' && line[i] != '1')
+	if (line[i] != ' ' && line[i] != '1' && line[i] != '0')
 		return (0);
 	else
 		return (1);

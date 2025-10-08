@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/07 13:57:35 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/08 13:32:49 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,6 +30,7 @@ int	copy_line(char *dst, char *src, t_config *data)
 			data->player_dir = src[i];
 			data->x_position = i;
 		}
+		(void)data;
 		dst[i] = src[i];
 		i++;
 	}
@@ -56,6 +57,7 @@ void	parser_map_2nd_round(t_config *data, char *file)
 
 	fd = open(file, O_RDONLY);
 	str = get_next_line(fd);
+	print_map(data);
 	while (str != NULL && data->stop == 0)
 	{
 		if (str[0] != '\n')
@@ -78,6 +80,7 @@ void	parser_map_2nd_round(t_config *data, char *file)
 		str = get_next_line(fd);
 	}
 	close (fd);
+	print_map(data);
 }
 
 void	parser(int fd, t_config *data, char *file)
@@ -102,22 +105,23 @@ void	parser(int fd, t_config *data, char *file)
 		create_empty_map(data);
 		parser_map_2nd_round(data, file);
 	}
+	check_map(data);
 	if (data->stop == 0)
 	{
-		printf("NO: %s\n", data->texture_no);
-		printf("SO: %s\n", data->texture_so);
-		printf("WE: %s\n", data->texture_we);
-		printf("EA: %s\n", data->texture_ea);
-		printf("\n");
-		printf("floor color: %x\n", data->floor_color);
-		printf("ceiling color: %x\n", data->ceiling_color);
-		printf("\n");
+		// printf("NO: %s\n", data->texture_no);
+		// printf("SO: %s\n", data->texture_so);
+		// printf("WE: %s\n", data->texture_we);
+		// printf("EA: %s\n", data->texture_ea);
+		// printf("\n");
+		// printf("floor color: %x\n", data->floor_color);
+		// printf("ceiling color: %x\n", data->ceiling_color);
+		// printf("\n");
 		printf("map_width: %d\n", data->map_width);
 		printf("map_height: %d\n", data->map_height);
-		printf("\n");
-		printf("x_position: %i\n", data->x_position);
-		printf("y_position: %i\n", data->y_position);
-		printf("direction: %c\n", data->player_dir);
+		// printf("\n");
+		// printf("x_position: %i\n", data->x_position);
+		// printf("y_position: %i\n", data->y_position);
+		// printf("direction: %c\n", data->player_dir);
 		print_map(data);
 	}
 }
