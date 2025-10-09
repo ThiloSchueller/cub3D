@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/09 12:28:29 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/09 14:32:13 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -98,7 +98,12 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	fd = check_file(argv[1]);
-	if (fd > 2)
+	if (fd < 0)
+	{
+		free(data);
+		return (1);
+	}
+	else if (fd > 2)
 	{
 		init_data(data);
 		parser(fd, data, argv[1]);
