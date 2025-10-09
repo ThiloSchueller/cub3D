@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:51:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/06 09:48:27 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/09 12:56:19 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,7 +30,6 @@ char	*ft_strdup_no_newline(const char *s1)
 	len = ft_strlen(s1);
 	if (len > 0 && s1[len - 1] == '\n')
 		len--;
-
 	p = (char *) malloc((len + 1) * sizeof(char));
 	if (p == NULL)
 		return (0);

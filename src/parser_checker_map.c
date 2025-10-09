@@ -1,52 +1,18 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_map.c                                       :+:      :+:    :+:   */
+/*   parser_checker_map.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 15:16:27 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/09 12:57:03 by lusimon          ###   ########.fr       */
+/*   Created: 2025/10/07 13:21:42 by lusimon           #+#    #+#             */
+/*   Updated: 2025/10/09 12:53:00 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../inc/cub3D.h"
 
-int	is_map_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	if (line[i] != ' ' && line[i] != '1' && line[i] != '0')
-		return (0);
-	else
-		return (1);
-}
-
-void	parse_map(char *line, t_config *data)
-{
-	int	len;
-
-	len = ft_strlen(line);
-	if (len > data->map_width)
-		data->map_width = len;
-	data->map_height++;
-	free(line);
-}
-
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	if (!map)
-		return ;
-	while (map[i])
-		free(map[i++]);
-	free(map);
-}
-
-void	create_empty_map(t_config *data)
+char	**map_copy(t_config *data)
 {
 	char	**map;
 	int		i;
@@ -55,14 +21,14 @@ void	create_empty_map(t_config *data)
 	i = 0;
 	map = malloc(sizeof(char *) * (data->map_height + 1));
 	if (!map)
-		return ;
+		return (NULL);
 	while (i < data->map_height)
 	{
 		map[i] = malloc(sizeof(char) * (data->map_width + 1));
 		if (!map[i])
 		{
 			free_map(map);
-			return ;
+			return (NULL);
 		}
 		j = 0;
 		while (j < data->map_width)
@@ -71,23 +37,21 @@ void	create_empty_map(t_config *data)
 		i++;
 	}
 	map[i] = NULL;
-	data->map = map;
+	return (map);
 }
 
-void	print_map(t_config *data)
+void	print_copy(char **map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	if (data->map == NULL)
-		return ;
-	while (i < data->map_height)
+	while (map[i])
 	{
 		j = 0;
-		while (data->map[i][j] != '\0')
+		while (map[i][j] != '\0')
 		{
-			printf("%c", data->map[i][j]);
+			printf("%c", map[i][j]);
 			j++;
 		}
 		printf("\n");
@@ -95,11 +59,41 @@ void	print_map(t_config *data)
 	}
 }
 
-//map_start = 0
-//the line count of map start is one
-//map_end is line_count -1
+void	check_map(t_config *data)
+{
+	char	**map;
+	int		i;
+	int		j;
 
-//[0]
-//[1]
-//[2]
-//line_count = 3
+	i = 0;
+	map = map_copy(data);
+	while (map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			map[i][j] = data->map[i][j];
+			j++;
+		}
+		i++;
+	}
+	if (check_conditions_map(map, data) < 0)
+		data->stop = 1;
+	free_map(map);
+}
+
+int	check_conditions_map(char **map, t_config *data)
+{
+	if (check_outside_walls(map) < 1)
+		return (-1);
+	if (check_last_wall(map) < 1)
+		return (-1);
+	if (player_position(map) < 1)
+		return (-1);
+	if (zero_touch_space(map) < 1)
+		return (-1);
+	if (player(map, data) < 1)
+		return (-1);
+	printf("valid_map\n");
+	return (1);
+}

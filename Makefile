@@ -14,6 +14,8 @@ SOURCES = 	main.c \
 			parser_helper.c \
 			parser_map.c \
 			parser_textures.c \
+			parser_checker_map.c \
+			parser_conditions_map.c \
 			render.c \
 			hook.c \
 			keys_arrows.c \

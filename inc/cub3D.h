@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/09 14:08:22 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:05:46 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -53,8 +53,8 @@ typedef struct s_config
 	int		map_width;		// length of the longest row (number of columns)
 	int		map_height;		// number of rows
 
-	int		player_x;		// x coordinate
-	int		player_y;		// y coordinate
+	int		x_position;
+	int		y_position;
 	char	player_dir;		// 'N', 'S', 'E', or 'W'
 }	t_config;
 
@@ -116,6 +116,7 @@ typedef struct s_fpoint //float point;
 //main.c
 int		check_file(char *file);
 void	init_data(t_config *data);
+void	free_data(t_config *data);
 
 //parser
 //parser_colours.c
@@ -129,18 +130,29 @@ char	*ft_strdup_no_newline(const char *s1);
 //parser_map.c
 int		is_map_line(char *line);
 void	parse_map(char *line, t_config *data);
-void	free_row(char **map, int i);
+void	free_map(char **map);
 void	create_empty_map(t_config *data);
 void	print_map(t_config *data);
 //parser_textures.c
 int		check_valid_path(char *path);
 int		parse_texture(char *line, t_config *data);
 //parser.c
-int		ft_memcpy_map(void *dst, const void *src, size_t n);
-void	compare_update_map(char *line, t_config *data);
+int		copy_line(char *dst, char *src, t_config *data);
+int		compare_update_map(char *line, t_config *data);
 void	parser_map_2nd_round(t_config *data, char *file);
 void	parser(int fd, t_config *data, char *file);
 void	parse_element(char *line, t_config *data);
+//parser_checker_map.c
+char	**map_copy(t_config *data);
+void	print_copy(char **map);
+void	check_map(t_config *data);
+int		check_conditions_map(char **map, t_config *data);
+//parser_conditions_map.c
+int		check_outside_walls(char **map);
+int		check_last_wall(char **map);
+int		player_position(char **map);
+int		zero_touch_space(char **map);
+int		player(char **map, t_config *data);
 
 void	ft_get_textures(t_vars *vars);
 void	ft_textures_to_images(t_texture *textures, t_vars *vars);

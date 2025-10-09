@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:52:55 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/01 14:24:43 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/09 12:36:25 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -55,7 +55,5 @@ int	parse_texture(char *line, t_config *data)
 	}
 	else
 		return (-1);
-	//this else handle the duplicate case
 	return (0);
 }
-
