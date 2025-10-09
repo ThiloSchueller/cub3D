@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/07 16:33:42 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/09 14:57:33 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,15 @@ int	render_walls(t_vars *vars)
 {
 	int	x;
 	int y;
-	int h;
+	//int h;
 	int	i;
 	int j;
+	t_hit_info hit_info;
 
 	i = 0;
 	j = 0;
 	x = 0;
-	while (i < WIDTH)
+	while (i < WIDTH) //overwriting the previous frame
 	{
 		while (j < HEIGHT)
 		{
@@ -82,10 +83,16 @@ int	render_walls(t_vars *vars)
 	}
 	while (x < WIDTH)
 	{
-		h = calculate_height(vars, x);
-		y = HEIGHT / 2 - h / 2;
-		while(y < HEIGHT / 2 + h / 2)
+		hit_info = get_hit_info(vars, x);
+		//h = calculate_height(vars, x);
+		y = HEIGHT / 2 - hit_info.height / 2;
+		while(y < HEIGHT / 2 + hit_info.height / 2)
 		{
+			// use hit_info and vars->view_angle for right image
+			// get single pixel like vars->images.east->pixels[1];
+			// uint8_t pixel;
+			// pixel = get_pixel(hit_info, vars);
+			// mlx_put_pixel(vars->walls, x, y, pixel_to_int(pixel)); //maybe the unint8 value can be directly used for pixelcolor, maybe it needs tranfomration
 			mlx_put_pixel(vars->walls, x, y, 0xFF00FFFF);
 			y++;
 		}

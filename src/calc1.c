@@ -26,6 +26,8 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 	{
 		if ((vars->smap[(int)ray_pos.x][(int)ray_pos.y + (int)copysign(1.0, dy)] != '1') &&
 				(vars->smap[(int)ray_pos.x + (int)copysign(1.0, dx)][(int)ray_pos.y] != '1'))
+		//if (!confirm_hit_x(ray_pos.x + dx, ray_pos.y, normalise_angle(angle), vars) && !confirm_hit_y(ray_pos.x + dx, ray_pos.y, normalise_angle(angle), vars) &&
+		// !confirm_hit_x(ray_pos.x , ray_pos.y + dy, normalise_angle(angle), vars) && !confirm_hit_y(ray_pos.x, ray_pos.y + dy, normalise_angle(angle), vars))
 		{
 			ray_pos.x += dx;
 			ray_pos.y += dy;
@@ -47,22 +49,23 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 	// distance = sqrt((ray_pos.x - vars->fpos.x) * (ray_pos.x - vars->fpos.x) 
 	// 			+ (ray_pos.y - vars->fpos.y) * (ray_pos.y - vars->fpos.y));
 				// + precise_hit(ray_pos, vars, dx, dy);
+	hit_info.distance =  hit_info.distance * cos(angle -vars->view_angle); //fisheye correction, but segaults becuase disctance get higher then HEIGHT but probably becuase of fault distance calc
 	return (hit_info);
-	//return (hit_info.distance * cos(angle -vars->view_angle)); //fisheye correction, but segaults becuase disctance get higher then HEIGHT but probably becuase of fault distance calc
 }
 
-int	calculate_height(t_vars *vars, int x)
+//int	calculate_height(t_vars *vars, int x)
+ t_hit_info	get_hit_info(t_vars *vars, int x)
 {
 	float	angle;
 	t_hit_info hit_info;
-	float	wall_height;
+	//float	wall_height;
 
 	angle = calculate_angle(vars, x);
 	hit_info = calculate_distance(vars, angle);
-	wall_height = (HEIGHT /  hit_info.distance); //cos(angle -vars->view_angle)
-	if (wall_height > 600)
-		wall_height = 600;
-	return ((int)wall_height);
+	hit_info.height = (HEIGHT /  hit_info.distance); //cos(angle -vars->view_angle)
+	if (hit_info.height > 600) // this is wrong but preverts segfaults
+		hit_info.height = 600;
+	return (hit_info);
 }
 
 t_hit_info	calc_hit(t_vars *vars, float angle, t_fpoint ray_pos)
@@ -127,16 +130,32 @@ t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_
 	c = vars->fpos.y - (m * vars->fpos.x);
 	x_hit = (y_to_hit - c) / m;
 	y_hit = m * x_to_hit + c;
-	distance_vertical = distance_two_points(vars->fpos, (t_fpoint){x_to_hit, y_hit});
-	distance_horizontal = distance_two_points(vars->fpos, (t_fpoint){x_hit, y_to_hit});
-	if ((distance_horizontal <= distance_vertical) && confirm_hit_x(x_to_hit, y_hit, normalise_angle(angle), vars)) //maybe <=
+	distance_vertical = distance_two_points(vars->fpos, (t_fpoint){x_to_hit, y_hit}); //read distance to vertical line
+	distance_horizontal = distance_two_points(vars->fpos, (t_fpoint){x_hit, y_to_hit}); //distance to horizontal line
+	if ((distance_horizontal <= distance_vertical) && confirm_hit_x(x_to_hit, y_hit, normalise_angle(angle), vars))
+	{
 		hit_info.distance = distance_horizontal;
+		hit_info.vertical_hit = false;
+		hit_info.percent_of_hit = (fmod(y_hit, 20)/20);
+	}
 	else if (distance_horizontal <= distance_vertical)
+	{
 	 	hit_info.distance = distance_vertical;
+		hit_info.vertical_hit = true;
+		hit_info.percent_of_hit = (fmod(x_hit, 20)/20);
+	}
 	if ((distance_horizontal > distance_vertical) && confirm_hit_y(x_hit, y_to_hit, normalise_angle(angle), vars))
+	{
 	 	hit_info.distance = distance_vertical;
+		hit_info.vertical_hit = true;
+		hit_info.percent_of_hit = (fmod(x_hit, 20)/20);
+	}
 	else if (distance_horizontal > distance_vertical)
+	{
 	 	hit_info.distance = distance_horizontal;
+		hit_info.vertical_hit = false;
+		hit_info.percent_of_hit = (fmod(y_hit, 20)/20);
+	}
 	if (fabs(angle - normalise_angle(vars->view_angle)) < 0.02)
 	{
 		// printf("calculated Steigung is %f\n", m);
@@ -147,7 +166,7 @@ t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_
 		//printf("distance horizontal would be %f\n", distance_horizontal);
 		//printf("distance vertical would be %f\n", distance_vertical);
 		if (!(y_to_hit < 0 || y_to_hit > vars->smap_height || x_hit < 0 || x_hit > vars->smap_width))
-			printf("checking in point x %d and y %d is %c\n", (int)x_hit, (int)y_to_hit, vars->smap[(int)x_hit][(int)y_to_hit]);
+			printf("checking in point x %d and y %d is %c\n", (int)x_to_hit, (int)y_to_hit, vars->smap[(int)x_hit][(int)y_to_hit]);
 	}
 	return(hit_info);
 }
@@ -160,7 +179,7 @@ float	distance_two_points(t_fpoint p, t_fpoint q)
 	return (re);
 }
 
-bool	confirm_hit_x(float x_to_hit,float y_hit,float angle, t_vars *vars)
+bool	confirm_hit_x(float x_to_hit,float y_hit,float angle, t_vars *vars) //cofirm hit in x = const
 {
 	if (x_to_hit < 0 || x_to_hit > vars->smap_width - 1 || y_hit < 0 || y_hit > vars->smap_height - 1)
 	 	return (true);
@@ -170,7 +189,7 @@ bool	confirm_hit_x(float x_to_hit,float y_hit,float angle, t_vars *vars)
 		return (true);
 	return (false);
 }
-bool	confirm_hit_y(float x_hit,float y_to_hit,float angle, t_vars *vars)
+bool	confirm_hit_y(float x_hit,float y_to_hit,float angle, t_vars *vars) //confirm in y = const
 {
 	if (y_to_hit < 0 || y_to_hit > vars->smap_height - 1 || x_hit < 0 || x_hit > vars->smap_width - 1)
 	 	return (true);

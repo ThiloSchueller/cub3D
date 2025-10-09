@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/08 18:03:17 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/09 14:08:22 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ typedef struct s_fpoint //float point;
  {
 	float		distance;
 	float		percent_of_hit;
-	float		height;//used?
-	t_fpoint	hit; //used?
+	float		height;
+	t_fpoint	hit; //not used?
 	bool		vertical_hit;
  }	t_hit_info;
  
@@ -163,7 +163,8 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  bool	is_player_char(char c);
  int	ft_exit(int code, t_vars *vars);
  void	move_2d(t_vars *vars, double dx, double dy);
- int	calculate_height(t_vars *vars, int x);
+ //int	calculate_height(t_vars *vars, int x);
+ t_hit_info	get_hit_info(t_vars *vars, int x);
  float	calculate_angle(t_vars *vars, int x);
  t_hit_info	calculate_distance(t_vars *vars, float angle);
  float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
@@ -174,6 +175,9 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
  bool	confirm_hit_x(float x_to_hit,float y_hit,float angle, t_vars *vars);
  bool	confirm_hit_y(float x_hit,float y_to_hit,float angle, t_vars *vars);
+ //bool	confirm_move(float x,float y,float angle, t_vars *vars);
+ //	uint8_t* get_pixel(t_hit_info hit_info,t_vars* vars);
+ //int	pixel_to_int(uint8_t* pixel);
 
 
  
