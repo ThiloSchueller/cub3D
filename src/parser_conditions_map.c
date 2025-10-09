@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 12:52:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/09 12:52:37 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/09 13:45:22 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -77,7 +77,6 @@ int	player_position(char **map)
 
 	i = 0;
 	player = 0;
-
 	while (map[i])
 	{
 		j = 0;
