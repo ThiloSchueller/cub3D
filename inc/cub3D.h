@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/08 13:32:09 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/09 12:54:21 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -104,6 +104,7 @@ typedef struct s_fpoint //float point;
 //main.c
 int		check_file(char *file);
 void	init_data(t_config *data);
+void	free_data(t_config *data);
 
 //parser
 //parser_colours.c
@@ -133,12 +134,13 @@ void	parse_element(char *line, t_config *data);
 char	**map_copy(t_config *data);
 void	print_copy(char **map);
 void	check_map(t_config *data);
+int		check_conditions_map(char **map, t_config *data);
+//parser_conditions_map.c
 int		check_outside_walls(char **map);
 int		check_last_wall(char **map);
 int		player_position(char **map);
 int		zero_touch_space(char **map);
 int		player(char **map, t_config *data);
-int		check_conditions_map(char **map, t_config *data);
 
 void	ft_get_textures(t_texture *textures);
 void	ft_textures_to_images(t_texture *textures, t_vars *vars);

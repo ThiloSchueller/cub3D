@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/07 13:35:12 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/09 12:28:29 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -42,8 +42,6 @@ int	check_file(char *file)
 
 void	init_data(t_config *data)
 {
-
-    // Flags
 	data->stop = 0;
 	data->no_set = 0;
 	data->so_set = 0;
@@ -52,26 +50,33 @@ void	init_data(t_config *data)
 	data->floor_set = 0;
 	data->ceil_set = 0;
 	data->map_set = 0;
-
-    // Texture paths
 	data->texture_no = NULL;
 	data->texture_so = NULL;
 	data->texture_we = NULL;
 	data->texture_ea = NULL;
-
-    // Colors
 	data->floor_color = -1;
 	data->ceiling_color = -1;
-
-    // Map
 	data->map = NULL;
 	data->map_width = 0;
 	data->map_height = 0;
-
-    // Player
 	data->x_position = -1;
 	data->y_position = -1;
 	data->player_dir = '\0';
+}
+
+void	free_data(t_config *data)
+{
+	if (data->texture_no)
+		free(data->texture_no);
+	if (data->texture_so)
+		free(data->texture_so);
+	if (data->texture_ea)
+		free(data->texture_ea);
+	if (data->texture_we)
+		free(data->texture_we);
+	if (data->map)
+		free_map(data->map);
+	free(data);
 }
 
 int	main(int argc, char *argv[])
@@ -100,10 +105,9 @@ int	main(int argc, char *argv[])
 		if (data->stop != 0)
 		{
 			printf("Invalid file.cub\n");
-			free_map(data->map);
+			free_data(data);
 			return (1);
 		}
-		// free_map(data->map); we also need this when we finish the game
 	}
 	//return (0);
 

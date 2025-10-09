@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:16:27 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/08 12:26:57 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/09 12:57:03 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -94,7 +94,6 @@ void	print_map(t_config *data)
 		i++;
 	}
 }
-
 
 //map_start = 0
 //the line count of map start is one
