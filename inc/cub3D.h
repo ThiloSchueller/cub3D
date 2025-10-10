@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/09 15:05:46 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/10 12:49:15 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -174,7 +174,7 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  char	**calc_smap(t_vars *vars);
  bool	is_player_char(char c);
  int	ft_exit(int code, t_vars *vars);
- void	move_2d(t_vars *vars, double dx, double dy);
+ void	move_2d(t_vars *vars, double dx, double dy, float angle);
  //int	calculate_height(t_vars *vars, int x);
  t_hit_info	get_hit_info(t_vars *vars, int x);
  float	calculate_angle(t_vars *vars, int x);
