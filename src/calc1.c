@@ -20,13 +20,13 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 	t_hit_info hit_info;
 
 	ray_pos = vars->fpos;
-	dx = cos(angle);
-	dy = -sin(angle);
+	dx = cos(angle) / 10;
+	dy = -sin(angle) / 10;
 	while (1) //if (vars->smap[(int)ray_pos.x][(int)ray_pos.y] != '1') 
 	{
-		if ((vars->smap[(int)ray_pos.x][(int)ray_pos.y + (int)copysign(1.0, dy)] != '1') &&
-				(vars->smap[(int)ray_pos.x + (int)copysign(1.0, dx)][(int)ray_pos.y] != '1'))
-		//if (!confirm_hit_x(ray_pos.x + dx, ray_pos.y, normalise_angle(angle), vars) && !confirm_hit_y(ray_pos.x + dx, ray_pos.y, normalise_angle(angle), vars) &&
+		// if ((vars->smap[(int)ray_pos.x][(int)ray_pos.y + (int)copysign(1.0, dy)] != '1') &&
+		// 		(vars->smap[(int)ray_pos.x + (int)copysign(1.0, dx)][(int)ray_pos.y] != '1'))
+		if (!confirm_hit_x(ray_pos.x + dx, ray_pos.y +dy, normalise_angle(angle), vars) && !confirm_hit_y(ray_pos.x + dx, ray_pos.y +dy, normalise_angle(angle), vars)) //&&
 		// !confirm_hit_x(ray_pos.x , ray_pos.y + dy, normalise_angle(angle), vars) && !confirm_hit_y(ray_pos.x, ray_pos.y + dy, normalise_angle(angle), vars))
 		{
 			ray_pos.x += dx;
@@ -90,14 +90,14 @@ t_hit_info	calc_hit(t_vars *vars, float angle, t_fpoint ray_pos)
 		else
 			x_to_hit = ceil(ray_pos.x);
 	}
-	// if (fabs(angle - normalise_angle(vars->view_angle)) < 0.02)
-	// {
-	// 	printf("---------------------------------------\n");
-	// 	printf("player pos  x is %f\n", vars->fpos.x);
-	// 	printf("player pos  y is %f\n", vars->fpos.y);
-	// 	printf("x to hit is: %f\n", x_to_hit);
-	// 	printf("y to his is: %f\n", y_to_hit);
-	// }
+	if (fabs(angle - normalise_angle(vars->view_angle)) < 0.02)
+	{
+		printf("---------------------------------------\n");
+		printf("player pos  x is %f\n", vars->fpos.x);
+		printf("player pos  y is %f\n", vars->fpos.y);
+		printf("x to hit is: %f\n", x_to_hit);
+		printf("y to his is: %f\n", y_to_hit);
+	}
 
 	hit_info = calc_intersection(vars, angle, x_to_hit, y_to_hit);
 	return (hit_info);
@@ -123,6 +123,10 @@ t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_
 	hit_info.vertical_hit = true;
 
 	m = -tan(angle);
+	if (fabs(m) > 1000)
+		m = 1000;
+	if (fabs(m) < 0.001)
+		m = 0.001;
 	// if (fabs(cos(angle)) < 0.1) // vertical ray
   	//   m = 100; // or some large number
 	// if (angle > 0.1 || angle > 2 * PI - 0.1)
@@ -165,8 +169,8 @@ t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_
 		// printf("it is a vertical hit: %d\n", hit_info.vertical_hit);
 		//printf("distance horizontal would be %f\n", distance_horizontal);
 		//printf("distance vertical would be %f\n", distance_vertical);
-		if (!(y_to_hit < 0 || y_to_hit > vars->smap_height || x_hit < 0 || x_hit > vars->smap_width))
-			printf("checking in point x %d and y %d is %c\n", (int)x_to_hit, (int)y_to_hit, vars->smap[(int)x_hit][(int)y_to_hit]);
+		//if (!(y_to_hit < 0 || y_to_hit > vars->smap_height || x_hit < 0 || x_hit > vars->smap_width))
+		//	printf("checking in point x %d and y %d is %c\n", (int)x_to_hit, (int)y_to_hit, vars->smap[(int)x_hit][(int)y_to_hit]);
 	}
 	return(hit_info);
 }
