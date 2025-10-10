@@ -22,12 +22,10 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 	ray_pos = vars->fpos;
 	dx = cos(angle) / 10;
 	dy = -sin(angle) / 10;
-	while (1) //if (vars->smap[(int)ray_pos.x][(int)ray_pos.y] != '1') 
+	while (1)
 	{
-		// if ((vars->smap[(int)ray_pos.x][(int)ray_pos.y + (int)copysign(1.0, dy)] != '1') &&
-		// 		(vars->smap[(int)ray_pos.x + (int)copysign(1.0, dx)][(int)ray_pos.y] != '1'))
-		if (!confirm_hit_x(ray_pos.x + dx, ray_pos.y +dy, normalise_angle(angle), vars) && !confirm_hit_y(ray_pos.x + dx, ray_pos.y +dy, normalise_angle(angle), vars)) //&&
-		// !confirm_hit_x(ray_pos.x , ray_pos.y + dy, normalise_angle(angle), vars) && !confirm_hit_y(ray_pos.x, ray_pos.y + dy, normalise_angle(angle), vars))
+		if (!confirm_hit_x(ray_pos.x + dx, ray_pos.y +dy, normalise_angle(angle), vars) && !confirm_hit_y(ray_pos.x + dx, ray_pos.y +dy, normalise_angle(angle), vars))
+		
 		{
 			ray_pos.x += dx;
 			ray_pos.y += dy;
@@ -37,14 +35,14 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 	}
 	angle = normalise_angle(angle);
 	hit_info = calc_hit(vars, angle, ray_pos);
-	// if (fabs(angle - normalise_angle(vars->view_angle)) < 0.02)
-	// {
-	// 	printf("normalised angle is %f\n", angle);
-	// 	printf("estimated distance was %f\n", distance_two_points(vars->fpos, (t_fpoint){ray_pos.x, ray_pos.y}));
-	// 	printf("estimated hit point was x: %f\n", ray_pos.x);
-	// 	printf("estimated hit point was y: %f\n", ray_pos.y);
-	// 	//printf("the value is %c \n", vars->smap[79][20]);
-	// }
+	if (fabs(angle - normalise_angle(vars->view_angle)) < 0.02)
+	{
+		printf("normalised angle is %f\n", angle);
+		printf("estimated distance was %f\n", distance_two_points(vars->fpos, (t_fpoint){ray_pos.x, ray_pos.y}));
+		printf("estimated hit point was x: %f\n", ray_pos.x);
+		printf("estimated hit point was y: %f\n", ray_pos.y);
+		//printf("the value is %c \n", vars->smap[79][20]);
+	}
 	// printf("%f\n", tan(PI / 4));
 	// distance = sqrt((ray_pos.x - vars->fpos.x) * (ray_pos.x - vars->fpos.x) 
 	// 			+ (ray_pos.y - vars->fpos.y) * (ray_pos.y - vars->fpos.y));
@@ -162,13 +160,13 @@ t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_
 	}
 	if (fabs(angle - normalise_angle(vars->view_angle)) < 0.02)
 	{
-		// printf("calculated Steigung is %f\n", m);
-		// printf("calculated distance is %f\n", hit_info.distance);
-		// printf("potential hit in x axis is %f\n", x_hit);
-		// printf("potential hit in y axis is %f\n", y_hit);
-		// printf("it is a vertical hit: %d\n", hit_info.vertical_hit);
-		//printf("distance horizontal would be %f\n", distance_horizontal);
-		//printf("distance vertical would be %f\n", distance_vertical);
+		printf("calculated Steigung is %f\n", m);
+		printf("calculated distance is %f\n", hit_info.distance);
+		printf("potential hit in x axis is %f\n", x_hit);
+		printf("potential hit in y axis is %f\n", y_hit);
+		printf("it is a vertical hit: %d\n", hit_info.vertical_hit);
+		printf("distance horizontal would be %f\n", distance_horizontal);
+		printf("distance vertical would be %f\n", distance_vertical);
 		//if (!(y_to_hit < 0 || y_to_hit > vars->smap_height || x_hit < 0 || x_hit > vars->smap_width))
 		//	printf("checking in point x %d and y %d is %c\n", (int)x_to_hit, (int)y_to_hit, vars->smap[(int)x_hit][(int)y_to_hit]);
 	}
