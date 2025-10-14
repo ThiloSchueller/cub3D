@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/14 11:49:10 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/14 12:46:19 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -73,6 +73,7 @@ int	render_walls(t_vars *vars)
 	int	jump;
 	int	index;
 	uint32_t color;
+	mlx_texture_t *texture;
 
 	i = 0;
 	j = 0;
@@ -90,16 +91,30 @@ int	render_walls(t_vars *vars)
 	while (x < WIDTH)
 	{
 		hit_info = get_hit_info(vars, x);
+		if (vars->hit_info.vertical_hit == 1)
+		{
+			if (vars->view_angle > 0)
+				texture = vars->textures->west;
+			else
+				texture = vars->textures->east;
+		}
+		else
+		{
+			if (vars->view_angle > 0)
+				texture = vars->textures->north;
+			else
+				texture = vars->textures->south;
+		}
 		bottom_wall = HEIGHT / 2 - hit_info.height / 2;
 		top_wall = HEIGHT / 2 + hit_info.height / 2;
 		wall_height = top_wall - bottom_wall;
-		jump = vars->textures->north->height / wall_height;
+		jump = texture->height / wall_height;
 		//h = calculate_height(vars, x);
 		y = HEIGHT / 2 - hit_info.height / 2;
 		while(y < HEIGHT / 2 + hit_info.height / 2)
 		{
-			index = ((y * vars->textures->north->width + x) * vars->textures->north->bytes_per_pixel) + jump;
-			color = (vars->textures->north->pixels[index + 3] << 24) | (vars->textures->north->pixels[index + 2] << 16) | (vars->textures->north->pixels[index + 1] << 8) | vars->textures->north->pixels[index + 0];
+			index = ((y + jump) * texture->width + (x + jump)) * texture->bytes_per_pixel;
+			color = (texture->pixels[index + 3] << 24) | (texture->pixels[index + 2] << 16) | (texture->pixels[index + 1] << 8) | texture->pixels[index + 0];
 			// use hit_info and vars->view_angle for right image
 			// get single pixel like vars->images.east->pixels[1];
 			// uint8_t pixel;
@@ -112,6 +127,7 @@ int	render_walls(t_vars *vars)
 	}
 	//printf("%hhu\n", vars->images.east->pixels[1]);
 	//mlx_put_pixel(vars->walls, 300, 400, vars->images.west->pixels[1800]);
+	printf("view_angle: %f\n", vars->view_angle);
 	return (0);
 }
 
