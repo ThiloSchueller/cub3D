@@ -23,7 +23,9 @@ SOURCES = 	main.c \
 			exit.c \
 			minimap.c \
 			images.c \
+			directions.c \
 			calc1.c \
+			calc2.c \
 			helpers.c
 
 HEADERS = cub3D.h

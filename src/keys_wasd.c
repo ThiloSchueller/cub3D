@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/10 15:26:20 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/14 13:11:17 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ void	a_key(t_vars *vars)
 
 void	move_2d(t_vars *vars, double dx, double dy, float angle)
 {
-	dx = dx/10;
-	dy = dy/10;
+	dx = dx/2;
+	dy = dy/2;
 	float	y_to_hit;
 	float	x_to_hit;
 
 	angle = normalise_angle(angle);
-	if (angle >= 0 && angle <= PI)
+	if (facing_up(angle))
 	{
 		y_to_hit = floor(vars->fpos.y);
-		if (angle >= PI / 2)
+		if (facing_left(angle))
 			x_to_hit = floor(vars->fpos.x);
 		else
 			x_to_hit = ceil(vars->fpos.x);
@@ -71,7 +71,7 @@ void	move_2d(t_vars *vars, double dx, double dy, float angle)
 	else
 	{
 		y_to_hit = ceil(vars->fpos.y);
-		if (angle <= 1.5 * PI)
+		if (facing_left(angle))
 			x_to_hit = floor(vars->fpos.x);
 		else
 			x_to_hit = ceil(vars->fpos.x);

@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:00:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/06 14:02:34 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/14 16:44:24 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	render_minimap_view(t_vars *vars)
 	angle = -FOV/2;
 	while (angle <= FOV/2)
 	{
-		render_minimap_rays(vars, vars->view_angle + angle * PI / 180);
+		render_minimap_ray(vars, vars->view_angle + angle * PI / 180);
 		angle += 1;
 	}
 	return (0);
 }
 
-int	render_minimap_rays(t_vars *vars, float angle)
+int	render_minimap_ray(t_vars *vars, float angle)
 {
 	t_point	ray;
 	double	x;
@@ -33,6 +33,7 @@ int	render_minimap_rays(t_vars *vars, float angle)
 	double	dx;
 	double	dy;
 
+	angle = normalise_angle(angle);
 	dx = cos(angle);
 	dy = -sin(angle);
 	ray = vars->pos;
@@ -73,11 +74,12 @@ char **calc_smap(t_vars *vars)
 			{
 				if (x % SCALE == ( SCALE / 2) && y % SCALE == (SCALE / 2))
 				{
+					
 					smap[x][y] = '0'; //simplify
 					vars->pos.x = x;
 					vars->pos.y = y;
-					vars->fpos.x = (float)x;
-					vars->fpos.y = (float)y;
+					vars->fpos.x = (float)x; //+ 0.0001;
+					vars->fpos.y = (float)y; //+ 0.0001;
 				}
 				else
 					smap[x][y] = '0';

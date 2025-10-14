@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/09 14:57:33 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/14 16:38:47 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	render_walls(t_vars *vars)
 		}
 		x++;
 	}
-	//printf("%hhu\n", vars->images.east->pixels[1]);
-	//mlx_put_pixel(vars->walls, 300, 400, vars->images.west->pixels[1800]);
+	// printf("%hhu\n", vars->images.east->pixels[1]);
+	// mlx_put_pixel(vars->walls, 300, 400, vars->images.west->pixels[1800]);
 	return (0);
 }
 

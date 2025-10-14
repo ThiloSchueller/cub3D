@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/10 12:49:15 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/14 16:45:02 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  int	render_background(t_vars *vars);
  int	render_minimap(t_vars *vars);
  int	render_walls(t_vars *vars);
- int	render_minimap_rays(t_vars *vars, float angle);
+ int	render_minimap_ray(t_vars *vars, float angle);
  int	render_minimap_view(t_vars *vars);
  char	**calc_smap(t_vars *vars);
  bool	is_player_char(char c);
@@ -179,14 +179,21 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  t_hit_info	get_hit_info(t_vars *vars, int x);
  float	calculate_angle(t_vars *vars, int x);
  t_hit_info	calculate_distance(t_vars *vars, float angle);
- float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
- float	quadrant4(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
+ //float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
+ //float	quadrant4(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
  float	distance_two_points(t_fpoint p, t_fpoint q);
- t_hit_info	calc_hit(t_vars *vars, float angle, t_fpoint ray_pos);
+ //t_hit_info	calc_hit(t_vars *vars, float angle, t_fpoint ray_pos);
  float	normalise_angle(float angle);
- t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
+//  t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
+t_fpoint	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
  bool	confirm_hit_x(float x_to_hit,float y_hit,float angle, t_vars *vars);
  bool	confirm_hit_y(float x_hit,float y_to_hit,float angle, t_vars *vars);
+ bool	facing_right(float angle);
+ bool	facing_left(float angle);
+ bool	facing_up(float angle);
+ bool	facing_down(float angle);
+ t_fpoint	lines_to_hit(t_fpoint point, float angle);
+
  //bool	confirm_move(float x,float y,float angle, t_vars *vars);
  //	uint8_t* get_pixel(t_hit_info hit_info,t_vars* vars);
  //int	pixel_to_int(uint8_t* pixel);
