@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/14 12:46:19 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/14 15:05:45 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -111,10 +111,17 @@ int	render_walls(t_vars *vars)
 		jump = texture->height / wall_height;
 		//h = calculate_height(vars, x);
 		y = HEIGHT / 2 - hit_info.height / 2;
+
 		while(y < HEIGHT / 2 + hit_info.height / 2)
 		{
+			//int tex_x = (int)(hit_info.percent_of_hit * texture->width);
+			//int tex_y = (int)((y + (hit_info.height /2) - HEIGHT /2) * jump);
+			//printf("y is %f\n", (y + (hit_info.height - HEIGHT /2));
+			//index = (tex_y * texture->width + tex_x) * texture->bytes_per_pixel;
+			//index = ((((int)(y * texture->height / wall_height)) * (int)texture->width) + (int)(hit_info.percent_of_hit * (int)texture->width)) * (int)texture->bytes_per_pixel;
+			//index = (((y * texture->height / wall_height) * texture->width) + hit_info.percent_of_hit * texture->width) * texture->bytes_per_pixel;
 			index = ((y + jump) * texture->width + (x + jump)) * texture->bytes_per_pixel;
-			color = (texture->pixels[index + 3] << 24) | (texture->pixels[index + 2] << 16) | (texture->pixels[index + 1] << 8) | texture->pixels[index + 0];
+			color = (texture->pixels[index + 0] << 24) | (texture->pixels[index + 2] << 16) | (texture->pixels[index + 1] << 8) | 0xFF;
 			// use hit_info and vars->view_angle for right image
 			// get single pixel like vars->images.east->pixels[1];
 			// uint8_t pixel;
@@ -128,6 +135,7 @@ int	render_walls(t_vars *vars)
 	//printf("%hhu\n", vars->images.east->pixels[1]);
 	//mlx_put_pixel(vars->walls, 300, 400, vars->images.west->pixels[1800]);
 	printf("view_angle: %f\n", vars->view_angle);
+	printf("color: %X\n", color);
 	return (0);
 }
 
