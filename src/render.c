@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/09 14:57:33 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/14 11:49:10 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3D.h"
 
@@ -67,6 +67,12 @@ int	render_walls(t_vars *vars)
 	int	i;
 	int j;
 	t_hit_info hit_info;
+	int	bottom_wall;
+	int	top_wall;
+	int	wall_height;
+	int	jump;
+	int	index;
+	uint32_t color;
 
 	i = 0;
 	j = 0;
@@ -84,16 +90,22 @@ int	render_walls(t_vars *vars)
 	while (x < WIDTH)
 	{
 		hit_info = get_hit_info(vars, x);
+		bottom_wall = HEIGHT / 2 - hit_info.height / 2;
+		top_wall = HEIGHT / 2 + hit_info.height / 2;
+		wall_height = top_wall - bottom_wall;
+		jump = vars->textures->north->height / wall_height;
 		//h = calculate_height(vars, x);
 		y = HEIGHT / 2 - hit_info.height / 2;
 		while(y < HEIGHT / 2 + hit_info.height / 2)
 		{
+			index = ((y * vars->textures->north->width + x) * vars->textures->north->bytes_per_pixel) + jump;
+			color = (vars->textures->north->pixels[index + 3] << 24) | (vars->textures->north->pixels[index + 2] << 16) | (vars->textures->north->pixels[index + 1] << 8) | vars->textures->north->pixels[index + 0];
 			// use hit_info and vars->view_angle for right image
 			// get single pixel like vars->images.east->pixels[1];
 			// uint8_t pixel;
 			// pixel = get_pixel(hit_info, vars);
 			// mlx_put_pixel(vars->walls, x, y, pixel_to_int(pixel)); //maybe the unint8 value can be directly used for pixelcolor, maybe it needs tranfomration
-			mlx_put_pixel(vars->walls, x, y, 0xFF00FFFF);
+			mlx_put_pixel(vars->walls, x, y, color);
 			y++;
 		}
 		x++;
