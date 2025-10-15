@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/14 16:45:02 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/15 16:57:53 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ int		player(char **map, t_config *data);
 void	ft_get_textures(t_vars *vars);
 void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  int	init_vars(t_vars *vars);
+ void	set_view_angle(t_vars *vars);
  void	ft_key_hook(mlx_key_data_t keydata, void *param);
  void	ft_loop_hook(void *param);
  void	left_key(t_vars *vars);

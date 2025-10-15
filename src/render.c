@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/15 13:38:08 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/15 16:33:28 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3D.h"
 
@@ -121,18 +121,18 @@ int	render_walls(t_vars *vars)
 			//index = ((((int)(y * texture->height / wall_height)) * (int)texture->width) + (int)(hit_info.percent_of_hit * (int)texture->width)) * (int)texture->bytes_per_pixel;
 			//index = (((y * texture->height / wall_height) * texture->width) + hit_info.percent_of_hit * texture->width) * texture->bytes_per_pixel;
 			// index = ((y + jump) * texture->width + (x + jump)) * texture->bytes_per_pixel;
-			if ( x == 400)
-			{
-				printf("y value is %d, ye value is %d, wallheight is %d \n", y, ye, wall_height);
-				printf("ye * jump is %d, ye * jump * texture->width is %d\n", (ye * jump), (ye * jump * texture->width));
-				printf("value of x is %d\n", ((int)(hit_info.percent_of_hit * texture->width)));
-			}
+			// if ( x == 400)
+			// {
+			// 	printf("y value is %d, ye value is %d, wallheight is %d \n", y, ye, wall_height);
+			// 	printf("ye * jump is %d, ye * jump * texture->width is %d\n", (ye * jump), (ye * jump * texture->width));
+			// 	printf("value of x is %d\n", ((int)(hit_info.percent_of_hit * texture->width)));
+			// }
 			int tex_y = (int)(ye * jump);
 			if (tex_y >= (int)texture->height)
    				 tex_y = texture->height - 1;
 			index = (tex_y * texture->width + ((int)(hit_info.percent_of_hit * texture->width))) * texture->bytes_per_pixel;
-			if ( x == 400)
-				printf("index value is %d\n", index);
+			// if ( x == 400)
+			// 	printf("index value is %d\n", index);
 			color = (texture->pixels[index + 0] << 24) | (texture->pixels[index + 2] << 16) | (texture->pixels[index + 1] << 8) | 0xFF;
 			// use hit_info and vars->view_angle for right image
 			// get single pixel like vars->images.east->pixels[1];
@@ -147,8 +147,8 @@ int	render_walls(t_vars *vars)
 	}
 	//printf("%hhu\n", vars->images.east->pixels[1]);
 	//mlx_put_pixel(vars->walls, 300, 400, vars->images.west->pixels[1800]);
-	printf("view_angle: %f\n", vars->view_angle);
-	printf("color: %X\n", color);
+	// printf("view_angle: %f\n", vars->view_angle);
+	// printf("color: %X\n", color);
 	return (0);
 }
 
@@ -159,3 +159,27 @@ int	render(t_vars *vars)
 	render_walls(vars);
 	return (0);
 }
+
+// int	render_minimap(t_vars *vars)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	j = 0;
+// 	while (i < vars->smap_height)
+// 	{
+// 		while (j < vars->smap_width)
+// 		{
+// 			if (vars->smap[i][j] == '1')
+// 				mlx_put_pixel(vars->minimap, j , i , 0x00FF0055);
+// 			else
+// 				mlx_put_pixel(vars->minimap, j , i , 0xFFFFFF55);
+// 			j++;
+// 		}
+// 		j = 0;
+// 		i++;
+// 	}
+// 	render_minimap_view(vars);
+// 	return (0);
+// }

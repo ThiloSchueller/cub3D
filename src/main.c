@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/09 15:10:45 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/15 16:58:56 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
@@ -131,6 +131,19 @@ int	main(int argc, char *argv[])
 	//mlx_terminate(vars.mlx);
 }
 
+void	set_view_angle(t_vars *vars)
+{
+	if (vars->config->player_dir == 'E')
+		vars->view_angle = 0.0;
+	if (vars->config->player_dir == 'N')
+		vars->view_angle = PI / 2;
+	if (vars->config->player_dir == 'W')
+		vars->view_angle = PI;
+	if (vars->config->player_dir == 'S')
+		vars->view_angle = 1.5 * PI;
+
+}
+
 int	init_vars(t_vars * vars)
 {
 	vars->smap = calc_smap(vars);
@@ -140,7 +153,8 @@ int	init_vars(t_vars * vars)
 	mlx_image_to_window(vars->mlx, vars->background, 0, 0);
 	mlx_image_to_window(vars->mlx, vars->minimap, 30, 30);
 	mlx_image_to_window(vars->mlx, vars->walls, 0, 0);
-	vars->view_angle = 0.0; //should be depending on SWEN maybe exxtra func
+	//vars->view_angle = 0.0;
+	set_view_angle(vars);
 	vars->background->instances->z = 1;
 	vars->minimap->instances->z = 3;
 	vars->walls->instances->z = 2;

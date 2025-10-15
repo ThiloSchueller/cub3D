@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/15 13:34:26 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/15 16:37:55 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 		if (ray_pos.x == next.x && confirm_hit_x(ray_pos.x, ray_pos.y, angle, vars))
 		{
 			hit_info.vertical_hit = true;
-	 		hit_info.percent_of_hit = (fmod(ray_pos.y, 20)/20);
+	 		hit_info.percent_of_hit = fmod(ray_pos.y, 1);
 			break;
 		}
 		if (ray_pos.y == next.y && confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars))
 		{
 			hit_info.vertical_hit = false;
-	 		hit_info.percent_of_hit = (fmod(ray_pos.x, 20)/20);
+	 		hit_info.percent_of_hit = fmod(ray_pos.x, 1);
 			break;
 		}
 	}
