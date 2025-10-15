@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:00:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/14 16:44:24 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:33:57 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ char **calc_smap(t_vars *vars)
 					smap[x][y] = '0'; //simplify
 					vars->pos.x = x;
 					vars->pos.y = y;
-					vars->fpos.x = (float)x; //+ 0.0001;
-					vars->fpos.y = (float)y; //+ 0.0001;
+					vars->fpos.x = (float)x+ 0.0001;
+					vars->fpos.y = (float)y+ 0.0001;
 				}
 				else
 					smap[x][y] = '0';

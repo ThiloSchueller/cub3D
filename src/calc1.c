@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/14 16:44:28 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:34:26 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 
 	ray_pos = vars->fpos;
 	//while (1)
-	for (int i=0; i<70;i++)
+	for (int i=0; i<100;i++)
 	{
 		next = lines_to_hit(ray_pos, angle);
 		ray_pos = calc_intersection(vars, angle, next.x, next.y);
