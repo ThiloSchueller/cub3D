@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/15 13:38:08 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/16 14:40:08 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -91,20 +91,44 @@ int	render_walls(t_vars *vars)
 	while (x < WIDTH)
 	{
 		hit_info = get_hit_info(vars, x);
-		if (vars->hit_info.vertical_hit == 1)
+		int adjust = 0;
+		if (vars->config->player_dir == 'E')
+			adjust = 0;
+		else if (vars->config->player_dir == 'N')
+			adjust += PI / 2;
+		else if (vars->config->player_dir == 'W')
+			adjust += PI;
+		else if (vars->config->player_dir == 'S')
+			adjust += 3 * PI / 2;
+		hit_info.new_angle = normalise_angle(calculate_angle(vars, x) + adjust);
+		if (facing_right(hit_info.new_angle) && facing_up(hit_info.new_angle))
 		{
-			if (vars->view_angle > 0)
-				texture = vars->textures->west;
-			else
+			if (hit_info.vertical_hit == 1)
 				texture = vars->textures->east;
-		}
-		else
-		{
-			if (vars->view_angle > 0)
+			else
 				texture = vars->textures->north;
+		}
+		else if (facing_right(hit_info.new_angle) && facing_down(hit_info.new_angle))
+		{
+			if (hit_info.vertical_hit == 1)
+				texture = vars->textures->east;
 			else
 				texture = vars->textures->south;
 		}
+		else if (facing_left(hit_info.new_angle) && facing_up(hit_info.new_angle))
+		{
+			if (hit_info.vertical_hit == 1)
+				texture = vars->textures->west;
+			else
+				texture = vars->textures->north;
+		}
+		else if (facing_left(hit_info.new_angle) && facing_down(hit_info.new_angle))
+		{
+			if (hit_info.vertical_hit == 1)
+				texture = vars->textures->west;
+			else
+				texture = vars->textures->south;
+		}	
 		bottom_wall = HEIGHT / 2 - hit_info.height / 2;
 		top_wall = HEIGHT / 2 + hit_info.height / 2;
 		wall_height = top_wall - bottom_wall;
@@ -127,9 +151,10 @@ int	render_walls(t_vars *vars)
 				printf("ye * jump is %d, ye * jump * texture->width is %d\n", (ye * jump), (ye * jump * texture->width));
 				printf("value of x is %d\n", ((int)(hit_info.percent_of_hit * texture->width)));
 			}
-			int tex_y = (int)(ye * jump);
-			if (tex_y >= (int)texture->height)
-   				 tex_y = texture->height - 1;
+			int	texture_offset = (wall_height - (int)texture->height) / 2;
+			int tex_y = (int)(ye * jump + texture_offset);
+			// if (tex_y >= (int)texture->height)
+   			// 	 tex_y = texture->height - 1;
 			index = (tex_y * texture->width + ((int)(hit_info.percent_of_hit * texture->width))) * texture->bytes_per_pixel;
 			if ( x == 400)
 				printf("index value is %d\n", index);

@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/15 13:44:46 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/16 11:22:44 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -33,6 +33,7 @@ t_hit_info	get_hit_info(t_vars *vars, int x)
 	hit_info.height = (HEIGHT /  hit_info.distance); //cos(angle -vars->view_angle)
 	if (hit_info.height > 600) // this is wrong but preverts segfaults
 		hit_info.height = 600;
+	hit_info.new_angle = angle;
 	return (hit_info);
 }
 
