@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/17 11:30:07 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/17 14:36:35 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	main(int argc, char *argv[])
 		ft_exit(ERROR_MLX, &vars);
 	vars.config = data;
 	ft_get_textures(&vars);
-	ft_textures_to_images(vars.textures, &vars);
 	mlx_key_hook(vars.mlx, &ft_key_hook, &vars);
 	mlx_loop_hook(vars.mlx, &ft_loop_hook, &vars);
 	init_vars(&vars);

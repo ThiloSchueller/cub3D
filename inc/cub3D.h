@@ -1,35 +1,36 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 16:23:28 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/17 16:41:11 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
- #define HEIGHT 600
- #define WIDTH 800
- #define SCALE 20
- #define PI 3.1415926535
- #define FOV 60
- #define ERROR_MLX 10
- #include <stdlib.h>
- #include <unistd.h>
- #include <stdio.h>
- #include <stdlib.h>
- #include <fcntl.h>
- #include <math.h>
- #include <stdbool.h>
- #include "../mlx/include/MLX42/MLX42.h"
- #include "../libft/libft.h"
- #include "../libft/ft_printf.h"
- #include "../libft/get_next_line.h"
+# define HEIGHT 600
+# define WIDTH 800
+# define SCALE 20
+# define PI 3.1415926535
+# define FOV 60
+# define ERROR_MLX 10
+# define ERROR_MALLOC 11
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
+# include "../mlx/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
+# include "../libft/ft_printf.h"
+# include "../libft/get_next_line.h"
 
 typedef struct s_config
 {
@@ -58,7 +59,7 @@ typedef struct s_config
 	char	player_dir;		// 'N', 'S', 'E', or 'W'
 }	t_config;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
@@ -82,12 +83,12 @@ typedef struct s_point
 
 typedef struct s_fpoint //float point;
 {
-	float x;
-	float y;
+	float	x;
+	float	y;
 }	t_fpoint;
 
- typedef struct	s_hit_info
- {
+typedef struct s_hit_info
+{
 	float		distance;
 	float		percent_of_hit;
 	float		wall_height;
@@ -101,24 +102,19 @@ typedef struct s_fpoint //float point;
  {
 	mlx_t	*mlx;
 	mlx_image_t	*background;
-	mlx_image_t *minimap;
-	mlx_image_t *walls;
+	mlx_image_t	*minimap;
+	mlx_image_t	*walls;
 	t_config	*config;
 	char		**smap; //scaled map;
 	int			smap_width;
 	int			smap_height;
 	float		view_angle;
 	t_point		pos;
-	t_fpoint 	fpos;
+	t_fpoint	fpos;
 	t_image		images;
 	t_texture	*textures;
 	//t_hit_info	hit_info; //not here
  }	t_vars;
-
-//main.c
-int		check_file(char *file);
-void	init_data(t_config *data);
-void	free_data(t_config *data);
 
 //parser
 //parser_colours.c
@@ -155,62 +151,65 @@ int		check_last_wall(char **map);
 int		player_position(char **map);
 int		zero_touch_space(char **map);
 int		player(char **map, t_config *data);
-
-void	ft_get_textures(t_vars *vars);
-void	ft_textures_to_images(t_texture *textures, t_vars *vars);
- int	init_vars(t_vars *vars);
- void	set_view_angle(t_vars *vars);
- void	ft_key_hook(mlx_key_data_t keydata, void *param);
- void	ft_loop_hook(void *param);
- void	left_key(t_vars *vars);
- void	right_key(t_vars *vars);
- void	w_key(t_vars *vars);
- void	s_key(t_vars *vars);
- void	a_key(t_vars *vars);
- void	d_key(t_vars *vars);
- int	render(t_vars *vars);
- int	render_background(t_vars *vars);
- int	render_minimap(t_vars *vars);
+//images.c
+void		ft_get_textures(t_vars *vars);
+//init.c
+int			check_file(char *file);
+void		init_data(t_config *data);
+void		free_data(t_config *data);
+int			init_vars(t_vars *vars);
+void		set_view_angle(t_vars *vars);
+//hook.c
+void		ft_key_hook(mlx_key_data_t keydata, void *param);
+void		ft_loop_hook(void *param);
+//key_arrows.c
+void		left_key(t_vars *vars);
+void		right_key(t_vars *vars);
+//key_wasd.c
+void		w_key(t_vars *vars);
+void		s_key(t_vars *vars);
+void		a_key(t_vars *vars);
+void		d_key(t_vars *vars);
+void		move_2d(t_vars *vars, double dx, double dy, float angle);
+//render.c
+int			render(t_vars *vars);
+int			render_background(t_vars *vars);
+int			render_minimap(t_vars *vars);
  void	overwrite_previous_frame(t_vars *vars);
 //  mlx_texture_t *define_texture(t_vars *vars, int x);
 mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hit);
 // int	define_color(t_vars *vars, int x, int y, int ye);
- int	render_walls(t_vars *vars);
- int	render_minimap_ray(t_vars *vars, float angle);
- int	render_minimap_view(t_vars *vars);
- char	**calc_smap(t_vars *vars);
- bool	is_player_char(char c);
- int	ft_exit(int code, t_vars *vars);
- void	move_2d(t_vars *vars, double dx, double dy, float angle);
- //int	calculate_height(t_vars *vars, int x);
- t_hit_info	get_hit_info(t_vars *vars, int x);
+int			render_walls(t_vars *vars);
+//minimap.c
+int			render_minimap_ray(t_vars *vars, float angle);
+int			render_minimap_view(t_vars *vars);
+void		fill_smap(t_vars *vars, int x, int y, char ***smap);
+char		**calc_smap(t_vars *vars);
+//helpers.c
+bool		is_player_char(char c);
+void		ft_free_array(char **a);
+//exit.c
+int			ft_exit(int code, t_vars *vars);
+void		ft_free_vars(t_vars *vars);
+//calc1.c
+t_hit_info	get_hit_info(t_vars *vars, int x);
  uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, int jump);
- float	calculate_angle(t_vars *vars, int x);
- t_hit_info	calculate_distance(t_vars *vars, float angle);
- //float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
- //float	quadrant4(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
- float	distance_two_points(t_fpoint p, t_fpoint q);
- //t_hit_info	calc_hit(t_vars *vars, float angle, t_fpoint ray_pos);
- float	normalise_angle(float angle);
-//  t_hit_info	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
+float		calculate_angle(t_vars *vars, int x);
+t_hit_info	calculate_distance(t_vars *vars, float angle);
 t_fpoint	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
- bool	confirm_hit_x(float x_to_hit,float y_hit,float angle, t_vars *vars);
- bool	confirm_hit_y(float x_hit,float y_to_hit,float angle, t_vars *vars);
- bool	facing_right(float angle);
- bool	facing_left(float angle);
- bool	facing_up(float angle);
- bool	facing_down(float angle);
- t_fpoint	lines_to_hit(t_fpoint point, float angle);
- t_fpoint	lines_to_hit_up(t_fpoint point, float angle);
- t_fpoint	lines_to_hit_down(t_fpoint point, float angle);
+//calc2.c
+float		distance_two_points(t_fpoint p, t_fpoint q);
+float		normalise_angle(float angle);
+bool		confirm_hit_x(float x_to_hit, float y_hit, float angle, t_vars *vars);
+bool		confirm_hit_y(float x_hit, float y_to_hit, float angle, t_vars *vars);
+//directions.c
+bool		facing_right(float angle);
+bool		facing_left(float angle);
+bool		facing_up(float angle);
+bool		facing_down(float angle);
+//lines.c
+t_fpoint	lines_to_hit(t_fpoint point, float angle);
+t_fpoint	lines_to_hit_up(t_fpoint point, float angle);
+t_fpoint	lines_to_hit_down(t_fpoint point, float angle);
 
- //bool	confirm_move(float x,float y,float angle, t_vars *vars);
- //	uint8_t* get_pixel(t_hit_info hit_info,t_vars* vars);
- //int	pixel_to_int(uint8_t* pixel);
-
-
- 
 #endif
-
-
-

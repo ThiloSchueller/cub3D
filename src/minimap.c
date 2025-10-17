@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:00:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 13:17:37 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/17 14:29:43 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	render_minimap_view(t_vars *vars)
 	int	angle;
 
 	angle = - (FOV / 2);
-	while (angle <= FOV/2)
+	while (angle <= FOV / 2)
 	{
 		render_minimap_ray(vars, vars->view_angle + angle * PI / 180);
 		angle += 1;
@@ -40,7 +40,7 @@ int	render_minimap_ray(t_vars *vars, float angle)
 	x = ray.x;
 	y = ray.y;
 	while ((vars->smap[ray.x][ray.y + (int)copysign(1.0, dy)] != '1') &&
-	 (vars->smap[ray.x + (int)copysign(1.0, dx)][ray.y] != '1'))
+		(vars->smap[ray.x + (int)copysign(1.0, dx)][ray.y] != '1'))
 	{
 		mlx_put_pixel(vars->minimap, ray.x, ray.y, 0x00000055);
 		x += dx;
@@ -52,7 +52,24 @@ int	render_minimap_ray(t_vars *vars, float angle)
 	return (0);
 }
 
-char **calc_smap(t_vars *vars)
+void	fill_smap(t_vars *vars, int x, int y, char ***smap)
+{
+	if (is_player_char(vars->config->map[y / SCALE][x / SCALE]) == true)
+	{
+		if (x % SCALE == (SCALE / 2) && y % SCALE == (SCALE / 2))
+		{
+			vars->pos.x = x;
+			vars->pos.y = y;
+			vars->fpos.x = (float)x + 0.0001;
+			vars->fpos.y = (float)y + 0.0001;
+		}
+		(*smap)[x][y] = '0';
+	}
+	else
+		(*smap)[x][y] = vars->config->map[y / SCALE][x / SCALE];
+}
+
+char	**calc_smap(t_vars *vars)
 {
 	char	**smap;
 	int		x;
@@ -60,32 +77,17 @@ char **calc_smap(t_vars *vars)
 
 	x = 0;
 	y = 0;
-	vars->smap_width = SCALE * vars->config->map_width;
-	vars->smap_height = SCALE * vars->config->map_height;
-	smap = malloc(((vars->smap_width) + 1)* sizeof(char *)); //protect
+	smap = malloc(((vars->smap_width) + 1) * sizeof(char *));
 	if (smap == NULL)
 		return (NULL);
 	while (x < vars->smap_width)
 	{
-		smap[x] = malloc((vars->smap_height + 1 )* sizeof(char));  //protect
+		smap[x] = malloc((vars->smap_height + 1) * sizeof(char));
+		if (smap[x] == NULL)
+			return (ft_free_array(smap), NULL);
 		while (y < vars->smap_height)
 		{
-			if (is_player_char(vars->config->map[y / SCALE][x / SCALE]) == true)
-			{
-				if (x % SCALE == ( SCALE / 2) && y % SCALE == (SCALE / 2))
-				{
-					
-					smap[x][y] = '0'; //simplify
-					vars->pos.x = x;
-					vars->pos.y = y;
-					vars->fpos.x = (float)x+ 0.0001;
-					vars->fpos.y = (float)y+ 0.0001;
-				}
-				else
-					smap[x][y] = '0';
-			}
-			else
-				smap[x][y] = vars->config->map[y / SCALE][x / SCALE];
+			fill_smap(vars, x, y, &smap);
 			y++;
 		}
 		smap[x][y] = '\0';
@@ -95,7 +97,6 @@ char **calc_smap(t_vars *vars)
 	smap[x] = NULL;
 	return (smap);
 }
-
 
 // char **calc_smap(t_vars *vars)
 // {
@@ -116,7 +117,7 @@ char **calc_smap(t_vars *vars)
 // 		{
 // 			// printf("y is %d\n", y);
 // 			// printf("x is %d\n", x);
-// 			if (is_player_char(vars->config->map[i / SCALE][j / SCALE]) == true)
+// 		if (is_player_char(vars->config->map[i / SCALE][j / SCALE]) == true)
 // 			{
 // 				if (i % SCALE == ( SCALE / 2) && j % SCALE == (SCALE / 2))
 // 				{				
@@ -125,7 +126,7 @@ char **calc_smap(t_vars *vars)
 // 					vars->pos.y = i;
 // 					vars->fpos.x = (float)j+ 0.0001;
 // 					vars->fpos.y = (float)i+ 0.0001;
-// 					printf("playerpos is x = %f and y = %f\n", vars->fpos.x, vars->fpos.y);
+// 		printf("playerpos is x = %f and y = %f\n", vars->fpos.x, vars->fpos.y);
 // 				}
 // 				else
 // 					smap[i][j] = '0';

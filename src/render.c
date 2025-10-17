@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 16:25:34 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/17 16:42:28 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3D.h"
 
@@ -48,8 +48,10 @@ int	render_minimap(t_vars *vars)
 		{
 			if (vars->smap[x][y] == '1')
 				mlx_put_pixel(vars->minimap, x , y , 0x00FF0055);
-			else
+			else if (vars->smap[x][y] == '0')
 				mlx_put_pixel(vars->minimap, x , y , 0xFFFFFF55);
+			else
+				mlx_put_pixel(vars->minimap, x , y , 0xFFFFFF00);
 			y++;
 		}
 		y = 0;
