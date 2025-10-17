@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 11:20:39 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:23:28 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -90,10 +90,11 @@ typedef struct s_fpoint //float point;
  {
 	float		distance;
 	float		percent_of_hit;
-	float		height;
+	float		wall_height;
 	t_fpoint	hit; //not used?
 	bool		vertical_hit;
-	float		angle;
+	float		new_angle;
+	mlx_texture_t *texture;
  }	t_hit_info;
  
  typedef struct s_vars
@@ -111,7 +112,7 @@ typedef struct s_fpoint //float point;
 	t_fpoint 	fpos;
 	t_image		images;
 	t_texture	*textures;
-	t_hit_info	hit_info; //not here
+	//t_hit_info	hit_info; //not here
  }	t_vars;
 
 //main.c
@@ -170,6 +171,10 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  int	render(t_vars *vars);
  int	render_background(t_vars *vars);
  int	render_minimap(t_vars *vars);
+ void	overwrite_previous_frame(t_vars *vars);
+//  mlx_texture_t *define_texture(t_vars *vars, int x);
+mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hit);
+// int	define_color(t_vars *vars, int x, int y, int ye);
  int	render_walls(t_vars *vars);
  int	render_minimap_ray(t_vars *vars, float angle);
  int	render_minimap_view(t_vars *vars);
@@ -179,6 +184,7 @@ void	ft_textures_to_images(t_texture *textures, t_vars *vars);
  void	move_2d(t_vars *vars, double dx, double dy, float angle);
  //int	calculate_height(t_vars *vars, int x);
  t_hit_info	get_hit_info(t_vars *vars, int x);
+ uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, int jump);
  float	calculate_angle(t_vars *vars, int x);
  t_hit_info	calculate_distance(t_vars *vars, float angle);
  //float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy);

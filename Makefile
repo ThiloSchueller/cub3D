@@ -28,7 +28,8 @@ SOURCES = 	main.c \
 			lines.c \
 			calc1.c \
 			calc2.c \
-			helpers.c
+			helpers.c \
+			small_render.c
 
 HEADERS = cub3D.h
 OBJ = $(addprefix $(OBJECT_DIR)/, $(SOURCES:.c=.o))
