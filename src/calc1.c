@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 16:27:50 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/17 16:28:33 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,7 +30,7 @@ t_hit_info	get_hit_info(t_vars *vars, int x)
 
 	angle = normalise_angle(calculate_angle(vars, x));
 	hit_info = calculate_distance(vars, angle);
-	hit_info.wall_height = (HEIGHT /  hit_info.distance); //cos(angle -vars->view_angle)
+	hit_info.wall_height = (HEIGHT /  (hit_info.distance / SCALE)); //cos(angle -vars->view_angle)
 	if (hit_info.wall_height > 600) // this is wrong but preverts segfaults
 		hit_info.wall_height = 600;
 	hit_info.new_angle = angle;
