@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/15 16:37:55 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:13:07 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_hit_info	get_hit_info(t_vars *vars, int x)
 
 	angle = normalise_angle(calculate_angle(vars, x));
 	hit_info = calculate_distance(vars, angle);
-	hit_info.height = (HEIGHT /  hit_info.distance); //cos(angle -vars->view_angle)
+	hit_info.height = (HEIGHT /  (hit_info.distance / SCALE));
 	if (hit_info.height > 600) // this is wrong but preverts segfaults
 		hit_info.height = 600;
 	return (hit_info);
@@ -43,26 +43,25 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 	t_hit_info	hit_info;
 
 	ray_pos = vars->fpos;
-	//while (1)
-	for (int i=0; i<100;i++)
+	while (1)
 	{
 		next = lines_to_hit(ray_pos, angle);
 		ray_pos = calc_intersection(vars, angle, next.x, next.y);
 		if (ray_pos.x == next.x && confirm_hit_x(ray_pos.x, ray_pos.y, angle, vars))
 		{
 			hit_info.vertical_hit = true;
-	 		hit_info.percent_of_hit = fmod(ray_pos.y, 1);
+	 		hit_info.percent_of_hit = fmod(ray_pos.y, SCALE)/SCALE;
 			break;
 		}
 		if (ray_pos.y == next.y && confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars))
 		{
 			hit_info.vertical_hit = false;
-	 		hit_info.percent_of_hit = fmod(ray_pos.x, 1);
+	 		hit_info.percent_of_hit = fmod(ray_pos.x, SCALE)/SCALE;
 			break;
 		}
 	}
 	hit_info.distance = distance_two_points(vars->fpos, ray_pos);
-	hit_info.distance =  hit_info.distance * cos(angle -vars->view_angle);
+	hit_info.distance = hit_info.distance * cos(angle -vars->view_angle);
 	return (hit_info);
 }
 

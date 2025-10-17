@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:00:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/15 16:32:09 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/17 13:17:37 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	render_minimap_view(t_vars *vars)
 {
 	int	angle;
 
-	angle = -FOV/2;
+	angle = - (FOV / 2);
 	while (angle <= FOV/2)
 	{
 		render_minimap_ray(vars, vars->view_angle + angle * PI / 180);
@@ -102,7 +102,6 @@ char **calc_smap(t_vars *vars)
 // 	char	**smap;
 // 	int		i;
 // 	int		j;
-
 // 	i = 0;
 // 	j = 0;
 // 	vars->smap_width = SCALE * vars->config->map_width;
@@ -120,8 +119,7 @@ char **calc_smap(t_vars *vars)
 // 			if (is_player_char(vars->config->map[i / SCALE][j / SCALE]) == true)
 // 			{
 // 				if (i % SCALE == ( SCALE / 2) && j % SCALE == (SCALE / 2))
-// 				{
-					
+// 				{				
 // 					smap[i][j] = '0'; //simplify
 // 					vars->pos.x = j;
 // 					vars->pos.y = i;
@@ -156,14 +154,11 @@ char **calc_smap(t_vars *vars)
 // 	}
 // 	return (smap);
 // }
-
-
 // char **calc_smap(t_vars *vars)
 // {
 // 	char	**smap;
 // 	int		x;
 // 	int		y;
-
 // 	x = 0;
 // 	y = 0;
 // 	vars->smap_width = SCALE * vars->config->map_width;
@@ -181,8 +176,7 @@ char **calc_smap(t_vars *vars)
 // 			if (is_player_char(vars->config->map[x / SCALE][y / SCALE]) == true)
 // 			{
 // 				if (x % SCALE == ( SCALE / 2) && y % SCALE == (SCALE / 2))
-// 				{
-					
+// 				{			
 // 					smap[x][y] = '0'; //simplify
 // 					vars->pos.x = x;
 // 					vars->pos.y = y;
@@ -203,3 +197,16 @@ char **calc_smap(t_vars *vars)
 // 	smap[x] = NULL;
 // 	return (smap);
 // }
+	// int i = 0;
+	// int j  = 0;
+	// while (i < vars->smap_width)
+	// {
+	// 	while (j < vars->smap_height)
+	// 	{
+	// 		printf("%c", smap[i][j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	j=0;
+	// 	i++;
+	// }

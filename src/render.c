@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/15 16:33:28 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:02:21 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,27 +159,3 @@ int	render(t_vars *vars)
 	render_walls(vars);
 	return (0);
 }
-
-// int	render_minimap(t_vars *vars)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	j = 0;
-// 	while (i < vars->smap_height)
-// 	{
-// 		while (j < vars->smap_width)
-// 		{
-// 			if (vars->smap[i][j] == '1')
-// 				mlx_put_pixel(vars->minimap, j , i , 0x00FF0055);
-// 			else
-// 				mlx_put_pixel(vars->minimap, j , i , 0xFFFFFF55);
-// 			j++;
-// 		}
-// 		j = 0;
-// 		i++;
-// 	}
-// 	render_minimap_view(vars);
-// 	return (0);
-// }

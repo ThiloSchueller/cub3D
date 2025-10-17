@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/15 16:57:53 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/17 11:20:39 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_fpoint //float point;
 	float		height;
 	t_fpoint	hit; //not used?
 	bool		vertical_hit;
+	float		angle;
  }	t_hit_info;
  
  typedef struct s_vars
@@ -194,6 +195,8 @@ t_fpoint	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to
  bool	facing_up(float angle);
  bool	facing_down(float angle);
  t_fpoint	lines_to_hit(t_fpoint point, float angle);
+ t_fpoint	lines_to_hit_up(t_fpoint point, float angle);
+ t_fpoint	lines_to_hit_down(t_fpoint point, float angle);
 
  //bool	confirm_move(float x,float y,float angle, t_vars *vars);
  //	uint8_t* get_pixel(t_hit_info hit_info,t_vars* vars);

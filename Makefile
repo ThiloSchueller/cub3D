@@ -16,6 +16,7 @@ SOURCES = 	main.c \
 			parser_textures.c \
 			parser_checker_map.c \
 			parser_conditions_map.c \
+			init.c \
 			render.c \
 			hook.c \
 			keys_arrows.c \
@@ -24,6 +25,7 @@ SOURCES = 	main.c \
 			minimap.c \
 			images.c \
 			directions.c \
+			lines.c \
 			calc1.c \
 			calc2.c \
 			helpers.c
