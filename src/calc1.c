@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 16:41:58 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:58:28 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,21 @@ t_hit_info	get_hit_info(t_vars *vars, int x)
 	return (hit_info);
 }
 
+t_hit_info	steep_angles(t_vars *vars, float angle)
+{
+	t_hit_info	hit_info;
+
+	if (angle < PI / 4 || angle > PI / 4 * 7)
+		hit_info = hit_right(vars, angle);
+	else if (angle <  PI * 3 / 4)
+		hit_info = hit_top(vars, angle);
+	else if (angle < PI * 5 / 4)
+		hit_info = hit_left(vars, angle);
+	else
+		hit_info = hit_bot(vars, angle);
+	return (hit_info);
+}
+
 t_hit_info	calculate_distance(t_vars *vars, float angle)
 {
 	t_fpoint	ray_pos;
@@ -45,6 +60,11 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 	t_hit_info	hit_info;
 
 	ray_pos = vars->fpos;
+	if (fabs(fmod(angle, PI/2)) < EPSILON || fabs(fmod(angle, PI/2) - PI/2) < EPSILON)
+	{
+		hit_info = steep_angles(vars, angle);
+		return (hit_info);
+	}
 	while (1)
 	{
 		next = lines_to_hit(ray_pos, angle);
@@ -75,9 +95,9 @@ t_fpoint	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to
 	float		y_hit;
 	float		distance_vertical;
 	float		distance_horizontal;
-	t_hit_info	hit_info;
+	// t_hit_info	hit_info;
 
-	hit_info.vertical_hit = true;
+	// hit_info.vertical_hit = true;
 	m = -tan(angle);
 	c = vars->fpos.y - (m * vars->fpos.x);
 	x_hit = (y_to_hit - c) / m;

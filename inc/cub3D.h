@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 16:41:11 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:57:39 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define SCALE 20
 # define PI 3.1415926535
 # define FOV 60
+# define MMSIZE 200.0
+# define EPSILON 0.001
 # define ERROR_MLX 10
 # define ERROR_MALLOC 11
 # include <stdlib.h>
@@ -108,11 +110,13 @@ typedef struct s_hit_info
 	char		**smap; //scaled map;
 	int			smap_width;
 	int			smap_height;
+	t_fpoint	scale;
 	float		view_angle;
 	t_point		pos;
 	t_fpoint	fpos;
 	t_image		images;
 	t_texture	*textures;
+	bool		mmswitch;
 	//t_hit_info	hit_info; //not here
  }	t_vars;
 
@@ -175,12 +179,13 @@ void		move_2d(t_vars *vars, double dx, double dy, float angle);
 int			render(t_vars *vars);
 int			render_background(t_vars *vars);
 int			render_minimap(t_vars *vars);
- void	overwrite_previous_frame(t_vars *vars);
-//  mlx_texture_t *define_texture(t_vars *vars, int x);
-mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hit);
-// int	define_color(t_vars *vars, int x, int y, int ye);
 int			render_walls(t_vars *vars);
+//small_render.c
+void		overwrite_previous_frame(t_vars *vars);
+mlx_texture_t	*define_texture(t_vars *vars, int x, float angle, bool vertical_hit);
+uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, float jump);
 //minimap.c
+t_fpoint	get_scaling_minimap(t_vars *vars);
 int			render_minimap_ray(t_vars *vars, float angle);
 int			render_minimap_view(t_vars *vars);
 void		fill_smap(t_vars *vars, int x, int y, char ***smap);
@@ -193,8 +198,8 @@ int			ft_exit(int code, t_vars *vars);
 void		ft_free_vars(t_vars *vars);
 //calc1.c
 t_hit_info	get_hit_info(t_vars *vars, int x);
- uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, int jump);
 float		calculate_angle(t_vars *vars, int x);
+t_hit_info	steep_angles(t_vars *vars, float angle);
 t_hit_info	calculate_distance(t_vars *vars, float angle);
 t_fpoint	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
 //calc2.c
@@ -211,5 +216,10 @@ bool		facing_down(float angle);
 t_fpoint	lines_to_hit(t_fpoint point, float angle);
 t_fpoint	lines_to_hit_up(t_fpoint point, float angle);
 t_fpoint	lines_to_hit_down(t_fpoint point, float angle);
+//hit_steep_angles.c
+t_hit_info	hit_top(t_vars *vars, float angle);
+t_hit_info	hit_right(t_vars *vars, float angle);
+t_hit_info	hit_left(t_vars *vars, float angle);
+t_hit_info	hit_bot(t_vars *vars, float angle);
 
 #endif

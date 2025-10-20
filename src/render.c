@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 16:42:28 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/20 13:54:30 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	render_minimap(t_vars *vars)
 {
 	int	x;
 	int	y;
-
+	
 	x = 0;
 	y = 0;
 	while (x < vars->smap_width)
@@ -47,11 +47,11 @@ int	render_minimap(t_vars *vars)
 		while (y < vars->smap_height)
 		{
 			if (vars->smap[x][y] == '1')
-				mlx_put_pixel(vars->minimap, x , y , 0x00FF0055);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0x00FF0055);
 			else if (vars->smap[x][y] == '0')
-				mlx_put_pixel(vars->minimap, x , y , 0xFFFFFF55);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0xFFFFFF55);
 			else
-				mlx_put_pixel(vars->minimap, x , y , 0xFFFFFF00);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0xFFFFFF00);
 			y++;
 		}
 		y = 0;
@@ -102,7 +102,7 @@ int	render_walls(t_vars *vars)
 	int y;
 	int ye;
 	t_hit_info hit_info;
-	int	jump;
+	float	jump;
 
 
 	x = 0;
@@ -128,7 +128,8 @@ int	render_walls(t_vars *vars)
 int	render(t_vars *vars)
 {
 	render_background(vars);
-	render_minimap(vars);
+	if (vars->mmswitch == true)
+		render_minimap(vars);
 	render_walls(vars);
 	return (0);
 }

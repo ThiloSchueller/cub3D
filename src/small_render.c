@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   small_render.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:18:10 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/17 16:19:12 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/20 11:11:27 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3D.h"
 
@@ -76,7 +76,7 @@ mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hi
 		return (NULL);
 }
 
-uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, int jump)
+uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, float jump)
 {
 	int	index;
 	uint32_t color;
