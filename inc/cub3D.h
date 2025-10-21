@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/21 14:32:49 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/21 14:33:54 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ int			render_walls(t_vars *vars);
 //small_render.c
 void		overwrite_previous_frame(t_vars *vars);
 mlx_texture_t	*define_texture(t_vars *vars, int x, float angle, bool vertical_hit);
-uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, float jump);
+uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, float jump, float begin_texture);
 //minimap.c
 t_fpoint	get_scaling_minimap(t_vars *vars);
 int			render_minimap_ray(t_vars *vars, float angle);
