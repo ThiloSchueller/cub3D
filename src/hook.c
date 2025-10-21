@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:31:03 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/06 17:52:05 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/20 13:49:27 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,24 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 		//free;
 		mlx_terminate(vars->mlx);
 		exit(EXIT_SUCCESS);
-	} 
+	}
+	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
+	{
+		if (vars->mmswitch == true)
+		{
+			vars->minimap->instances->z = 0;
+			vars->mmswitch = false;
+		}
+		else
+		{
+			vars->minimap->instances->z = 3;
+			vars->mmswitch = true;
+		}
+	}
 }
 
- void	ft_loop_hook(void *param)
- {
+void	ft_loop_hook(void *param)
+{
 	t_vars	*vars;
 
 	vars = (t_vars *)param;
@@ -43,4 +56,4 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 	if (mlx_is_key_down(vars->mlx, MLX_KEY_D))
 		d_key(vars);
 	render(vars);
- }
+}

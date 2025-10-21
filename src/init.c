@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:02:54 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 11:29:23 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/20 13:49:19 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ void	set_view_angle(t_vars *vars)
 
 int	init_vars(t_vars *vars)
 {
+	vars->mmswitch = false;
+	vars->smap_width = SCALE * vars->config->map_width;
+	vars->smap_height = SCALE * vars->config->map_height;
+	vars->scale = get_scaling_minimap(vars);
 	vars->smap = calc_smap(vars);
+	if (vars->smap == NULL)
+		ft_exit(ERROR_MALLOC, vars);
 	vars->background = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	vars->minimap = mlx_new_image(vars->mlx, WIDTH -30, HEIGHT -30);
 	vars->walls = mlx_new_image (vars->mlx, WIDTH, HEIGHT);

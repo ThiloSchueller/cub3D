@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/21 14:17:40 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/21 14:35:01 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3D.h"
 
@@ -39,7 +39,7 @@ int	render_minimap(t_vars *vars)
 {
 	int	x;
 	int	y;
-
+	
 	x = 0;
 	y = 0;
 	while (x < vars->smap_width)
@@ -47,9 +47,11 @@ int	render_minimap(t_vars *vars)
 		while (y < vars->smap_height)
 		{
 			if (vars->smap[x][y] == '1')
-				mlx_put_pixel(vars->minimap, x , y , 0x00FF0055);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0x00FF0055);
+			else if (vars->smap[x][y] == '0')
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0xFFFFFF55);
 			else
-				mlx_put_pixel(vars->minimap, x , y , 0xFFFFFF55);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0xFFFFFF00);
 			y++;
 		}
 		y = 0;
@@ -97,7 +99,8 @@ int	render_walls(t_vars *vars)
 int	render(t_vars *vars)
 {
 	render_background(vars);
-	render_minimap(vars);
+	if (vars->mmswitch == true)
+		render_minimap(vars);
 	render_walls(vars);
 	return (0);
 }
