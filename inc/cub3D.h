@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 16:23:28 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/21 14:19:59 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -93,7 +93,7 @@ typedef struct s_fpoint //float point;
 	float		wall_height;
 	t_fpoint	hit; //not used?
 	bool		vertical_hit;
-	float		new_angle;
+	float		new_angle; // not used?
 	mlx_texture_t *texture;
  }	t_hit_info;
  
@@ -184,7 +184,7 @@ mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hi
  void	move_2d(t_vars *vars, double dx, double dy, float angle);
  //int	calculate_height(t_vars *vars, int x);
  t_hit_info	get_hit_info(t_vars *vars, int x);
- uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, int jump);
+uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, float jump, float begin_texture);
  float	calculate_angle(t_vars *vars, int x);
  t_hit_info	calculate_distance(t_vars *vars, float angle);
  //float	precise_hit(t_fpoint ray_pos, t_vars *vars, float dx, float dy);
