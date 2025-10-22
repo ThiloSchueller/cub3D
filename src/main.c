@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 13:12:26 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 15:25:12 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -84,7 +84,6 @@ t_config	*check_arg_map(int argc, char *argv[])
 		return (NULL);
 	return (data);
 }
-
 
 int	main(int argc, char *argv[])
 {

@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:02:54 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 13:12:38 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 15:15:44 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -49,6 +49,7 @@ int	init_vars(t_vars *vars)
 void	init_data(t_config *data)
 {
 	data->stop = 0;
+	data->map_before = 0;
 	data->no_set = 0;
 	data->so_set = 0;
 	data->we_set = 0;

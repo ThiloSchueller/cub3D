@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:29:28 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 13:47:00 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 15:24:01 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -83,8 +83,8 @@ int	parse_texture_color_before(t_config *data)
 	if (data->no_set == 1 && data->so_set == 1 && data->we_set == 1
 		&& data->ea_set == 1 && data->floor_set == 1 && data->ceil_set == 1)
 		return (1);
-	data->stop = 1;
-	return (0);
+	data->map_before = 1;
+	return (1);
 }
 
 void	parser(int fd, t_config *data, char *file)
@@ -100,10 +100,13 @@ void	parser(int fd, t_config *data, char *file)
 				parse_map(ft_strdup_no_newline(str), data);
 			parse_element(str, data);
 		}
-		free(str);
+		if (str)
+			free(str);
 		str = get_next_line(fd);
 	}
 	close (fd);
+	if (data->map_before == 1)
+		data->stop = 1;
 	if (data->stop == 0)
 	{
 		create_empty_map(data);

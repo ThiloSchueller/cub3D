@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:21:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/09 12:53:00 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 15:20:55 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -65,6 +65,8 @@ void	check_map(t_config *data)
 	int		i;
 	int		j;
 
+	if (data->stop == 1)
+		return ;
 	i = 0;
 	map = map_copy(data);
 	while (map[i])

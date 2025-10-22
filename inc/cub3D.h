@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 13:46:19 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 15:17:38 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -37,6 +37,7 @@
 typedef struct s_config
 {
 	int		stop;			// when we have duplicate, no need to continue
+	int		map_before;
 	int		no_set;
 	int		so_set;
 	int		we_set;
