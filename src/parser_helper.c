@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:51:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 15:50:49 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 16:21:01 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -20,6 +20,24 @@ int	starts_with(char *line, char *str)
 	if (ft_strncmp(line, str, str_len) != 0)
 		return (-1);
 	return (1);
+}
+
+char	*ft_strdup_no_newline_map(const char *s1)
+{
+	char	*p;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(s1);
+	if (len > 0 && s1[len - 1] == '\n')
+		len--;
+	p = (char *) malloc((len + 1) * sizeof(char));
+	if (p == NULL)
+		return (0);
+	ft_memcpy(p, s1, len);
+	p[len] = '\0';
+	return (p);
 }
 
 char	*ft_strdup_no_newline(const char *s1)

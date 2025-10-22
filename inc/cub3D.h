@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 15:50:16 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 16:21:40 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -136,6 +136,7 @@ int		color_str_to_int(char *str);
 int		parse_color(char *line, t_config *data);
 //parser_helper.c
 int		starts_with(char *line, char *str);
+char	*ft_strdup_no_newline_map(const char *s1);
 char	*ft_strdup_no_newline(const char *s1);
 int		parse_texture_color_before(t_config *data);
 //parser_map.c
