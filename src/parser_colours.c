@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:54:16 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/09 12:55:51 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 15:39:28 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -16,18 +16,23 @@ int	check_validity_input(char *str)
 {
 	int	i;
 	int	coma;
+	int	digit;
 
 	i = 0;
 	coma = 0;
+	digit = 0;
 	while (str[i] != '\0')
 	{
-		if (!((str[i] >= '0' && str[i] <= '9') || str[i] == ','))
+		if (!((str[i] >= '0' && str[i] <= '9') || str[i] == ','
+				|| str[i] == ' ' || str[i] == '	'))
 			return (-1);
+		if (str[i] >= '0' && str[i] <= '9')
+			digit ++;
 		if (str[i] == ',')
 			coma ++;
 		i++;
 	}
-	if (coma != 2 || i > 11)
+	if (coma != 2 || digit > 9)
 		return (-1);
 	return (0);
 }

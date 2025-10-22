@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:51:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/09 12:56:19 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 15:33:14 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -26,7 +26,12 @@ char	*ft_strdup_no_newline(const char *s1)
 {
 	char	*p;
 	int		len;
+	int		i;
 
+	i = 0;
+	while (s1[i] == ' ' || s1[i] == '	')
+		i++;
+	s1 = s1 + i;
 	len = ft_strlen(s1);
 	if (len > 0 && s1[len - 1] == '\n')
 		len--;
