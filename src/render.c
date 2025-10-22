@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/21 14:35:01 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:04:18 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3D.h"
 
@@ -16,17 +16,21 @@ int	render_background(t_vars *vars)
 {
 	int x;
 	int y;
+	int	opac_ceiling;
+	int	opac_floor;
 
 	x = 0;
 	y = 0;
+	opac_ceiling = (vars->config->ceiling_color << 8) | 0xFF;
+	opac_floor = (vars->config->floor_color << 8) | 0xFF;
 	while(x < WIDTH)
 	{
 		while (y < HEIGHT)
 		{
 			if (y < HEIGHT / 2)
-				mlx_put_pixel(vars->background, x, y, vars->config->ceiling_color);
+				mlx_put_pixel(vars->background, x, y, opac_ceiling);
 			else
-				mlx_put_pixel(vars->background, x, y, vars->config->floor_color); //ADD OPACITY? so 0xffffffff, istead of 0xffffff
+				mlx_put_pixel(vars->background, x, y, opac_floor);
 			y++;
 		}
 		y = 0;

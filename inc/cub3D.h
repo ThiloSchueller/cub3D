@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/21 14:33:54 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/22 12:27:58 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -119,6 +119,12 @@ typedef struct s_hit_info
 	bool		mmswitch;
 	//t_hit_info	hit_info; //not here
  }	t_vars;
+
+
+//main
+ t_config	*check_arg(int argc);
+ t_config	*check_arg_map(int argc, char *argv[]);
+
 
 //parser
 //parser_colours.c
