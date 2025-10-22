@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/21 14:33:54 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/22 13:52:31 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,8 +214,9 @@ bool		facing_up(float angle);
 bool		facing_down(float angle);
 //lines.c
 t_fpoint	lines_to_hit(t_fpoint point, float angle);
-t_fpoint	lines_to_hit_up(t_fpoint point, float angle);
-t_fpoint	lines_to_hit_down(t_fpoint point, float angle);
+bool	forbidden_square(t_vars *vars,float dx,float dy, float angle);
+// t_fpoint	lines_to_hit_up(t_fpoint point, float angle);
+// t_fpoint	lines_to_hit_down(t_fpoint point, float angle);
 //hit_steep_angles.c
 t_hit_info	hit_top(t_vars *vars, float angle);
 t_hit_info	hit_right(t_vars *vars, float angle);
