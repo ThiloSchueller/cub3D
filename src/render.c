@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/21 16:04:18 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 13:29:14 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -81,7 +81,11 @@ int	render_walls(t_vars *vars)
 	{
 		begin_texture = 0;
 		hit_info = get_hit_info(vars, x);
-		jump = hit_info.texture->height / hit_info.wall_height;
+		jump = hit_info.texture->height / (hit_info.wall_height + 1);
+		//added this +1
+		//we need this +1 for our jump to be a bit smaller
+		//so that our tex_y (ye * jump) never goes above the texture->height 1024
+		//failling case with wall_height = 230 ye = 231
 		if (hit_info.wall_height > 600)
 		{
 			begin_texture = (hit_info.wall_height /2 - (float)HEIGHT /2) * jump;

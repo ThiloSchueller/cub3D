@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:02:54 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/20 13:49:19 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/22 13:12:38 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cub3D.h"
 
@@ -44,34 +44,6 @@ int	init_vars(t_vars *vars)
 	vars->minimap->instances->z = 3;
 	vars->walls->instances->z = 2;
 	return (0);
-}
-
-int	check_file(char *file)
-{
-	char	*str;
-	int		i;
-	int		j;
-	int		fd;
-
-	i = 0;
-	j = 0;
-	str = ".cub";
-	while (file[i])
-		i++;
-	i = i - 4;
-	j = ft_memcmp(&file[i], str, 4);
-	if (j != 0)
-	{
-		printf("Invalid file\n");
-		return (-1);
-	}
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-	{
-		printf("Couldn't open file\n");
-		return (-1);
-	}
-	return (fd);
 }
 
 void	init_data(t_config *data)

@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 12:27:58 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 13:46:19 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -123,6 +123,7 @@ typedef struct s_hit_info
 
 //main
  t_config	*check_arg(int argc);
+ int			check_file(char *file);
  t_config	*check_arg_map(int argc, char *argv[]);
 
 
@@ -148,6 +149,7 @@ int		parse_texture(char *line, t_config *data);
 int		copy_line(char *dst, char *src, t_config *data);
 int		compare_update_map(char *line, t_config *data);
 void	parser_map_2nd_round(t_config *data, char *file);
+int		parse_texture_color_before(t_config *data);
 void	parser(int fd, t_config *data, char *file);
 void	parse_element(char *line, t_config *data);
 //parser_checker_map.c
@@ -164,7 +166,6 @@ int		player(char **map, t_config *data);
 //images.c
 void		ft_get_textures(t_vars *vars);
 //init.c
-int			check_file(char *file);
 void		init_data(t_config *data);
 void		free_data(t_config *data);
 int			init_vars(t_vars *vars);

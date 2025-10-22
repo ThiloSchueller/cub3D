@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 12:29:22 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 13:12:26 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -30,6 +30,34 @@ t_config	*check_arg(int argc)
 		return (NULL);
 	}
 	return (data);
+}
+
+int	check_file(char *file)
+{
+	char	*str;
+	int		i;
+	int		j;
+	int		fd;
+
+	i = 0;
+	j = 0;
+	str = ".cub";
+	while (file[i])
+		i++;
+	i = i - 4;
+	j = ft_memcmp(&file[i], str, 4);
+	if (j != 0)
+	{
+		printf("Invalid file\n");
+		return (-1);
+	}
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		printf("Couldn't open file\n");
+		return (-1);
+	}
+	return (fd);
 }
 
 t_config	*check_arg_map(int argc, char *argv[])
