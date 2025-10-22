@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:18:10 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 13:03:48 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 17:22:06 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -81,6 +81,6 @@ uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, float jump, float 
 	// not needed anymore
 	index = (tex_y * hit_info.texture->width + ((int)(hit_info.percent_of_hit * hit_info.texture->width))) * hit_info.texture->bytes_per_pixel;
 
-	color = (hit_info.texture->pixels[index + 0] << 24) | (hit_info.texture->pixels[index + 2] << 16) | (hit_info.texture->pixels[index + 1] << 8) | 0xFF;
+	color = (hit_info.texture->pixels[index + 0] << 24) | (hit_info.texture->pixels[index + 2] << 8) | (hit_info.texture->pixels[index + 1] << 16) | 0xFF;
 	return (color);
 }
