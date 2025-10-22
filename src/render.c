@@ -1,21 +1,21 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 13:29:14 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 17:50:42 by lusimon          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3D.h"
 
 int	render_background(t_vars *vars)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 	int	opac_ceiling;
 	int	opac_floor;
 
@@ -23,7 +23,7 @@ int	render_background(t_vars *vars)
 	y = 0;
 	opac_ceiling = (vars->config->ceiling_color << 8) | 0xFF;
 	opac_floor = (vars->config->floor_color << 8) | 0xFF;
-	while(x < WIDTH)
+	while (x < WIDTH)
 	{
 		while (y < HEIGHT)
 		{
@@ -43,7 +43,7 @@ int	render_minimap(t_vars *vars)
 {
 	int	x;
 	int	y;
-	
+
 	x = 0;
 	y = 0;
 	while (x < vars->smap_width)
@@ -67,11 +67,11 @@ int	render_minimap(t_vars *vars)
 
 int	render_walls(t_vars *vars)
 {
-	int	x;
-	int y;
-	int ye;
-	t_hit_info hit_info;
-	float	jump;
+	int			x;
+	int			y;
+	int			ye;
+	t_hit_info	hit_info;
+	float		jump;
 	float		begin_texture;
 
 
