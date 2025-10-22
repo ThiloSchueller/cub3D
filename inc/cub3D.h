@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 16:21:40 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 16:46:52 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -223,8 +223,9 @@ bool		facing_up(float angle);
 bool		facing_down(float angle);
 //lines.c
 t_fpoint	lines_to_hit(t_fpoint point, float angle);
-t_fpoint	lines_to_hit_up(t_fpoint point, float angle);
-t_fpoint	lines_to_hit_down(t_fpoint point, float angle);
+bool	forbidden_square(t_vars *vars,float dx,float dy, float angle);
+// t_fpoint	lines_to_hit_up(t_fpoint point, float angle);
+// t_fpoint	lines_to_hit_down(t_fpoint point, float angle);
 //hit_steep_angles.c
 t_hit_info	hit_top(t_vars *vars, float angle);
 t_hit_info	hit_right(t_vars *vars, float angle);

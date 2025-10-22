@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/21 14:35:25 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/22 12:55:19 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 		hit_info = steep_angles(vars, angle);
 		return (hit_info);
 	}
+	int i = 0;
 	while (1)
 	{
 		next = lines_to_hit(ray_pos, angle);
@@ -75,11 +76,19 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 			hit_info.percent_of_hit = fmod(ray_pos.y, SCALE) / SCALE;
 			break ;
 		}
-		if (ray_pos.y == next.y && confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars))
+		else if (ray_pos.y == next.y && confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars))
 		{
 			hit_info.vertical_hit = false;
 			hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
 			break ;
+		}
+		i++;
+		if (i>20000 && i <20010)
+		{
+			printf("lines to hit were x = %f and y = %f\n", next.x, next.y);
+			printf("ray pos x is %f ray pos y is %f\n", ray_pos.x, ray_pos.y);
+			printf("player pos  x is %f and y %f\n", vars->fpos.x, vars->fpos.y);
+			printf("bug angle is %f\n", angle);
 		}
 	}
 	hit_info.distance = distance_two_points(vars->fpos, ray_pos);
@@ -104,6 +113,11 @@ t_fpoint	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to
 	y_hit = m * x_to_hit + c;
 	distance_vertical = distance_two_points(vars->fpos, (t_fpoint){x_to_hit, y_hit});
 	distance_horizontal = distance_two_points(vars->fpos, (t_fpoint){x_hit, y_to_hit});
+	// if (distance_horizontal == distance_vertical)
+	// {
+	// 	printf("========================\n");
+	// 	return ((t_fpoint){x_to_hit, y_to_hit});
+	// }
 	if (distance_horizontal < distance_vertical)
 		return ((t_fpoint){x_hit, y_to_hit});
 	else
