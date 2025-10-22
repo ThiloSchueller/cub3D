@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:51:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 15:33:14 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 15:50:49 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -45,3 +45,12 @@ char	*ft_strdup_no_newline(const char *s1)
 
 //we need this helper_function to not include the \n
 //when we look at the validity of the path
+
+int	parse_texture_color_before(t_config *data)
+{
+	if (data->no_set == 1 && data->so_set == 1 && data->we_set == 1
+		&& data->ea_set == 1 && data->floor_set == 1 && data->ceil_set == 1)
+		return (1);
+	data->map_before = 1;
+	return (1);
+}

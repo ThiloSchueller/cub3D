@@ -30,7 +30,8 @@ SOURCES = 	main.c \
 			calc2.c \
 			helpers.c \
 			small_render.c \
-			hit_steep_angles.c
+			hit_steep_angles.c \
+			check_arg_file.c
 
 HEADERS = cub3D.h
 OBJ = $(addprefix $(OBJECT_DIR)/, $(SOURCES:.c=.o))

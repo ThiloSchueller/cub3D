@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 15:17:38 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/22 15:50:16 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -122,9 +122,9 @@ typedef struct s_hit_info
  }	t_vars;
 
 
-//main
+//check_arg_file.c
  t_config	*check_arg(int argc);
- int			check_file(char *file);
+ int		check_file(char *file);
  t_config	*check_arg_map(int argc, char *argv[]);
 
 
@@ -137,6 +137,7 @@ int		parse_color(char *line, t_config *data);
 //parser_helper.c
 int		starts_with(char *line, char *str);
 char	*ft_strdup_no_newline(const char *s1);
+int		parse_texture_color_before(t_config *data);
 //parser_map.c
 int		is_map_line(char *line);
 void	parse_map(char *line, t_config *data);
@@ -150,7 +151,6 @@ int		parse_texture(char *line, t_config *data);
 int		copy_line(char *dst, char *src, t_config *data);
 int		compare_update_map(char *line, t_config *data);
 void	parser_map_2nd_round(t_config *data, char *file);
-int		parse_texture_color_before(t_config *data);
 void	parser(int fd, t_config *data, char *file);
 void	parse_element(char *line, t_config *data);
 //parser_checker_map.c
