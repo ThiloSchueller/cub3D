@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:59:00 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/20 17:04:22 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:17:53 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_hit_info	hit_top(t_vars *vars, float angle)
 		else
 			ray_pos.y -= 1;
 	}
-	hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
+	hit_info.distance = distance_two_points(ray_pos, vars->fpos);
+	// hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
 	hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
 	hit_info.vertical_hit = false;
 	return (hit_info);
@@ -46,7 +47,8 @@ t_hit_info	hit_right(t_vars *vars, float angle)
 		else
 			ray_pos.x += 1;
 	}
-	hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
+	hit_info.distance = distance_two_points(ray_pos, vars->fpos);
+	//hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
 	hit_info.percent_of_hit = fmod(ray_pos.y, SCALE) / SCALE;
 	hit_info.vertical_hit = true;
 	return (hit_info);
@@ -65,7 +67,8 @@ t_hit_info	hit_left(t_vars *vars, float angle)
 		else
 			ray_pos.x -= 1;
 	}
-	hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
+	hit_info.distance = distance_two_points(ray_pos, vars->fpos);
+	//hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
 	hit_info.percent_of_hit = fmod(ray_pos.y, SCALE) / SCALE;
 	hit_info.vertical_hit = true;
 	return (hit_info);
@@ -85,7 +88,8 @@ t_hit_info	hit_bot(t_vars *vars, float angle)
 		else
 			ray_pos.y += 1;
 	}
-	hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
+	hit_info.distance = distance_two_points(ray_pos, vars->fpos);
+	//hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
 	hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
 	hit_info.vertical_hit = false;
 	return (hit_info);

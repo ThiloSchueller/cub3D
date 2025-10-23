@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:15:29 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 15:45:40 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:37:18 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,24 @@ bool	forbidden_square(t_vars *vars,float dx,float dy, float angle)
 		(vars->smap[newpos.x + 1][newpos.y + 1] == '1'))
 	{
 		printf("yes\n");
-		if ((!confirm_hit_x(next.x, vars->fpos.y + dy -1, angle, vars)
-				&& facing_up(angle))
-			|| (!confirm_hit_x(next.x+2, vars->fpos.y + dy +1, angle, vars)
-				&& facing_down(angle)))
-			vars->fpos.y += dy;
-		else if (facing_down(angle))
-			vars->fpos.y = ceil(vars->fpos.y) - 0.001;
-		else 
-			vars->fpos.y = floor(vars->fpos.y) + 0.001;
-		if ((!confirm_hit_y(vars->fpos.x + dx +1, next.y, angle, vars)
-				&& facing_right(angle))
-			|| (!confirm_hit_y(vars->fpos.x + dx -1, next.y+2, angle, vars)
-				&& facing_left(angle)))
-			vars->fpos.x += dx;
-		else if (facing_right(angle))
-			vars->fpos.x = ceil(vars->fpos.x) - 0.001;
-		else
-			vars->fpos.x = floor(vars->fpos.x) + 0.001;
+		// if ((!confirm_hit_x(next.x, vars->fpos.y + dy -1, angle, vars)
+		// 		&& facing_up(angle))
+		// 	|| (!confirm_hit_x(next.x+2, vars->fpos.y + dy +1, angle, vars)
+		// 		&& facing_down(angle)))
+		// 	vars->fpos.y += dy;
+		// else if (facing_down(angle))
+		// 	vars->fpos.y = ceil(vars->fpos.y) - 0.001;
+		// else 
+		// 	vars->fpos.y = floor(vars->fpos.y) + 0.001;
+		// if ((!confirm_hit_y(vars->fpos.x + dx +1, next.y, angle, vars)
+		// 		&& facing_right(angle))
+		// 	|| (!confirm_hit_y(vars->fpos.x + dx -1, next.y+2, angle, vars)
+		// 		&& facing_left(angle)))
+		// 	vars->fpos.x += dx;
+		// else if (facing_right(angle))
+		// 	vars->fpos.x = ceil(vars->fpos.x) - 0.001;
+		// else
+		// 	vars->fpos.x = floor(vars->fpos.x) + 0.001;
 
 		
 		//if ((vars->fpos.x == ceil(vars->fpos.x) - 0.001) && (vars->fpos.y == ceil(vars->fpos.y) - 0.001))

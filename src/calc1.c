@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 12:55:19 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:30:07 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 	if (fabs(fmod(angle, PI/2)) < EPSILON || fabs(fmod(angle, PI/2) - PI/2) < EPSILON)
 	{
 		hit_info = steep_angles(vars, angle);
+		hit_info.distance = hit_info.distance * cos(angle - vars->view_angle);
 		return (hit_info);
 	}
 	int i = 0;
