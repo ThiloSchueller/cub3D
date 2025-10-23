@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   small_render.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:18:10 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 13:03:48 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:40:20 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3D.h"
 
@@ -33,7 +33,7 @@ void	overwrite_previous_frame(t_vars *vars)
 
 
 
-mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hit)
+mlx_texture_t *define_texture(t_vars *vars, int x, double angle, bool vertical_hit)
 {
 	(void)x;
 		//angle = normalise_angle(calculate_angle(vars, x));
@@ -68,7 +68,7 @@ mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hi
 		return (NULL);
 }
 
-uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, float jump, float begin_texture)
+uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, double jump, double begin_texture)
 {
 	int	index;
 	uint32_t color;

@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 13:29:14 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:40:38 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3D.h"
 
@@ -71,8 +71,8 @@ int	render_walls(t_vars *vars)
 	int y;
 	int ye;
 	t_hit_info hit_info;
-	float	jump;
-	float		begin_texture;
+	double	jump;
+	double		begin_texture;
 
 
 	x = 0;
@@ -88,7 +88,7 @@ int	render_walls(t_vars *vars)
 		//failling case with wall_height = 230 ye = 231
 		if (hit_info.wall_height > 600)
 		{
-			begin_texture = (hit_info.wall_height /2 - (float)HEIGHT /2) * jump;
+			begin_texture = (hit_info.wall_height /2 - (double)HEIGHT /2) * jump;
 			hit_info.wall_height = 600;
 		}
 		y = HEIGHT / 2 - hit_info.wall_height / 2;

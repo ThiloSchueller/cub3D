@@ -6,13 +6,13 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:15:29 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/23 15:37:18 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:41:32 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_fpoint lines_to_hit(t_fpoint point, float angle)
+t_fpoint lines_to_hit(t_fpoint point, double angle)
 {
 	t_fpoint	next;
 
@@ -27,7 +27,7 @@ t_fpoint lines_to_hit(t_fpoint point, float angle)
 return next;
 }
 
-bool	forbidden_square(t_vars *vars,float dx,float dy, float angle)
+bool	forbidden_square(t_vars *vars,double dx,double dy, double angle)
 {
 	t_fpoint	fnewpos;
 	t_point		newpos;
@@ -76,7 +76,7 @@ bool	forbidden_square(t_vars *vars,float dx,float dy, float angle)
 	return (false);
 }
 
-// t_fpoint	lines_to_hit_up(t_fpoint point, float angle)
+// t_fpoint	lines_to_hit_up(t_fpoint point, double angle)
 // {
 // 	t_fpoint	next;
 
@@ -98,7 +98,7 @@ bool	forbidden_square(t_vars *vars,float dx,float dy, float angle)
 // 	return (next);
 // }
 
-// t_fpoint	lines_to_hit_down(t_fpoint point, float angle)
+// t_fpoint	lines_to_hit_down(t_fpoint point, double angle)
 // {
 // 	t_fpoint	next;
 
@@ -122,7 +122,7 @@ bool	forbidden_square(t_vars *vars,float dx,float dy, float angle)
 // 	return (next);
 // }
 
-// t_fpoint	lines_to_hit(t_fpoint point, float angle)
+// t_fpoint	lines_to_hit(t_fpoint point, double angle)
 // {
 // 	t_fpoint	next;
 

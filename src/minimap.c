@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:00:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 12:55:02 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:41:14 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	render_minimap_view(t_vars *vars)
 	return (0);
 }
 
-int	render_minimap_ray(t_vars *vars, float angle)
+int	render_minimap_ray(t_vars *vars, double angle)
 {
 	t_point	ray;
 	double	x;
@@ -74,8 +74,8 @@ void	fill_smap(t_vars *vars, int x, int y, char ***smap)
 		{
 			vars->pos.x = x;
 			vars->pos.y = y;
-			vars->fpos.x = (float)x;
-			vars->fpos.y = (float)y;
+			vars->fpos.x = (double)x;
+			vars->fpos.y = (double)y;
 		}
 		(*smap)[x][y] = '0';
 	}
@@ -138,8 +138,8 @@ char	**calc_smap(t_vars *vars)
 // 					smap[i][j] = '0'; //simplify
 // 					vars->pos.x = j;
 // 					vars->pos.y = i;
-// 					vars->fpos.x = (float)j+ 0.0001;
-// 					vars->fpos.y = (float)i+ 0.0001;
+// 					vars->fpos.x = (double)j+ 0.0001;
+// 					vars->fpos.y = (double)i+ 0.0001;
 // 		printf("playerpos is x = %f and y = %f\n", vars->fpos.x, vars->fpos.y);
 // 				}
 // 				else
@@ -195,8 +195,8 @@ char	**calc_smap(t_vars *vars)
 // 					smap[x][y] = '0'; //simplify
 // 					vars->pos.x = x;
 // 					vars->pos.y = y;
-// 					vars->fpos.x = (float)x+ 0.0001;
-// 					vars->fpos.y = (float)y+ 0.0001;
+// 					vars->fpos.x = (double)x+ 0.0001;
+// 					vars->fpos.y = (double)y+ 0.0001;
 // 				}
 // 				else
 // 					smap[x][y] = '0';

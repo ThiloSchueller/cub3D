@@ -6,13 +6,13 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:52:54 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/17 13:41:06 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:42:55 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-float	normalise_angle(float angle)
+double	normalise_angle(double angle)
 {
 	angle = fmod(angle, 2 * PI);
 	if (angle < 0)
@@ -20,15 +20,15 @@ float	normalise_angle(float angle)
 	return (angle);
 }
 
-float	distance_two_points(t_fpoint p, t_fpoint q)
+double	distance_two_points(t_fpoint p, t_fpoint q)
 {
-	float	re;
+	double	re;
 
 	re = sqrt((q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y));
 	return (re);
 }
 
-bool	confirm_hit_x(float x_to_hit, float y_hit, float angle, t_vars *vars)
+bool	confirm_hit_x(double x_to_hit, double y_hit, double angle, t_vars *vars)
 {
 	if (x_to_hit < 0 || x_to_hit > vars->smap_width - 1 || y_hit < 0 || y_hit > vars->smap_height - 1)
 		return (true);
@@ -39,7 +39,7 @@ bool	confirm_hit_x(float x_to_hit, float y_hit, float angle, t_vars *vars)
 	return (false);
 }
 
-bool	confirm_hit_y(float x_hit, float y_to_hit, float angle, t_vars *vars)
+bool	confirm_hit_y(double x_hit, double y_to_hit, double angle, t_vars *vars)
 {
 	if (y_to_hit < 0 || y_to_hit > vars->smap_height - 1 || x_hit < 0 || x_hit > vars->smap_width - 1)
 		return (true);

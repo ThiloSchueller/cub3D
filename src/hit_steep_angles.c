@@ -6,13 +6,13 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:59:00 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/23 15:17:53 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:42:17 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_hit_info	hit_top(t_vars *vars, float angle)
+t_hit_info	hit_top(t_vars *vars, double angle)
 {
 	t_hit_info	hit_info;
 	t_fpoint	ray_pos;
@@ -33,7 +33,7 @@ t_hit_info	hit_top(t_vars *vars, float angle)
 	return (hit_info);
 }
 
-t_hit_info	hit_right(t_vars *vars, float angle)
+t_hit_info	hit_right(t_vars *vars, double angle)
 {
 	t_hit_info	hit_info;
 	t_fpoint	ray_pos;
@@ -53,7 +53,7 @@ t_hit_info	hit_right(t_vars *vars, float angle)
 	hit_info.vertical_hit = true;
 	return (hit_info);
 }
-t_hit_info	hit_left(t_vars *vars, float angle)
+t_hit_info	hit_left(t_vars *vars, double angle)
 {
 	t_hit_info	hit_info;
 	t_fpoint	ray_pos;
@@ -74,7 +74,7 @@ t_hit_info	hit_left(t_vars *vars, float angle)
 	return (hit_info);
 }
 
-t_hit_info	hit_bot(t_vars *vars, float angle)
+t_hit_info	hit_bot(t_vars *vars, double angle)
 {
 	t_hit_info	hit_info;
 	t_fpoint	ray_pos;

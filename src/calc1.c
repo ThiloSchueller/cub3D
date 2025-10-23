@@ -6,18 +6,18 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/23 15:30:07 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/23 16:57:05 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-float	calculate_angle(t_vars *vars, int x)
+double	calculate_angle(t_vars *vars, int x)
 {
-	float	degree_per_pixel;
-	float	angle_for_x;
+	double	degree_per_pixel;
+	double	angle_for_x;
 
-	degree_per_pixel = (float)FOV / (float)WIDTH;
+	degree_per_pixel = (double)FOV / (double)WIDTH;
 	angle_for_x = vars->view_angle + (FOV / 2 * PI / 180)
 		- degree_per_pixel * x * PI / 180;
 	return (angle_for_x);
@@ -25,20 +25,17 @@ float	calculate_angle(t_vars *vars, int x)
 
 t_hit_info	get_hit_info(t_vars *vars, int x)
 {
-	float		angle;
+	double		angle;
 	t_hit_info	hit_info;
 
 	angle = normalise_angle(calculate_angle(vars, x));
 	hit_info = calculate_distance(vars, angle);
-	hit_info.wall_height = (HEIGHT /  (hit_info.distance / SCALE)); //cos(angle -vars->view_angle)
-	// if (hit_info.wall_height > 600) // this is wrong but preverts segfaults
-	// 	hit_info.wall_height = 600;
-	//hit_info.new_angle = angle;
+	hit_info.wall_height = (HEIGHT /  (hit_info.distance / SCALE));
 	hit_info.texture = define_texture(vars, x, angle, hit_info.vertical_hit);
 	return (hit_info);
 }
 
-t_hit_info	steep_angles(t_vars *vars, float angle)
+t_hit_info	steep_angles(t_vars *vars, double angle)
 {
 	t_hit_info	hit_info;
 
@@ -53,7 +50,7 @@ t_hit_info	steep_angles(t_vars *vars, float angle)
 	return (hit_info);
 }
 
-t_hit_info	calculate_distance(t_vars *vars, float angle)
+t_hit_info	calculate_distance(t_vars *vars, double angle)
 {
 	t_fpoint	ray_pos;
 	t_fpoint	next;
@@ -66,11 +63,27 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 		hit_info.distance = hit_info.distance * cos(angle - vars->view_angle);
 		return (hit_info);
 	}
-	int i = 0;
 	while (1)
 	{
 		next = lines_to_hit(ray_pos, angle);
 		ray_pos = calc_intersection(vars, angle, next.x, next.y);
+		//corner
+		// if (ray_pos.x == next.x && ray_pos.y == next.y &&confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars) && confirm_hit_x(ray_pos.x, ray_pos.y, angle, vars))
+		// {
+		// 	hit_info.vertical_hit = false;
+		// 	hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
+		// 	break ;
+		// }
+		// edge case of hitting crosses in the koordinaten
+		// if (ray_pos.x == next.x && ray_pos.y == next.y &&confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars))
+		// {
+		// 	hit_info.vertical_hit = false;
+		// 	hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
+		// 	printf("corner hit\n");
+		// 	fflush(stdout);
+		// 	break ;
+		// }
+		//again
 		if (ray_pos.x == next.x && confirm_hit_x(ray_pos.x, ray_pos.y, angle, vars))
 		{
 			hit_info.vertical_hit = true;
@@ -83,31 +96,21 @@ t_hit_info	calculate_distance(t_vars *vars, float angle)
 			hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
 			break ;
 		}
-		i++;
-		if (i>20000 && i <20010)
-		{
-			printf("lines to hit were x = %f and y = %f\n", next.x, next.y);
-			printf("ray pos x is %f ray pos y is %f\n", ray_pos.x, ray_pos.y);
-			printf("player pos  x is %f and y %f\n", vars->fpos.x, vars->fpos.y);
-			printf("bug angle is %f\n", angle);
-		}
 	}
 	hit_info.distance = distance_two_points(vars->fpos, ray_pos);
 	hit_info.distance = hit_info.distance * cos(angle - vars->view_angle);
 	return (hit_info);
 }
 
-t_fpoint	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit)
+t_fpoint	calc_intersection(t_vars *vars, double angle, double x_to_hit, double y_to_hit)
 {
-	float		c;
-	float		m;
-	float		x_hit;
-	float		y_hit;
-	float		distance_vertical;
-	float		distance_horizontal;
-	// t_hit_info	hit_info;
+	double		c;
+	double		m;
+	double		x_hit;
+	double		y_hit;
+	double		distance_vertical;
+	double		distance_horizontal;
 
-	// hit_info.vertical_hit = true;
 	m = -tan(angle);
 	c = vars->fpos.y - (m * vars->fpos.x);
 	x_hit = (y_to_hit - c) / m;

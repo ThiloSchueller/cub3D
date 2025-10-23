@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 16:46:52 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:39:40 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,20 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
-typedef struct s_fpoint //float point;
+typedef struct s_fpoint //double point;
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_fpoint;
 
 typedef struct s_hit_info
 {
-	float		distance;
-	float		percent_of_hit;
-	float		wall_height;
+	double		distance;
+	double		percent_of_hit;
+	double		wall_height;
 	t_fpoint	hit; //not used?
 	bool		vertical_hit;
-	float		new_angle; // not used?
+	double		new_angle; // not used?
 	mlx_texture_t *texture;
  }	t_hit_info;
  
@@ -112,7 +112,7 @@ typedef struct s_hit_info
 	int			smap_width;
 	int			smap_height;
 	t_fpoint	scale;
-	float		view_angle;
+	double		view_angle;
 	t_point		pos;
 	t_fpoint	fpos;
 	t_image		images;
@@ -183,7 +183,7 @@ void		w_key(t_vars *vars);
 void		s_key(t_vars *vars);
 void		a_key(t_vars *vars);
 void		d_key(t_vars *vars);
-void		move_2d(t_vars *vars, double dx, double dy, float angle);
+void		move_2d(t_vars *vars, double dx, double dy, double angle);
 //render.c
 int			render(t_vars *vars);
 int			render_background(t_vars *vars);
@@ -191,11 +191,11 @@ int			render_minimap(t_vars *vars);
 int			render_walls(t_vars *vars);
 //small_render.c
 void		overwrite_previous_frame(t_vars *vars);
-mlx_texture_t	*define_texture(t_vars *vars, int x, float angle, bool vertical_hit);
-uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, float jump, float begin_texture);
+mlx_texture_t	*define_texture(t_vars *vars, int x, double angle, bool vertical_hit);
+uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, double jump, double begin_texture);
 //minimap.c
 t_fpoint	get_scaling_minimap(t_vars *vars);
-int			render_minimap_ray(t_vars *vars, float angle);
+int			render_minimap_ray(t_vars *vars, double angle);
 int			render_minimap_view(t_vars *vars);
 void		fill_smap(t_vars *vars, int x, int y, char ***smap);
 char		**calc_smap(t_vars *vars);
@@ -207,29 +207,29 @@ int			ft_exit(int code, t_vars *vars);
 void		ft_free_vars(t_vars *vars);
 //calc1.c
 t_hit_info	get_hit_info(t_vars *vars, int x);
-float		calculate_angle(t_vars *vars, int x);
-t_hit_info	steep_angles(t_vars *vars, float angle);
-t_hit_info	calculate_distance(t_vars *vars, float angle);
-t_fpoint	calc_intersection(t_vars *vars, float angle, float x_to_hit, float y_to_hit);
+double		calculate_angle(t_vars *vars, int x);
+t_hit_info	steep_angles(t_vars *vars, double angle);
+t_hit_info	calculate_distance(t_vars *vars, double angle);
+t_fpoint	calc_intersection(t_vars *vars, double angle, double x_to_hit, double y_to_hit);
 //calc2.c
-float		distance_two_points(t_fpoint p, t_fpoint q);
-float		normalise_angle(float angle);
-bool		confirm_hit_x(float x_to_hit, float y_hit, float angle, t_vars *vars);
-bool		confirm_hit_y(float x_hit, float y_to_hit, float angle, t_vars *vars);
+double		distance_two_points(t_fpoint p, t_fpoint q);
+double		normalise_angle(double angle);
+bool		confirm_hit_x(double x_to_hit, double y_hit, double angle, t_vars *vars);
+bool		confirm_hit_y(double x_hit, double y_to_hit, double angle, t_vars *vars);
 //directions.c
-bool		facing_right(float angle);
-bool		facing_left(float angle);
-bool		facing_up(float angle);
-bool		facing_down(float angle);
+bool		facing_right(double angle);
+bool		facing_left(double angle);
+bool		facing_up(double angle);
+bool		facing_down(double angle);
 //lines.c
-t_fpoint	lines_to_hit(t_fpoint point, float angle);
-bool	forbidden_square(t_vars *vars,float dx,float dy, float angle);
-// t_fpoint	lines_to_hit_up(t_fpoint point, float angle);
-// t_fpoint	lines_to_hit_down(t_fpoint point, float angle);
+t_fpoint	lines_to_hit(t_fpoint point, double angle);
+bool	forbidden_square(t_vars *vars,double dx,double dy, double angle);
+// t_fpoint	lines_to_hit_up(t_fpoint point, double angle);
+// t_fpoint	lines_to_hit_down(t_fpoint point, double angle);
 //hit_steep_angles.c
-t_hit_info	hit_top(t_vars *vars, float angle);
-t_hit_info	hit_right(t_vars *vars, float angle);
-t_hit_info	hit_left(t_vars *vars, float angle);
-t_hit_info	hit_bot(t_vars *vars, float angle);
+t_hit_info	hit_top(t_vars *vars, double angle);
+t_hit_info	hit_right(t_vars *vars, double angle);
+t_hit_info	hit_left(t_vars *vars, double angle);
+t_hit_info	hit_bot(t_vars *vars, double angle);
 
 #endif
