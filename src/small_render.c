@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:18:10 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/03 13:14:56 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/03 13:17:10 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	overwrite_previous_frame(t_vars *vars)
 // 	return (NULL);
 // }
 
-mlx_texture_t	*right_texture(t_vars *vars, float angle, bool vertical_hit)
+mlx_texture_t	*right_texture(t_vars *vars, double angle, bool vertical_hit)
 {
 	if (facing_up(angle))
 	{
@@ -86,7 +86,7 @@ mlx_texture_t	*right_texture(t_vars *vars, float angle, bool vertical_hit)
 		return (NULL);
 }
 
-mlx_texture_t	*left_texture(t_vars *vars, float angle, bool vertical_hit)
+mlx_texture_t	*left_texture(t_vars *vars, double angle, bool vertical_hit)
 {
 	if (facing_up(angle))
 	{
@@ -105,7 +105,7 @@ mlx_texture_t	*left_texture(t_vars *vars, float angle, bool vertical_hit)
 	return (NULL);
 }
 
-mlx_texture_t	*define_texture(t_vars *vars, float angle, bool vertical_hit)
+mlx_texture_t	*define_texture(t_vars *vars, double angle, bool vertical_hit)
 {
 	if (facing_right(angle))
 		return (right_texture(vars, angle, vertical_hit));
@@ -114,7 +114,7 @@ mlx_texture_t	*define_texture(t_vars *vars, float angle, bool vertical_hit)
 	return (NULL);
 }
 
-uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, float jump, float begin_texture)
+uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, double jump, double begin_texture)
 {
 	int			index;
 	uint32_t	color;

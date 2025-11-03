@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/03 13:09:40 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/03 13:18:09 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,8 +191,8 @@ int			render_minimap(t_vars *vars);
 int			render_walls(t_vars *vars);
 //small_render.c
 void		overwrite_previous_frame(t_vars *vars);
-mlx_texture_t	*right_texture(t_vars *vars, float angle, bool vertical_hit);
-mlx_texture_t	*left_texture(t_vars *vars, float angle, bool vertical_hit);
+mlx_texture_t	*right_texture(t_vars *vars, double angle, bool vertical_hit);
+mlx_texture_t	*left_texture(t_vars *vars, double angle, bool vertical_hit);
 mlx_texture_t	*define_texture(t_vars *vars, double angle, bool vertical_hit);
 uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, double jump, double begin_texture);
 //minimap.c
