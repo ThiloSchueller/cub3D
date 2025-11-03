@@ -6,26 +6,26 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:15:29 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/23 15:41:32 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/03 11:27:56 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_fpoint lines_to_hit(t_fpoint point, double angle)
-{
-	t_fpoint	next;
+// t_fpoint lines_to_hit(t_fpoint point, double angle)
+// {
+// 	t_fpoint	next;
 
-	if (facing_up(angle))
-		next.y = floor(point.y - 0.0001);
-	else
-		next.y = ceil(point.y + 0.0001);
-	if (facing_left(angle))
-		next.x = floor(point.x - 0.0001);
-	else
-		next.x = ceil(point.x + 0.0001);
-return next;
-}
+// 	if (facing_up(angle))
+// 		next.y = floor(point.y - 0.000001);
+// 	else
+// 		next.y = ceil(point.y + 0.000001);
+// 	if (facing_left(angle))
+// 		next.x = floor(point.x - 0.000001);
+// 	else
+// 		next.x = ceil(point.x + 0.000001);
+// return next;
+// }
 
 bool	forbidden_square(t_vars *vars,double dx,double dy, double angle)
 {
@@ -76,59 +76,59 @@ bool	forbidden_square(t_vars *vars,double dx,double dy, double angle)
 	return (false);
 }
 
-// t_fpoint	lines_to_hit_up(t_fpoint point, double angle)
-// {
-// 	t_fpoint	next;
+t_fpoint	lines_to_hit_up(t_fpoint point, double angle)
+{
+	t_fpoint	next;
 
-// 	next.y = floor(point.y);
-// 	if (next.y == point.y)
-// 		next.y -= 1;
-// 	if (facing_left(angle))
-// 	{
-// 		next.x = floor(point.x);
-// 		if (next.x == point.x)
-// 			next.x -= 1;
-// 	}
-// 	else
-// 	{
-// 		next.x = ceil(point.x);
-// 		if (next.x == point.x)
-// 			next.x += 1;
-// 	}
-// 	return (next);
-// }
+	next.y = floor(point.y);
+	if (next.y == point.y)
+		next.y -= 1;
+	if (facing_left(angle))
+	{
+		next.x = floor(point.x);
+		if (next.x == point.x)
+			next.x -= 1;
+	}
+	else
+	{
+		next.x = ceil(point.x);
+		if (next.x == point.x)
+			next.x += 1;
+	}
+	return (next);
+}
 
-// t_fpoint	lines_to_hit_down(t_fpoint point, double angle)
-// {
-// 	t_fpoint	next;
+t_fpoint	lines_to_hit_down(t_fpoint point, double angle)
+{
+	t_fpoint	next;
 
-// 	next.y = ceil(point.y);
-// 	if (next.y == point.y)
-// 	{
-// 		next.y += 1;
-// 	}
-// 	if (facing_left(angle))
-// 	{
-// 		next.x = floor(point.x);
-// 		if (next.x == point.x)
-// 			next.x -= 1;
-// 	}
-// 	else
-// 	{
-// 		next.x = ceil(point.x);
-// 		if (next.x == point.x)
-// 			next.x += 1;
-// 	}
-// 	return (next);
-// }
+	next.y = ceil(point.y);
+	if (next.y == point.y)
+	{
+		next.y += 1;
+	}
+	if (facing_left(angle))
+	{
+		next.x = floor(point.x);
+		if (next.x == point.x)
+			next.x -= 1;
+	}
+	else
+	{
+		next.x = ceil(point.x);
+		if (next.x == point.x)
+			next.x += 1;
+	}
+	return (next);
+}
 
-// t_fpoint	lines_to_hit(t_fpoint point, double angle)
-// {
-// 	t_fpoint	next;
+t_fpoint	lines_to_hit(t_fpoint point, double angle)
+{
+	t_fpoint	next;
 
-// 	if (facing_up(angle))
-// 		next = lines_to_hit_up(point, angle);
-// 	else
-// 		next = lines_to_hit_down(point, angle);
-// 	return (next);
-// }
+	if (facing_up(angle))
+		next = lines_to_hit_up(point, angle);
+	else
+		next = lines_to_hit_down(point, angle);
+	return (next);
+}
