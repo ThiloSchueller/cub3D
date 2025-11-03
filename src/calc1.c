@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/23 16:57:05 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:06:05 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ t_hit_info	get_hit_info(t_vars *vars, int x)
 
 	angle = normalise_angle(calculate_angle(vars, x));
 	hit_info = calculate_distance(vars, angle);
-	hit_info.wall_height = (HEIGHT /  (hit_info.distance / SCALE));
-	hit_info.texture = define_texture(vars, x, angle, hit_info.vertical_hit);
+	hit_info.wall_height = (HEIGHT /  (hit_info.distance / SCALE)); //cos(angle -vars->view_angle)
+	// if (hit_info.wall_height > 600) // this is wrong but preverts segfaults
+	// 	hit_info.wall_height = 600;
+	//hit_info.new_angle = angle;
+	hit_info.texture = define_texture(vars, angle, hit_info.vertical_hit);
 	return (hit_info);
 }
 

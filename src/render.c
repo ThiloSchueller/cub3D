@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/23 15:40:38 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:11:04 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	render_background(t_vars *vars)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 	int	opac_ceiling;
 	int	opac_floor;
 
@@ -23,7 +23,7 @@ int	render_background(t_vars *vars)
 	y = 0;
 	opac_ceiling = (vars->config->ceiling_color << 8) | 0xFF;
 	opac_floor = (vars->config->floor_color << 8) | 0xFF;
-	while(x < WIDTH)
+	while (x < WIDTH)
 	{
 		while (y < HEIGHT)
 		{
@@ -43,7 +43,7 @@ int	render_minimap(t_vars *vars)
 {
 	int	x;
 	int	y;
-	
+
 	x = 0;
 	y = 0;
 	while (x < vars->smap_width)
@@ -51,11 +51,14 @@ int	render_minimap(t_vars *vars)
 		while (y < vars->smap_height)
 		{
 			if (vars->smap[x][y] == '1')
-				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0x00FF0055);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x),
+					(int)(vars->scale.y * y), 0x00FF0055);
 			else if (vars->smap[x][y] == '0')
-				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0xFFFFFF55);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x),
+					(int)(vars->scale.y * y), 0xFFFFFF55);
 			else
-				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0xFFFFFF00);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x),
+					(int)(vars->scale.y * y), 0xFFFFFF00);
 			y++;
 		}
 		y = 0;
@@ -67,11 +70,11 @@ int	render_minimap(t_vars *vars)
 
 int	render_walls(t_vars *vars)
 {
-	int	x;
-	int y;
-	int ye;
-	t_hit_info hit_info;
-	double	jump;
+	int			x;
+	int			y;
+	int			ye;
+	t_hit_info	hit_info;
+	double		jump;
 	double		begin_texture;
 
 
