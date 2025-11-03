@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:18:10 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 17:57:01 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/03 11:38:52 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,44 @@ void	overwrite_previous_frame(t_vars *vars)
 	}
 }
 
+// mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hit)
+// {
+// 	(void)x;
+// 	//angle = normalise_angle(calculate_angle(vars, x));
+// 	if (facing_right(angle) && facing_up(angle))
+// 	{
+// 		if (vertical_hit == 1)
+// 			return (vars->textures->east);
+// 		else
+// 			return (vars->textures->north);
+// 	}
+// 	else if (facing_right(angle) && facing_down(angle))
+// 	{
+// 		if (vertical_hit == 1)
+// 			return (vars->textures->east);
+// 		else
+// 			return (vars->textures->south);
+// 	}
+// 	else if (facing_left(angle) && facing_up(angle))
+// 	{
+// 		if (vertical_hit == 1)
+// 			return (vars->textures->west);
+// 		else
+// 			return (vars->textures->north);
+// 	}
+// 	else if (facing_left(angle) && facing_down(angle))
+// 	{
+// 		if (vertical_hit == 1)
+// 			return (vars->textures->west);
+// 		else
+// 			return (vars->textures->south);
+// 	}
+// 	return (NULL);
+// }
 
-
-mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hit)
+mlx_texture_t	*right_texture(t_vars *vars, float angle, bool vertical_hit)
 {
-	(void)x;
-	//angle = normalise_angle(calculate_angle(vars, x));
-	if (facing_right(angle) && facing_up(angle))
+	if (facing_up(angle))
 	{
 		if (vertical_hit == 1)
 			return (vars->textures->east);
@@ -51,20 +82,35 @@ mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hi
 		else
 			return (vars->textures->south);
 	}
-	else if (facing_left(angle) && facing_up(angle))
+	else
+		return (NULL);
+}
+
+mlx_texture_t	*left_texture(t_vars *vars, float angle, bool vertical_hit)
+{
+	if (facing_up(angle))
 	{
 		if (vertical_hit == 1)
 			return (vars->textures->west);
 		else
 			return (vars->textures->north);
 	}
-	else if (facing_left(angle) && facing_down(angle))
+	else if (facing_down(angle))
 	{
 		if (vertical_hit == 1)
 			return (vars->textures->west);
 		else
 			return (vars->textures->south);
 	}
+	return (NULL);
+}
+
+mlx_texture_t	*define_texture(t_vars *vars, float angle, bool vertical_hit)
+{
+	if (facing_right(angle))
+		return (right_texture(vars, angle, vertical_hit));
+	else if (facing_left(angle))
+		return (left_texture(vars, angle, vertical_hit));
 	return (NULL);
 }
 

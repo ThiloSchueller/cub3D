@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 17:50:42 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/03 10:42:48 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,14 @@ int	render_minimap(t_vars *vars)
 		while (y < vars->smap_height)
 		{
 			if (vars->smap[x][y] == '1')
-				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0x00FF0055);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x),
+					(int)(vars->scale.y * y), 0x00FF0055);
 			else if (vars->smap[x][y] == '0')
-				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0xFFFFFF55);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x),
+					(int)(vars->scale.y * y), 0xFFFFFF55);
 			else
-				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x), (int)(vars->scale.y * y), 0xFFFFFF00);
+				mlx_put_pixel(vars->minimap, (int)(vars->scale.x * x),
+					(int)(vars->scale.y * y), 0xFFFFFF00);
 			y++;
 		}
 		y = 0;
