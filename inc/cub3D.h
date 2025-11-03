@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/03 13:18:09 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/03 15:31:48 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,11 +179,11 @@ void		ft_loop_hook(void *param);
 void		left_key(t_vars *vars);
 void		right_key(t_vars *vars);
 //key_wasd.c
-void		w_key(t_vars *vars);
-void		s_key(t_vars *vars);
-void		a_key(t_vars *vars);
-void		d_key(t_vars *vars);
-void		move_2d(t_vars *vars, double dx, double dy, double angle);
+t_fpoint		w_key(t_vars *vars);
+t_fpoint		s_key(t_vars *vars);
+t_fpoint		a_key(t_vars *vars);
+t_fpoint		d_key(t_vars *vars);
+void		move_2d(t_vars *vars, t_fpoint d);
 //render.c
 int			render(t_vars *vars);
 int			render_background(t_vars *vars);
@@ -212,7 +212,7 @@ t_hit_info	get_hit_info(t_vars *vars, int x);
 double		calculate_angle(t_vars *vars, int x);
 t_hit_info	steep_angles(t_vars *vars, double angle);
 t_hit_info	calculate_distance(t_vars *vars, double angle);
-t_fpoint	calc_intersection(t_vars *vars, double angle, double x_to_hit, double y_to_hit);
+t_fpoint	calc_intersections(t_vars *vars, double angle, double x_to_hit, double y_to_hit);
 //calc2.c
 double		distance_two_points(t_fpoint p, t_fpoint q);
 double		normalise_angle(double angle);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/03 13:06:05 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/03 16:40:15 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_hit_info	calculate_distance(t_vars *vars, double angle)
 	while (1)
 	{
 		next = lines_to_hit(ray_pos, angle);
-		ray_pos = calc_intersection(vars, angle, next.x, next.y);
+		ray_pos = calc_intersections(vars, angle, next.x, next.y);
 		//corner
 		// if (ray_pos.x == next.x && ray_pos.y == next.y &&confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars) && confirm_hit_x(ray_pos.x, ray_pos.y, angle, vars))
 		// {
@@ -105,7 +105,7 @@ t_hit_info	calculate_distance(t_vars *vars, double angle)
 	return (hit_info);
 }
 
-t_fpoint	calc_intersection(t_vars *vars, double angle, double x_to_hit, double y_to_hit)
+t_fpoint	calc_intersections(t_vars *vars, double angle, double x_to_hit, double y_to_hit)
 {
 	double		c;
 	double		m;
@@ -115,6 +115,8 @@ t_fpoint	calc_intersection(t_vars *vars, double angle, double x_to_hit, double y
 	double		distance_horizontal;
 
 	m = -tan(angle);
+	if ( m == 0.0)
+		m = 0.01;
 	c = vars->fpos.y - (m * vars->fpos.x);
 	x_hit = (y_to_hit - c) / m;
 	y_hit = m * x_to_hit + c;
