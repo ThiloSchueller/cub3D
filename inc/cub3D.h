@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/03 15:31:48 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:46:31 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_hit_info
 	mlx_image_t	*walls;
 	t_config	*config;
 	char		**smap; //scaled map;
+	char		**cmap;
 	int			smap_width;
 	int			smap_height;
 	t_fpoint	scale;
@@ -175,6 +176,7 @@ void		set_view_angle(t_vars *vars);
 //hook.c
 void		ft_key_hook(mlx_key_data_t keydata, void *param);
 void		ft_loop_hook(void *param);
+t_fpoint	vec_add(t_fpoint a, t_fpoint b);
 //key_arrows.c
 void		left_key(t_vars *vars);
 void		right_key(t_vars *vars);

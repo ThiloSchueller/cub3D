@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:02:54 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/22 15:15:44 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/04 17:03:19 by tschulle         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cub3D.h"
 
@@ -24,6 +24,46 @@ void	set_view_angle(t_vars *vars)
 		vars->view_angle = 1.5 * PI;
 }
 
+char	**calc_cmap(t_vars *vars)
+{
+	char	**cmap;
+	int		x;
+	int		y;
+
+	x = 0;
+	y = 0;
+	cmap = malloc(((vars->smap_width) + 1) * sizeof(char *));
+	if (cmap == NULL)
+		return (NULL);
+	while (x < vars->smap_width)
+	{
+		cmap[x] = malloc((vars->smap_height + 1) * sizeof(char));
+		if (cmap[x] == NULL)
+			return (ft_free_array(cmap), NULL);
+		while (y < vars->smap_height)
+		{
+			if (vars->smap[x][y] == '0' && 
+				(vars->smap[x -1][y] == '1' ||
+					vars->smap[x+1][y] == '1' ||
+					vars->smap[x][y-1] == '1' ||
+					vars->smap[x][y+1] == '1' ||
+					vars->smap[x+1][y+1] == '1' ||
+					vars->smap[x+1][y-1] == '1' ||
+					vars->smap[x-1][y+1] == '1' ||
+					vars->smap[x-1][y-1] == '1'))
+				cmap[x][y] = '1';
+			else
+				cmap[x][y] = vars->smap[x][y];
+			y++;
+		}
+		cmap[x][y] = '\0';
+		y = 0;
+		x++;
+	}
+	cmap[x] = NULL;
+	return (cmap);
+}
+
 int	init_vars(t_vars *vars)
 {
 	vars->mmswitch = false;
@@ -32,6 +72,9 @@ int	init_vars(t_vars *vars)
 	vars->scale = get_scaling_minimap(vars);
 	vars->smap = calc_smap(vars);
 	if (vars->smap == NULL)
+		ft_exit(ERROR_MALLOC, vars);
+	vars->cmap = calc_cmap(vars);
+	if (vars->cmap == NULL)
 		ft_exit(ERROR_MALLOC, vars);
 	vars->background = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
 	vars->minimap = mlx_new_image(vars->mlx, WIDTH -30, HEIGHT -30);

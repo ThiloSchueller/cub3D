@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:31:03 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/03 17:08:12 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:35:58 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,31 +71,6 @@ void	ft_loop_hook(void *param)
 	}
 	if (d.x != 0 || d.y != 0)
 		move_2d(vars, d);
+	printf("x is %f, y is %f\n", d.x, d.y);
 	render(vars);
-}
-void	move_2d(t_vars *vars, t_fpoint d)
-{
-	double angle;
-	t_fpoint new;
-	t_fpoint next;
-	t_fpoint step;
-
-	new = vec_add(vars->fpos, d);
-	angle = normalise_angle(atan2(-d.y, d.x));
-	next = lines_to_hit(vars->fpos, angle);
-	{
-		step = calc_intersections(vars, angle, next.x, next.y);
-		if (step.x == next.x && !confirm_hit_x(step.x, step.y, angle, vars))
-			vars->fpos = step;
-		else if (step.y == next.y && !confirm_hit_y(step.x, step.y, angle, vars))
-			vars->fpos = step;
-		next = lines_to_hit(vars->fpos, angle);
-		step = calc_intersections(vars, angle, next.x, next.y);
-		if (step.x == next.x && !confirm_hit_x(step.x, step.y, angle, vars))
-			vars->fpos = new;
-		else if (step.y == next.y && !confirm_hit_y(step.x, step.y, angle, vars))
-			vars->fpos = new;
-	}
-	vars->pos.x = floor(vars->fpos.x);
- 	vars->pos.y = floor(vars->fpos.y);
 }
