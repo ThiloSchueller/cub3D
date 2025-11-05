@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:02:54 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/04 17:03:19 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/05 15:20:48 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,11 @@ char	**calc_cmap(t_vars *vars)
 	return (cmap);
 }
 
-int	init_vars(t_vars *vars)
+void	init_vars(t_vars *vars)
 {
+	vars->textures = NULL;
+	vars->smap = NULL;
+	vars->cmap = NULL;
 	vars->mmswitch = false;
 	vars->smap_width = SCALE * vars->config->map_width;
 	vars->smap_height = SCALE * vars->config->map_height;
@@ -76,17 +79,7 @@ int	init_vars(t_vars *vars)
 	vars->cmap = calc_cmap(vars);
 	if (vars->cmap == NULL)
 		ft_exit(ERROR_MALLOC, vars);
-	vars->background = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
-	vars->minimap = mlx_new_image(vars->mlx, WIDTH -30, HEIGHT -30);
-	vars->walls = mlx_new_image (vars->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(vars->mlx, vars->background, 0, 0);
-	mlx_image_to_window(vars->mlx, vars->minimap, 30, 30);
-	mlx_image_to_window(vars->mlx, vars->walls, 0, 0);
 	set_view_angle(vars);
-	vars->background->instances->z = 1;
-	vars->minimap->instances->z = 3;
-	vars->walls->instances->z = 2;
-	return (0);
 }
 
 void	init_data(t_config *data)

@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/05 13:27:46 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/05 15:43:44 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct s_hit_info
 	mlx_image_t	*walls;
 	t_config	*config;
 	char		**smap; //scaled map;
-	char		**cmap;
+	char		**cmap; //collision map;
 	int			smap_width;
 	int			smap_height;
 	t_fpoint	scale;
@@ -130,6 +130,9 @@ typedef struct s_hit_info
 
 
 //parser
+//main.c
+void	clean_after_x(t_vars *vars);
+void	init_after_mlx(t_vars *vars);
 //parser_colours.c
 int		check_validity_input(char *str);
 int		color_to_hex(int red, int green, int blue);
@@ -173,7 +176,7 @@ void		ft_get_textures(t_vars *vars);
 //init.c
 void		init_data(t_config *data);
 void		free_data(t_config *data);
-int			init_vars(t_vars *vars);
+void			init_vars(t_vars *vars);
 void		set_view_angle(t_vars *vars);
 //hook.c
 void		ft_key_hook(mlx_key_data_t keydata, void *param);
