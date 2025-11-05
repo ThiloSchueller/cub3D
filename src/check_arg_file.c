@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/04 11:26:49 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/05 13:06:26 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ t_config	*check_arg_map(int argc, char *argv[])
 		}
 	}
 	else
+	{
+		free(data);
 		return (NULL);
+	}
 	return (data);
 }

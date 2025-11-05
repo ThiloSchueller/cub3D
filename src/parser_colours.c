@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:54:16 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/05 12:41:16 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/05 13:01:41 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,21 @@ int	color_str_to_int(char *str)
 	int		color;
 
 	rgb = ft_split(str, ',');
-	// int i = -1;
-	// while (rgb[++i] != NULL)
-	// 	printf("%s\n", rgb[i]);
-	// if (rgb == NULL)
-	// 	printf("split_fail\n");
+	int i = 0;
+	while (rgb[i] != NULL)
+		i++;
+	if (i != 3)
+	{
+		int j = 0;
+		while (rgb[j] != NULL)
+		{
+			free(rgb[j]);
+			j++;
+		}
+		free(rgb);
+		printf("Invalid colour input\n");
+		return (-1);
+	}
 	red = ft_atoi(rgb[0]);
 	green = ft_atoi(rgb[1]);
 	blue = ft_atoi(rgb[2]);
