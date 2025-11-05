@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/05 12:15:38 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/05 13:27:46 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define HEIGHT 600
 # define WIDTH 800
-# define SCALE 20
+# define SCALE 10
 # define PI 3.1415926535
 # define FOV 60
 # define MMSIZE 200.0
@@ -109,6 +109,7 @@ typedef struct s_hit_info
 	mlx_image_t	*walls;
 	t_config	*config;
 	char		**smap; //scaled map;
+	char		**cmap;
 	int			smap_width;
 	int			smap_height;
 	t_fpoint	scale;
@@ -177,6 +178,7 @@ void		set_view_angle(t_vars *vars);
 //hook.c
 void		ft_key_hook(mlx_key_data_t keydata, void *param);
 void		ft_loop_hook(void *param);
+t_fpoint	vec_add(t_fpoint a, t_fpoint b);
 //key_arrows.c
 void		left_key(t_vars *vars);
 void		right_key(t_vars *vars);

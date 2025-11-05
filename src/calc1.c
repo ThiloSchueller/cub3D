@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/03 16:40:15 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:08:34 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_hit_info	calculate_distance(t_vars *vars, double angle)
 		hit_info.distance = hit_info.distance * cos(angle - vars->view_angle);
 		return (hit_info);
 	}
+	int i = 0;
 	while (1)
 	{
 		next = lines_to_hit(ray_pos, angle);
@@ -87,6 +88,7 @@ t_hit_info	calculate_distance(t_vars *vars, double angle)
 		// 	break ;
 		// }
 		//again
+		//herhehreheheheheheh
 		if (ray_pos.x == next.x && confirm_hit_x(ray_pos.x, ray_pos.y, angle, vars))
 		{
 			hit_info.vertical_hit = true;
@@ -99,9 +101,12 @@ t_hit_info	calculate_distance(t_vars *vars, double angle)
 			hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
 			break ;
 		}
+		i++;
 	}
 	hit_info.distance = distance_two_points(vars->fpos, ray_pos);
 	hit_info.distance = hit_info.distance * cos(angle - vars->view_angle);
+
+	//printf("iterationcount is %d\n", i);
 	return (hit_info);
 }
 

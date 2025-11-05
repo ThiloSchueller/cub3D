@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:00:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/23 15:41:14 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/05 11:18:51 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	fill_smap(t_vars *vars, int x, int y, char ***smap)
 		{
 			vars->pos.x = x;
 			vars->pos.y = y;
-			vars->fpos.x = (double)x;
-			vars->fpos.y = (double)y;
+			vars->fpos.x = (double)x + 0.5;
+			vars->fpos.y = (double)y + 0.5;
 		}
 		(*smap)[x][y] = '0';
 	}
