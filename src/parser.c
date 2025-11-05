@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 17:34:37 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/05 12:38:10 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/05 12:52:19 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void	parse_element(char *line, t_config *data)
 		check = parse_texture(new_line, data);
 	else if (starts_with(new_line, "F ") == 1 || starts_with(new_line, "C ") == 1)
 		check = parse_color(new_line, data);
+	free(new_line);
 	if (check < 0)
 	{
 		data->stop = 1;
