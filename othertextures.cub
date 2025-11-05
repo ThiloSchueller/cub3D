@@ -1,0 +1,13 @@
+SO /home/tschulle/old_evaluations/mhummel-cub3d/textures/south.png
+NO /home/tschulle/old_evaluations/mhummel-cub3d/textures/north.png
+WE /home/tschulle/old_evaluations/mhummel-cub3d/textures/west.png
+EA /home/tschulle/old_evaluations/mhummel-cub3d/textures/east.png
+
+F 255,255,255
+C 0,0,0
+
+11111
+10001
+1E101
+10001
+11111

@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:31:03 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/04 16:35:58 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:04:25 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_loop_hook(void *param)
 	}
 	if (d.x != 0 || d.y != 0)
 		move_2d(vars, d);
-	printf("x is %f, y is %f\n", d.x, d.y);
+	//printf("x is %f, y is %f\n", d.x, d.y);
+	//printf("player is x %f and y %f\n", vars->fpos.x, vars->fpos.y);
 	render(vars);
 }

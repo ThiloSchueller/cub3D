@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/04 16:46:31 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:16:19 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define HEIGHT 600
 # define WIDTH 800
-# define SCALE 20
+# define SCALE 10
 # define PI 3.1415926535
 # define FOV 60
 # define MMSIZE 200.0
