@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:16:27 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 17:47:35 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/05 10:29:16 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@ int	is_map_line(char *line)
 	int	i;
 
 	i = 0;
-	if (line[i] != ' ' && line[i] != '1' && line[i] != '0')
+	while (line[i] != '\0')
+	{
+		while (line[i] == ' ' || line[i] == '	')
+			i++;
+		if (line[i] == '1')
+			return (1);
 		return (0);
-	else
-		return (1);
+	}
+	return (0);
 }
 
 void	parse_map(char *line, t_config *data)

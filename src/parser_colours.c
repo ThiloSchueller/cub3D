@@ -6,11 +6,37 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:54:16 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 17:47:18 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/05 12:41:16 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
+
+int	coma_without_digit(char *str)
+{
+	int	i;
+	int	digit;
+
+	i = 0;
+	digit = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ',')
+		{
+			digit = 0;
+			if (str[i + 1] == '\0' || str[i + 1] == ',')
+				return (-1);
+			while (str[i] != ft_isdigit(str[i]))
+				i++;
+			if (ft_isdigit(str[i]))
+				digit = 1;
+		}
+		if (digit == 0)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
 
 int	check_validity_input(char *str)
 {
@@ -32,6 +58,8 @@ int	check_validity_input(char *str)
 			coma ++;
 		i++;
 	}
+	//if (coma_without_digit(str) < 0)
+		//return (-1);
 	if (coma != 2 || digit > 9)
 		return (-1);
 	return (0);
@@ -55,6 +83,11 @@ int	color_str_to_int(char *str)
 	int		color;
 
 	rgb = ft_split(str, ',');
+	// int i = -1;
+	// while (rgb[++i] != NULL)
+	// 	printf("%s\n", rgb[i]);
+	// if (rgb == NULL)
+	// 	printf("split_fail\n");
 	red = ft_atoi(rgb[0]);
 	green = ft_atoi(rgb[1]);
 	blue = ft_atoi(rgb[2]);

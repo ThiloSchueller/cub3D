@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/03 15:31:48 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/05 12:15:38 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ int		color_to_hex(int red, int green, int blue);
 int		color_str_to_int(char *str);
 int		parse_color(char *line, t_config *data);
 //parser_helper.c
+char	*remove_space_tab_before(char *line);
+char	*remove_space_tab_between(char *line);
 int		starts_with(char *line, char *str);
 char	*ft_strdup_no_newline_map(const char *s1);
 char	*ft_strdup_no_newline(const char *s1);

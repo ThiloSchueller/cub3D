@@ -6,11 +6,73 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:51:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 17:47:31 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/05 12:35:00 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
+
+char	*remove_space_tab_before(char *line)
+{
+	char	*new_line;
+	int		new_len;
+	int		i;
+	int		j;
+
+	i = 0;
+	new_len = 0;
+	new_line = NULL;
+	while (line[i])
+	{
+		if (line[i] == ' ' || line[i] == '	')
+			i++;
+		else
+			break ;
+	}
+	j = i;
+	while (line[i] != '\0')
+	{
+		i++;
+		new_len++;
+	}
+	new_line = malloc(sizeof(char) * (new_len + 1));
+	if (!new_line)
+		return (NULL);
+	i = 0;
+	while (line[j] != '\0')
+	{
+		new_line[i] = line[j];
+		i++;
+		j++;
+	}
+	new_line[i] = '\0';
+	return (new_line);
+}
+
+char	*remove_space_tab_between(char *line)
+{
+	char	*new_line;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	new_line = remove_space_tab_before(line);
+	while (new_line[j] != '\0')
+	{
+		if (new_line[j] == '	')
+			new_line[j] = ' ';
+		j++;
+	}
+	return (new_line);
+}
+
+//how do I remove space and tabs in between?
+//maybe I need to do ft_split
+//everytime I have something written it is considered as one token
+//then recreate a sentence be separating those tokens with spaces
+
+
 
 int	starts_with(char *line, char *str)
 {

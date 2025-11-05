@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 17:34:37 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 17:47:49 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/05 12:38:10 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,13 @@ void	parser(int fd, t_config *data, char *file)
 		{
 			if (is_map_line(str) && parse_texture_color_before(data))
 				parse_map(ft_strdup_no_newline_map(str), data);
-			parse_element(str, data);
+			else
+				parse_element(str, data);
 		}
 		if (str)
 			free(str);
-		str = get_next_line(fd);
+		if (data->stop == 0)
+			str = get_next_line(fd);
 	}
 	close (fd);
 	if (data->map_before == 1)
@@ -103,9 +105,7 @@ void	parser(int fd, t_config *data, char *file)
 		create_empty_map(data);
 		parser_map_2nd_round(data, file);
 	}
-	printf("data->stop = %d\n", data->stop);
 	check_map(data);
-	printf("data->stop = %d\n", data->stop);
 	if (data->stop == 0)
 	{
 		// printf("NO: %s\n", data->texture_no);
@@ -128,14 +128,16 @@ void	parser(int fd, t_config *data, char *file)
 
 void	parse_element(char *line, t_config *data)
 {
-	int	check;
+	int		check;
+	char	*new_line;
 
 	check = 0;
-	if (starts_with(line, "NO ") == 1 || starts_with(line, "SO ") == 1
-		|| starts_with(line, "WE ") == 1 || starts_with(line, "EA ") == 1)
-		check = parse_texture(line, data);
-	else if (starts_with(line, "F ") == 1 || starts_with(line, "C ") == 1)
-		check = parse_color(line, data);
+	new_line = remove_space_tab_between(line);
+	if (starts_with(new_line, "NO ") == 1 || starts_with(new_line, "SO ") == 1
+		|| starts_with(new_line, "WE ") == 1 || starts_with(new_line, "EA ") == 1)
+		check = parse_texture(new_line, data);
+	else if (starts_with(new_line, "F ") == 1 || starts_with(new_line, "C ") == 1)
+		check = parse_color(new_line, data);
 	if (check < 0)
 	{
 		data->stop = 1;
