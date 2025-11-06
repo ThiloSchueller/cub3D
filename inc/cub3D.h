@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/05 13:27:46 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 12:31:34 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ typedef struct s_hit_info
 //parser_colours.c
 int		check_validity_input(char *str);
 int		color_to_hex(int red, int green, int blue);
+char	**array_color(char *str);
+void	free_array(char **array);
 int		color_str_to_int(char *str);
 int		parse_color(char *line, t_config *data);
 //parser_helper.c
