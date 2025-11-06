@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:51:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/05 12:50:53 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/06 12:47:56 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 char	*remove_space_tab_before(char *line)
 {
 	char	*new_line;
-	int		new_len;
 	int		i;
-	int		j;
 
 	i = 0;
-	new_len = 0;
 	new_line = NULL;
 	while (line[i])
 	{
@@ -29,23 +26,7 @@ char	*remove_space_tab_before(char *line)
 		else
 			break ;
 	}
-	j = i;
-	while (line[i] != '\0')
-	{
-		i++;
-		new_len++;
-	}
-	new_line = malloc(sizeof(char) * (new_len + 1));
-	if (!new_line)
-		return (NULL);
-	i = 0;
-	while (line[j] != '\0')
-	{
-		new_line[i] = line[j];
-		i++;
-		j++;
-	}
-	new_line[i] = '\0';
+	new_line = ft_substr(line, i, ft_strlen(&line[i]));
 	return (new_line);
 }
 
