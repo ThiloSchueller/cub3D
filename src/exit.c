@@ -6,13 +6,13 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:41:11 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/05 15:39:53 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 11:24:10 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void 	ft_free_vars(t_vars *vars)
+void	ft_free_vars(t_vars *vars)
 {
 	if (vars->config->map != NULL)
 		ft_free_array(vars->config->map);
@@ -33,7 +33,6 @@ void 	ft_free_vars(t_vars *vars)
 	if (vars->textures != NULL)
 		free(vars->textures);
 }
-
 
 int	ft_exit(int code, t_vars *vars)
 {

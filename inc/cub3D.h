@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/05 15:43:44 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 11:12:52 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void		ft_get_textures(t_vars *vars);
 //init.c
 void		init_data(t_config *data);
 void		free_data(t_config *data);
-void			init_vars(t_vars *vars);
+void		init_vars(t_vars *vars);
 void		set_view_angle(t_vars *vars);
 //hook.c
 void		ft_key_hook(mlx_key_data_t keydata, void *param);

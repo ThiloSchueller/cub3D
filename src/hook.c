@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:31:03 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/05 15:25:41 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 11:29:58 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 	}
 }
 
-t_fpoint vec_add(t_fpoint a, t_fpoint b)
+t_fpoint	vec_add(t_fpoint a, t_fpoint b)
 {
 	return ((t_fpoint){a.x + b.x, a.y + b.y});
 }
 
 void	ft_loop_hook(void *param)
 {
-	t_vars	*vars;
+	t_vars		*vars;
 	t_fpoint	d;
 
 	d.x = 0;
@@ -70,7 +70,5 @@ void	ft_loop_hook(void *param)
 	}
 	if (d.x != 0 || d.y != 0)
 		move_2d(vars, d);
-	//printf("x is %f, y is %f\n", d.x, d.y);
-	//printf("player is x %f and y %f\n", vars->fpos.x, vars->fpos.y);
 	render(vars);
 }

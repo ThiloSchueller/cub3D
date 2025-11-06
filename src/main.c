@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/05 15:42:32 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 11:13:31 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ int	main(int argc, char *argv[])
 	//render(&vars);
 	mlx_loop(vars.mlx);
 	clean_after_x(&vars);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:59:00 by tschulle          #+#    #+#             */
-/*   Updated: 2025/10/23 15:42:17 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 11:28:39 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ t_hit_info	hit_top(t_vars *vars, double angle)
 	while (1)
 	{
 		if (confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars))
-			break;
+			break ;
 		else
 			ray_pos.y -= 1;
 	}
 	hit_info.distance = distance_two_points(ray_pos, vars->fpos);
-	// hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
 	hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
 	hit_info.vertical_hit = false;
 	return (hit_info);
@@ -43,16 +42,16 @@ t_hit_info	hit_right(t_vars *vars, double angle)
 	while (1)
 	{
 		if (confirm_hit_x(ray_pos.x, ray_pos.y, angle, vars))
-			break;
+			break ;
 		else
 			ray_pos.x += 1;
 	}
 	hit_info.distance = distance_two_points(ray_pos, vars->fpos);
-	//hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
 	hit_info.percent_of_hit = fmod(ray_pos.y, SCALE) / SCALE;
 	hit_info.vertical_hit = true;
 	return (hit_info);
 }
+
 t_hit_info	hit_left(t_vars *vars, double angle)
 {
 	t_hit_info	hit_info;
@@ -63,12 +62,11 @@ t_hit_info	hit_left(t_vars *vars, double angle)
 	while (1)
 	{
 		if (confirm_hit_x(ray_pos.x, ray_pos.y, angle, vars))
-			break;
+			break ;
 		else
 			ray_pos.x -= 1;
 	}
 	hit_info.distance = distance_two_points(ray_pos, vars->fpos);
-	//hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
 	hit_info.percent_of_hit = fmod(ray_pos.y, SCALE) / SCALE;
 	hit_info.vertical_hit = true;
 	return (hit_info);
@@ -84,12 +82,11 @@ t_hit_info	hit_bot(t_vars *vars, double angle)
 	while (1)
 	{
 		if (confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars))
-			break;
+			break ;
 		else
 			ray_pos.y += 1;
 	}
 	hit_info.distance = distance_two_points(ray_pos, vars->fpos);
-	//hit_info.distance = distance_two_points(ray_pos, vars->fpos) * cos(angle - vars->view_angle);
 	hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
 	hit_info.vertical_hit = false;
 	return (hit_info);
