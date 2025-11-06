@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:18:10 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/03 13:17:10 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/06 15:35:49 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	overwrite_previous_frame(t_vars *vars)
 
 	i = 0;
 	j = 0;
-	while (i < WIDTH) //overwriting the previous frame
+	while (i < WIDTH)
 	{
 		while (j < HEIGHT)
 		{
@@ -30,41 +30,6 @@ void	overwrite_previous_frame(t_vars *vars)
 		i++;
 	}
 }
-
-// mlx_texture_t *define_texture(t_vars *vars, int x, float angle, bool vertical_hit)
-// {
-// 	(void)x;
-// 	//angle = normalise_angle(calculate_angle(vars, x));
-// 	if (facing_right(angle) && facing_up(angle))
-// 	{
-// 		if (vertical_hit == 1)
-// 			return (vars->textures->east);
-// 		else
-// 			return (vars->textures->north);
-// 	}
-// 	else if (facing_right(angle) && facing_down(angle))
-// 	{
-// 		if (vertical_hit == 1)
-// 			return (vars->textures->east);
-// 		else
-// 			return (vars->textures->south);
-// 	}
-// 	else if (facing_left(angle) && facing_up(angle))
-// 	{
-// 		if (vertical_hit == 1)
-// 			return (vars->textures->west);
-// 		else
-// 			return (vars->textures->north);
-// 	}
-// 	else if (facing_left(angle) && facing_down(angle))
-// 	{
-// 		if (vertical_hit == 1)
-// 			return (vars->textures->west);
-// 		else
-// 			return (vars->textures->south);
-// 	}
-// 	return (NULL);
-// }
 
 mlx_texture_t	*right_texture(t_vars *vars, double angle, bool vertical_hit)
 {
@@ -114,7 +79,7 @@ mlx_texture_t	*define_texture(t_vars *vars, double angle, bool vertical_hit)
 	return (NULL);
 }
 
-uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, double jump, double begin_texture)
+uint32_t	get_color(t_vars *vars, int ye, double jump, double begin_texture)
 {
 	int			index;
 	uint32_t	color;
@@ -122,15 +87,17 @@ uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, double jump, doubl
 
 	(void)vars;
 	tex_y = (int)((ye * jump) + begin_texture);
-	// if (tex_y >= ((int)(hit_info.texture->height - begin_texture)))
-	// 	 tex_y = (hit_info.texture->height - begin_texture) - 1; // why is this necessary ? bad bounds before maybe
-	// not needed anymore
-	index = (tex_y * hit_info.texture->width
-			+ ((int)(hit_info.percent_of_hit * hit_info.texture->width)))
-		* hit_info.texture->bytes_per_pixel;
-
-	color = (hit_info.texture->pixels[index + 0] << 24)
-		| (hit_info.texture->pixels[index + 2] << 8)
-		| (hit_info.texture->pixels[index + 1] << 16) | 0xFF;
+	index = (tex_y * vars->hit_info.texture->width
+			+ ((int)(vars->hit_info.percent_of_hit
+					* vars->hit_info.texture->width)))
+		* vars->hit_info.texture->bytes_per_pixel;
+	color = (vars->hit_info.texture->pixels[index + 0] << 24)
+		| (vars->hit_info.texture->pixels[index + 2] << 8)
+		| (vars->hit_info.texture->pixels[index + 1] << 16) | 0xFF;
 	return (color);
 }
+
+	// if (tex_y >= ((int)(hit_info.texture->height - begin_texture)))
+	// 	 tex_y = (hit_info.texture->height - begin_texture) - 1;
+	// why is this necessary ? bad bounds before maybe
+	// not needed anymore

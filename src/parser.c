@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 17:34:37 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/06 12:55:00 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/06 15:28:34 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,6 @@ void	parser_map_2nd_round(t_config *data, char *file)
 	close (fd);
 }
 
-void	check_map_before(t_config *data)
-{
-	if (data->map_before == 1)
-		data->stop = 1;
-}
-
 void	parser(int fd, t_config *data, char *file)
 {
 	char	*str;
@@ -105,16 +99,16 @@ void	parser(int fd, t_config *data, char *file)
 	}
 	close (fd);
 	check_map_before(data);
-	// if (data->map_before == 1)
-	// 	data->stop = 1;
 	if (data->stop == 0)
 	{
 		create_empty_map(data);
 		parser_map_2nd_round(data, file);
 	}
 	check_map(data);
-	if (data->stop == 0)
-	{
+}
+
+	// if (data->stop == 0)
+	// {
 		// printf("NO: %s\n", data->texture_no);
 		// printf("SO: %s\n", data->texture_so);
 		// printf("WE: %s\n", data->texture_we);
@@ -123,15 +117,14 @@ void	parser(int fd, t_config *data, char *file)
 		// printf("floor color: %x\n", data->floor_color);
 		// printf("ceiling color: %x\n", data->ceiling_color);
 		// printf("\n");
-		printf("map_width: %d\n", data->map_width);
-		printf("map_height: %d\n", data->map_height);
+		// printf("map_width: %d\n", data->map_width);
+		// printf("map_height: %d\n", data->map_height);
 		// printf("\n");
 		// printf("x_position: %i\n", data->x_position);
 		// printf("y_position: %i\n", data->y_position);
 		// printf("direction: %c\n", data->player_dir);
-		print_map(data);
-	}
-}
+	// 	print_map(data);
+	// }
 
 void	parse_element(char *line, t_config *data)
 {
@@ -141,9 +134,11 @@ void	parse_element(char *line, t_config *data)
 	check = 0;
 	new_line = remove_space_tab_between(line);
 	if (starts_with(new_line, "NO ") == 1 || starts_with(new_line, "SO ") == 1
-		|| starts_with(new_line, "WE ") == 1 || starts_with(new_line, "EA ") == 1)
+		|| starts_with(new_line, "WE ") == 1
+		|| starts_with(new_line, "EA ") == 1)
 		check = parse_texture(new_line, data);
-	else if (starts_with(new_line, "F ") == 1 || starts_with(new_line, "C ") == 1)
+	else if (starts_with(new_line, "F ") == 1
+		|| starts_with(new_line, "C ") == 1)
 		check = parse_color(new_line, data);
 	free(new_line);
 	if (check < 0)

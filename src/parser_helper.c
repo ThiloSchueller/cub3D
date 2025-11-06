@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:51:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/06 12:47:56 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/06 15:25:07 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,6 @@ char	*remove_space_tab_between(char *line)
 	}
 	return (new_line);
 }
-
-//how do I remove space and tabs in between?
-//maybe I need to do ft_split
-//everytime I have something written it is considered as one token
-//then recreate a sentence be separating those tokens with spaces
-
-
 
 int	starts_with(char *line, char *str)
 {
@@ -106,12 +99,3 @@ char	*ft_strdup_no_newline(const char *s1)
 
 //we need this helper_function to not include the \n
 //when we look at the validity of the path
-
-int	parse_texture_color_before(t_config *data)
-{
-	if (data->no_set == 1 && data->so_set == 1 && data->we_set == 1
-		&& data->ea_set == 1 && data->floor_set == 1 && data->ceil_set == 1)
-		return (1);
-	data->map_before = 1;
-	return (1);
-}

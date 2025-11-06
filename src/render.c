@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 15:04:27 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/06 15:32:58 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,10 @@ int	render_walls(t_vars *vars)
 		ye = 0;
 		while (y < HEIGHT / 2 + vars->hit_info.wall_height / 2)
 		{
+			// mlx_put_pixel(vars->walls, x, y,
+			// 	get_color(vars, ye, vars->hit_info, jump, begin_texture));
 			mlx_put_pixel(vars->walls, x, y,
-				get_color(vars, ye, vars->hit_info, jump, begin_texture));
+				get_color(vars, ye, jump, begin_texture));
 			y++;
 			ye++;
 		}
@@ -121,7 +123,6 @@ int	render_walls(t_vars *vars)
 // 	double		jump;
 // 	double		begin_texture;
 
-
 // 	x = 0;
 // 	overwrite_previous_frame(vars);
 // 	while (x < WIDTH)
@@ -131,18 +132,20 @@ int	render_walls(t_vars *vars)
 // 		jump = hit_info.texture->height / (hit_info.wall_height + 1);
 // 		//added this +1
 // 		//we need this +1 for our jump to be a bit smaller
-// 		//so that our tex_y (ye * jump) never goes above the texture->height 1024
+// 		//so that our tex_y (ye * jump)never goes above the texture->height 1024
 // 		//failling case with wall_height = 230 ye = 231
 // 		if (hit_info.wall_height > 600)
 // 		{
-// 			begin_texture = (hit_info.wall_height /2 - (double)HEIGHT /2) * jump;
+// 			begin_texture = (hit_info.wall_height /2
+				//- (double)HEIGHT /2) * jump;
 // 			hit_info.wall_height = 600;
 // 		}
 // 		y = HEIGHT / 2 - hit_info.wall_height / 2;
 // 		ye = 0;
 // 		while(y < HEIGHT / 2 + hit_info.wall_height / 2)
 // 		{
-// 			mlx_put_pixel(vars->walls, x, y, get_color(vars, ye, hit_info, jump, begin_texture));
+// 			mlx_put_pixel(vars->walls, x, y,
+			//get_color(vars, ye, hit_info, jump, begin_texture));
 // 			y++;
 // 			ye++;
 // 		}
@@ -159,13 +162,3 @@ int	render(t_vars *vars)
 	render_walls(vars);
 	return (0);
 }
-
-			// if ( x == 400)
-			// 	printf("index value is %d\n", index);
-						// if ( x == 400)
-			// {
-			// 	printf("y value is %d, ye value is %d, wallheight is %d \n", y, ye, wall_height);
-			// 	printf("ye * jump is %d, ye * jump * texture->width is %d\n", (ye * jump), (ye * jump * texture->width));
-			// 	printf("value of x is %d\n", ((int)(hit_info.percent_of_hit * texture->width)));
-			// }
-					//wall_height = (HEIGHT / 2 + hit_info.height / 2) - (HEIGHT / 2 - hit_info.height / 2);

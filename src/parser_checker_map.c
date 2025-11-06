@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:21:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/10/22 17:47:10 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/06 15:39:51 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,5 @@ int	check_conditions_map(char **map, t_config *data)
 		return (-1);
 	if (player(map, data) < 1)
 		return (-1);
-	printf("valid_map\n");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 15:03:24 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/06 15:36:57 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ void	init_after_mlx(t_vars *vars);
 int		check_validity_input(char *str);
 int		color_to_hex(int red, int green, int blue);
 char	**array_color(char *str);
-void	free_array(char **array);
 int		color_str_to_int(char *str);
 int		parse_color(char *line, t_config *data);
 //parser_helper.c
@@ -146,7 +145,6 @@ char	*remove_space_tab_between(char *line);
 int		starts_with(char *line, char *str);
 char	*ft_strdup_no_newline_map(const char *s1);
 char	*ft_strdup_no_newline(const char *s1);
-int		parse_texture_color_before(t_config *data);
 //parser_map.c
 int		is_map_line(char *line);
 void	parse_map(char *line, t_config *data);
@@ -160,7 +158,6 @@ int		parse_texture(char *line, t_config *data);
 int		copy_line(char *dst, char *src, t_config *data);
 int		compare_update_map(char *line, t_config *data);
 void	parser_map_2nd_round(t_config *data, char *file);
-void	check_map_before(t_config *data);
 void	parser(int fd, t_config *data, char *file);
 void	parse_element(char *line, t_config *data);
 //parser_checker_map.c
@@ -205,7 +202,7 @@ void		overwrite_previous_frame(t_vars *vars);
 mlx_texture_t	*right_texture(t_vars *vars, double angle, bool vertical_hit);
 mlx_texture_t	*left_texture(t_vars *vars, double angle, bool vertical_hit);
 mlx_texture_t	*define_texture(t_vars *vars, double angle, bool vertical_hit);
-uint32_t	get_color(t_vars *vars, int ye ,t_hit_info hit_info, double jump, double begin_texture);
+uint32_t	get_color(t_vars *vars, int ye, double jump, double begin_texture);
 //minimap.c
 t_fpoint	get_scaling_minimap(t_vars *vars);
 int			render_minimap_ray(t_vars *vars, double angle);
@@ -215,6 +212,9 @@ char		**calc_smap(t_vars *vars);
 //helpers.c
 bool		is_player_char(char c);
 void		ft_free_array(char **a);
+void		free_array(char **array);
+int			parse_texture_color_before(t_config *data);
+void		check_map_before(t_config *data);
 //exit.c
 int			ft_exit(int code, t_vars *vars);
 void		ft_free_vars(t_vars *vars);
