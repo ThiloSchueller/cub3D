@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:02:54 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/05 15:20:48 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 17:38:59 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,46 +22,6 @@ void	set_view_angle(t_vars *vars)
 		vars->view_angle = PI;
 	if (vars->config->player_dir == 'S')
 		vars->view_angle = 1.5 * PI;
-}
-
-char	**calc_cmap(t_vars *vars)
-{
-	char	**cmap;
-	int		x;
-	int		y;
-
-	x = 0;
-	y = 0;
-	cmap = malloc(((vars->smap_width) + 1) * sizeof(char *));
-	if (cmap == NULL)
-		return (NULL);
-	while (x < vars->smap_width)
-	{
-		cmap[x] = malloc((vars->smap_height + 1) * sizeof(char));
-		if (cmap[x] == NULL)
-			return (ft_free_array(cmap), NULL);
-		while (y < vars->smap_height)
-		{
-			if (vars->smap[x][y] == '0' && 
-				(vars->smap[x -1][y] == '1' ||
-					vars->smap[x+1][y] == '1' ||
-					vars->smap[x][y-1] == '1' ||
-					vars->smap[x][y+1] == '1' ||
-					vars->smap[x+1][y+1] == '1' ||
-					vars->smap[x+1][y-1] == '1' ||
-					vars->smap[x-1][y+1] == '1' ||
-					vars->smap[x-1][y-1] == '1'))
-				cmap[x][y] = '1';
-			else
-				cmap[x][y] = vars->smap[x][y];
-			y++;
-		}
-		cmap[x][y] = '\0';
-		y = 0;
-		x++;
-	}
-	cmap[x] = NULL;
-	return (cmap);
 }
 
 void	init_vars(t_vars *vars)

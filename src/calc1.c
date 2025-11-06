@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 11:23:09 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:04:22 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,67 +53,50 @@ t_hit_info	steep_angles(t_vars *vars, double angle)
 t_hit_info	calculate_distance(t_vars *vars, double angle)
 {
 	t_fpoint	ray_pos;
-	t_fpoint	next;
 	t_hit_info	hit_info;
 
 	ray_pos = vars->fpos;
-	if (fabs(fmod(angle, PI / 2)) < EPSILON || fabs(fmod(angle, PI / 2) - PI / 2) < EPSILON)
+	if (fabs(fmod(angle, PI / 2)) < EPSILON
+		|| fabs(fmod(angle, PI / 2) - PI / 2) < EPSILON)
 	{
 		hit_info = steep_angles(vars, angle);
 		hit_info.distance = hit_info.distance * cos(angle - vars->view_angle);
 		return (hit_info);
 	}
-	while (1)
-	{
-		next = lines_to_hit(ray_pos, angle);
-		ray_pos = calc_intersections(vars, angle, next.x, next.y);
-		if (ray_pos.x == next.x && confirm_hit_x(ray_pos.x, ray_pos.y, angle, vars))
-		{
-			hit_info.vertical_hit = true;
-			hit_info.percent_of_hit = fmod(ray_pos.y, SCALE) / SCALE;
-			break ;
-		}
-		else if (ray_pos.y == next.y && confirm_hit_y(ray_pos.x, ray_pos.y, angle, vars))
-		{
-			hit_info.vertical_hit = false;
-			hit_info.percent_of_hit = fmod(ray_pos.x, SCALE) / SCALE;
-			break ;
-		}
-	}
+	ray_walk_loop(vars, angle, &ray_pos, &hit_info);
 	hit_info.distance = distance_two_points(vars->fpos, ray_pos);
 	hit_info.distance = hit_info.distance * cos(angle - vars->view_angle);
 	return (hit_info);
 }
 
-t_fpoint	calc_intersections(t_vars *vars, double angle, double x_to_hit, double y_to_hit)
+t_fpoint	calc_intersections(
+	t_vars *vars, double angle, double x_to_hit, double y_to_hit)
 {
 	double		c;
 	double		m;
 	double		x_hit;
 	double		y_hit;
-	double		distance_vertical;
-	double		distance_horizontal;
+	t_fpoint	distances;
 
 	m = -tan(angle);
-	if (m == 0.0)
-		m = 0.01;
 	c = vars->fpos.y - (m * vars->fpos.x);
 	x_hit = (y_to_hit - c) / m;
 	y_hit = m * x_to_hit + c;
-	distance_vertical = distance_two_points(vars->fpos, (t_fpoint){x_to_hit, y_hit});
-	distance_horizontal = distance_two_points(vars->fpos, (t_fpoint){x_hit, y_to_hit});
-	if (distance_horizontal < distance_vertical)
+	distances.y = distance_two_points(vars->fpos, (t_fpoint){x_to_hit, y_hit});
+	distances.x = distance_two_points(vars->fpos, (t_fpoint){x_hit, y_to_hit});
+	if (distances.x < distances.y)
 		return ((t_fpoint){x_hit, y_to_hit});
 	else
 		return ((t_fpoint){x_to_hit, y_hit});
 }
-
+//distances.y is now distances_vertical
 // distance_vertical = read distance to vertical line
 //distance_horizontal = distance to horizontal line
 // if (fabs(angle - normalise_angle(vars->view_angle)) < 0.02)
 // {
 // 	printf("normalised angle is %f\n", angle);
-// 	printf("estimated distance was %f\n", distance_two_points(vars->fpos, (t_fpoint){ray_pos.x, ray_pos.y}));
+// 	printf("estimated distance was %f\n",
+//distance_two_points(vars->fpos, (t_fpoint){ray_pos.x, ray_pos.y}));
 // 	printf("estimated hit point was x: %f\n", ray_pos.x);
 // 	printf("estimated hit point was y: %f\n", ray_pos.y);
 // 	printf("calculated Steigung is %f\n", m);
@@ -123,8 +106,10 @@ t_fpoint	calc_intersections(t_vars *vars, double angle, double x_to_hit, double 
 // 	printf("it is a vertical hit: %d\n", hit_info.vertical_hit);
 // 	printf("distance horizontal would be %f\n", distance_horizontal);
 // 	printf("distance vertical would be %f\n", distance_vertical);
-// 	//if (!(y_to_hit < 0 || y_to_hit > vars->smap_height || x_hit < 0 || x_hit > vars->smap_width))
-// 	//	printf("checking in point x %d and y %d is %c\n", (int)x_to_hit, (int)y_to_hit, vars->smap[(int)x_hit][(int)y_to_hit]);
+// 	//if (!(y_to_hit < 0 || y_to_hit > vars->smap_height
+//|| x_hit < 0 || x_hit > vars->smap_width))
+// 	//	printf("checking in point x %d and y %d is %c\n",
+//(int)x_to_hit, (int)y_to_hit, vars->smap[(int)x_hit][(int)y_to_hit]);
 // 	printf("---------------------------------------\n");
 // 	printf("player pos  x is %f\n", vars->fpos.x);
 // 	printf("player pos  y is %f\n", vars->fpos.y);

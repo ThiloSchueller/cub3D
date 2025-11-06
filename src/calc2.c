@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:52:54 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/03 13:42:04 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/07 11:16:43 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,54 @@ double	distance_two_points(t_fpoint p, t_fpoint q)
 
 bool	confirm_hit_x(double x_to_hit, double y_hit, double angle, t_vars *vars)
 {
-	if (x_to_hit < 0 || x_to_hit > vars->smap_width - 1 || y_hit < 0 || y_hit > vars->smap_height - 1)
+	if (x_to_hit < 0 || x_to_hit > vars->smap_width - 1
+		|| y_hit < 0 || y_hit > vars->smap_height - 1)
 		return (true);
 	if (facing_right(angle) && (vars->smap[(int)x_to_hit][(int)y_hit] == '1'))
 		return (true);
-	else if (facing_left(angle) && (vars->smap[(int)x_to_hit -1][(int)(y_hit)] == '1'))
+	else if (facing_left(angle)
+		&& (vars->smap[(int)x_to_hit -1][(int)(y_hit)] == '1'))
 		return (true);
 	return (false);
 }
 
 bool	confirm_hit_y(double x_hit, double y_to_hit, double angle, t_vars *vars)
 {
-	if (y_to_hit < 0 || y_to_hit > vars->smap_height - 1 || x_hit < 0 || x_hit > vars->smap_width - 1)
+	if (y_to_hit < 0 || y_to_hit > vars->smap_height - 1
+		|| x_hit < 0 || x_hit > vars->smap_width - 1)
 		return (true);
 	if (facing_down(angle) && (vars->smap[(int)x_hit][(int)y_to_hit] == '1'))
 		return (true);
-	else if (facing_up(angle) && (vars->smap[(int)x_hit][(int)y_to_hit -1] == '1'))
+	else if (facing_up(angle)
+		&& (vars->smap[(int)x_hit][(int)y_to_hit -1] == '1'))
 		return (true);
 	return (false);
+}
+
+void	ray_walk_loop(
+	t_vars *vars, double angle, t_fpoint *ray_pos, t_hit_info *hit_info)
+{
+	t_fpoint	next;
+
+	while (1)
+	{
+		next = lines_to_hit(*ray_pos, angle);
+		*ray_pos = calc_intersections(vars, angle, next.x, next.y);
+		if (ray_pos->x == next.x
+			&& confirm_hit_x(ray_pos->x, ray_pos->y, angle, vars))
+		{
+			hit_info->vertical_hit = true;
+			hit_info->percent_of_hit = fmod(ray_pos->y, SCALE) / SCALE;
+			break ;
+		}
+		else if (ray_pos->y == next.y
+			&& confirm_hit_y(ray_pos->x, ray_pos->y, angle, vars))
+		{
+			hit_info->vertical_hit = false;
+			hit_info->percent_of_hit = fmod(ray_pos->x, SCALE) / SCALE;
+			break ;
+		}
+	}
 }
 
 //read confirm_hit_x as cofirm hit in x = const

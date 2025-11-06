@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 15:36:57 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/07 11:13:01 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ void		set_view_angle(t_vars *vars);
 void		ft_key_hook(mlx_key_data_t keydata, void *param);
 void		ft_loop_hook(void *param);
 t_fpoint	vec_add(t_fpoint a, t_fpoint b);
+t_fpoint	normalise_vec_length(t_fpoint d);
 //key_arrows.c
 void		left_key(t_vars *vars);
 void		right_key(t_vars *vars);
@@ -190,7 +191,6 @@ t_fpoint		w_key(t_vars *vars);
 t_fpoint		s_key(t_vars *vars);
 t_fpoint		a_key(t_vars *vars);
 t_fpoint		d_key(t_vars *vars);
-void		move_2d(t_vars *vars, t_fpoint d);
 //render.c
 int			render(t_vars *vars);
 int			render_background(t_vars *vars);
@@ -229,6 +229,7 @@ double		distance_two_points(t_fpoint p, t_fpoint q);
 double		normalise_angle(double angle);
 bool		confirm_hit_x(double x_to_hit, double y_hit, double angle, t_vars *vars);
 bool		confirm_hit_y(double x_hit, double y_to_hit, double angle, t_vars *vars);
+void	ray_walk_loop(t_vars *vars, double angle, t_fpoint *ray_pos, t_hit_info *hit_info);
 //directions.c
 bool		facing_right(double angle);
 bool		facing_left(double angle);
@@ -236,13 +237,28 @@ bool		facing_up(double angle);
 bool		facing_down(double angle);
 //lines.c
 t_fpoint	lines_to_hit(t_fpoint point, double angle);
-bool	forbidden_square(t_vars *vars,double dx,double dy, double angle);
-// t_fpoint	lines_to_hit_up(t_fpoint point, double angle);
-// t_fpoint	lines_to_hit_down(t_fpoint point, double angle);
+//bool		forbidden_square(t_vars *vars,double dx,double dy, double angle);
+t_fpoint	lines_to_hit_up(t_fpoint point, double angle);
+t_fpoint	lines_to_hit_down(t_fpoint point, double angle);
 //hit_steep_angles.c
 t_hit_info	hit_top(t_vars *vars, double angle);
 t_hit_info	hit_right(t_vars *vars, double angle);
 t_hit_info	hit_left(t_vars *vars, double angle);
 t_hit_info	hit_bot(t_vars *vars, double angle);
+//move_helpers.c
+double	ox(double angle);
+double	oy(double angle);
+bool	confirm_move_x(
+	double x_to_hit, double y_hit, double angle, t_vars *vars);
+bool	confirm_move_y(
+	double x_hit, double y_to_hit, double angle, t_vars *vars);
+//move.c
+void		move_2d(t_vars *vars, t_fpoint d);
+void	move_over_one_line(t_vars *vars, double angle, t_fpoint new);
+void	move_over_two_lines(t_vars *vars, double angle, t_fpoint new);
+void	second_step(t_vars *vars, double angle, t_fpoint new);
+//collisionmap.c
+char	**calc_cmap(t_vars *vars);
+void	fill_cmap(t_vars *vars, int x, int y, char ***cmap);
 
 #endif

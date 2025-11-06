@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:31:03 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 11:29:58 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 14:29:43 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,19 @@ t_fpoint	vec_add(t_fpoint a, t_fpoint b)
 	return ((t_fpoint){a.x + b.x, a.y + b.y});
 }
 
+t_fpoint	normalise_vec_length(t_fpoint d)
+{
+	double	len;
+
+	len = sqrt(d.x * d.x + d.y * d.y);
+	if (len > 0)
+	{
+		d.x /= len;
+		d.y /= len;
+	}
+	return (d);
+}
+
 void	ft_loop_hook(void *param)
 {
 	t_vars		*vars;
@@ -62,12 +75,7 @@ void	ft_loop_hook(void *param)
 		d = vec_add(d, a_key(vars));
 	if (mlx_is_key_down(vars->mlx, MLX_KEY_D))
 		d = vec_add(d, d_key(vars));
-	double len = sqrt(d.x * d.x + d.y * d.y);
-	if (len > 0)
-	{
-		d.x /= len;
-		d.y /= len;
-	}
+	d = normalise_vec_length(d);
 	if (d.x != 0 || d.y != 0)
 		move_2d(vars, d);
 	render(vars);

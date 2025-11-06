@@ -32,7 +32,9 @@ SOURCES = 	main.c \
 			small_render.c \
 			hit_steep_angles.c \
 			check_arg_file.c \
-			move.c
+			move.c \
+			move_helpers.c \
+			collisionmap.c
 
 HEADERS = cub3D.h
 OBJ = $(addprefix $(OBJECT_DIR)/, $(SOURCES:.c=.o))

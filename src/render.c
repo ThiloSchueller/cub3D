@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 15:32:58 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/07 11:15:43 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

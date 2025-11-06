@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/06 15:19:57 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/07 11:13:54 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	main(int argc, char *argv[])
 	init_after_mlx(&vars);
 	mlx_key_hook(vars.mlx, &ft_key_hook, &vars);
 	mlx_loop_hook(vars.mlx, &ft_loop_hook, &vars);
-	//render(&vars);
 	mlx_loop(vars.mlx);
 	clean_after_x(&vars);
 	return (0);
