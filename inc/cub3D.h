@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 11:12:52 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/06 13:07:51 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ void	init_after_mlx(t_vars *vars);
 //parser_colours.c
 int		check_validity_input(char *str);
 int		color_to_hex(int red, int green, int blue);
+char	**array_color(char *str);
+void	free_array(char **array);
 int		color_str_to_int(char *str);
 int		parse_color(char *line, t_config *data);
 //parser_helper.c
@@ -158,6 +160,7 @@ int		parse_texture(char *line, t_config *data);
 int		copy_line(char *dst, char *src, t_config *data);
 int		compare_update_map(char *line, t_config *data);
 void	parser_map_2nd_round(t_config *data, char *file);
+void	check_map_before(t_config *data);
 void	parser(int fd, t_config *data, char *file);
 void	parse_element(char *line, t_config *data);
 //parser_checker_map.c

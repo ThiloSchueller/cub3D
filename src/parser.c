@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 17:34:37 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/05 12:52:19 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/06 12:55:00 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ void	parser_map_2nd_round(t_config *data, char *file)
 	close (fd);
 }
 
+void	check_map_before(t_config *data)
+{
+	if (data->map_before == 1)
+		data->stop = 1;
+}
+
 void	parser(int fd, t_config *data, char *file)
 {
 	char	*str;
@@ -98,8 +104,9 @@ void	parser(int fd, t_config *data, char *file)
 			str = get_next_line(fd);
 	}
 	close (fd);
-	if (data->map_before == 1)
-		data->stop = 1;
+	check_map_before(data);
+	// if (data->map_before == 1)
+	// 	data->stop = 1;
 	if (data->stop == 0)
 	{
 		create_empty_map(data);
