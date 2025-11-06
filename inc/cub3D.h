@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 13:07:51 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/06 15:03:24 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ typedef struct s_hit_info
 	t_image		images;
 	t_texture	*textures;
 	bool		mmswitch;
-	//t_hit_info	hit_info; //not here
+	t_hit_info	hit_info;
  }	t_vars;
 
 
@@ -198,6 +198,7 @@ void		move_2d(t_vars *vars, t_fpoint d);
 int			render(t_vars *vars);
 int			render_background(t_vars *vars);
 int			render_minimap(t_vars *vars);
+double		initialize_values(double *jump, t_vars *vars, int x);
 int			render_walls(t_vars *vars);
 //small_render.c
 void		overwrite_previous_frame(t_vars *vars);
