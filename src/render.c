@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/07 11:15:43 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/07 13:24:25 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ int	render_walls(t_vars *vars)
 		ye = 0;
 		while (y < HEIGHT / 2 + vars->hit_info.wall_height / 2)
 		{
-			// mlx_put_pixel(vars->walls, x, y,
-			// 	get_color(vars, ye, vars->hit_info, jump, begin_texture));
 			mlx_put_pixel(vars->walls, x, y,
 				get_color(vars, ye, jump, begin_texture));
 			y++;
