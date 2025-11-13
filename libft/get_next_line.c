@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:19:29 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/07 14:19:43 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/13 14:26:50 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*get_next_line(int fd)
 		return (free(str), NULL);
 	if ((str != NULL) && (buf[0] == '\0'))
 		return (str);
-	ft_memmove(buf, ft_strchr(buf, '\n') + 1, \
+	ft_memmove(buf, ft_strchr(buf, '\n') + 1,
 		ft_strlen(ft_strchr(buf, '\n')));
 	re = ft_makeline(str);
 	if (re == NULL)
