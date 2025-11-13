@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/07 13:52:35 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/13 16:15:53 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 typedef struct s_config
 {
 	int		stop;
+	int		map_started;
 	int		map_before;
 	int		no_set;
 	int		so_set;
@@ -151,6 +152,7 @@ void			free_map(char **map);
 void			create_empty_map(t_config *data);
 void			print_map(t_config *data);
 //parser_textures.c
+int				ft_strncmp_back(const char *s1, const char *s2, size_t n);
 int				check_valid_path(char *path);
 int				parse_texture(char *line, t_config *data);
 //parser.c
@@ -164,6 +166,7 @@ char			**map_copy(t_config *data);
 void			print_copy(char **map);
 void			check_map(t_config *data);
 int				check_conditions_map(char **map, t_config *data);
+void			start_map(t_config *data, char *file);
 //parser_conditions_map.c
 int				check_outside_walls(char **map);
 int				check_last_wall(char **map);

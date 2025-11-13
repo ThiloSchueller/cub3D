@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:16:27 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/05 10:29:16 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/13 16:20:07 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	parse_map(char *line, t_config *data)
 {
 	int	len;
 
+	data->map_started = 1;
 	len = ft_strlen(line);
 	if (len > data->map_width)
 		data->map_width = len;

@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 17:34:37 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/06 15:28:34 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/13 16:16:42 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	parser(int fd, t_config *data, char *file)
 			else
 				parse_element(str, data);
 		}
+		else if (str[0] == '\n' && data->map_started == 1)
+			data->stop = 1;
 		if (str)
 			free(str);
 		if (data->stop == 0)
@@ -100,10 +102,7 @@ void	parser(int fd, t_config *data, char *file)
 	close (fd);
 	check_map_before(data);
 	if (data->stop == 0)
-	{
-		create_empty_map(data);
-		parser_map_2nd_round(data, file);
-	}
+		start_map(data, file);
 	check_map(data);
 }
 
@@ -140,6 +139,8 @@ void	parse_element(char *line, t_config *data)
 	else if (starts_with(new_line, "F ") == 1
 		|| starts_with(new_line, "C ") == 1)
 		check = parse_color(new_line, data);
+	else
+		check = -1;
 	free(new_line);
 	if (check < 0)
 	{

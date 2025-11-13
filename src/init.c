@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 11:02:54 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 17:38:59 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/13 16:08:38 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	init_vars(t_vars *vars)
 void	init_data(t_config *data)
 {
 	data->stop = 0;
+	data->map_started = 0;
 	data->map_before = 0;
 	data->no_set = 0;
 	data->so_set = 0;
