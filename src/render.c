@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:30:58 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/07 13:24:25 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/14 14:51:30 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,15 @@ int	render_walls(t_vars *vars)
 	return (0);
 }
 
+int	render(t_vars *vars)
+{
+	render_background(vars);
+	if (vars->mmswitch == true)
+		render_minimap(vars);
+	render_walls(vars);
+	return (0);
+}
+
 // int	render_walls(t_vars *vars)
 // {
 // 	int			x;
@@ -151,12 +160,3 @@ int	render_walls(t_vars *vars)
 // 	}
 // 	return (0);
 // }
-
-int	render(t_vars *vars)
-{
-	render_background(vars);
-	if (vars->mmswitch == true)
-		render_minimap(vars);
-	render_walls(vars);
-	return (0);
-}

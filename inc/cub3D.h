@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/13 16:15:53 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/18 13:05:11 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define WIDTH 800
 # define SCALE 10
 # define PI 3.1415926535
-# define FOV 60
+# define FOV 120
 # define MMSIZE 200.0
 # define EPSILON 0.001
 # define ERROR_MLX 10

@@ -6,7 +6,7 @@
 /*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:56:28 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/06 18:04:22 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:43:47 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 double	calculate_angle(t_vars *vars, int x)
 {
-	double	degree_per_pixel;
+	double	camera_x;
 	double	angle_for_x;
 
-	degree_per_pixel = (double)FOV / (double)WIDTH;
-	angle_for_x = vars->view_angle + (FOV / 2 * PI / 180)
-		- degree_per_pixel * x * PI / 180;
+	camera_x = 2.0 * x / (double)WIDTH - 1.0;
+	angle_for_x = vars->view_angle
+		- atan(camera_x * tan((FOV * 0.5) * PI / 180.0));
 	return (angle_for_x);
 }
 
@@ -89,6 +89,16 @@ t_fpoint	calc_intersections(
 	else
 		return ((t_fpoint){x_to_hit, y_hit});
 }
+
+// double	calculate_angle(t_vars *vars, int x)
+// {
+// 	double	degree_per_pixel;
+// 	double	angle_for_x;
+// 	degree_per_pixel = (double)FOV / (double)WIDTH;
+// 	angle_for_x = vars->view_angle + (FOV / 2 * PI / 180)
+// 		- degree_per_pixel * x * PI / 180;
+// 	return (angle_for_x);
+// }
 //distances.y is now distances_vertical
 // distance_vertical = read distance to vertical line
 //distance_horizontal = distance to horizontal line
