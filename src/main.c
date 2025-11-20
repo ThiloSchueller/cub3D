@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:14:06 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/07 11:13:54 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:38:27 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ void	clean_after_x(t_vars *vars)
 	mlx_terminate(vars->mlx);
 }
 
+void	delete_texture_clean(t_vars *vars) //new_function
+{
+	if (vars->textures->east)
+		mlx_delete_texture(vars->textures->east);
+	if (vars->textures->west)
+		mlx_delete_texture(vars->textures->west);
+	if (vars->textures->north)
+		mlx_delete_texture(vars->textures->north);
+	if (vars->textures->south)
+		mlx_delete_texture(vars->textures->south);
+	ft_free_vars(vars);
+	mlx_terminate(vars->mlx);
+}
+
 void	init_after_mlx(t_vars *vars)
 {
 	vars->background = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
@@ -36,6 +50,13 @@ void	init_after_mlx(t_vars *vars)
 	vars->background->instances->z = 1;
 	vars->minimap->instances->z = 3;
 	vars->walls->instances->z = 2;
+}
+
+void	call_mlx_function(t_vars *vars) //new_function_gain_place_in_main
+{
+	mlx_key_hook(vars->mlx, &ft_key_hook, vars);
+	mlx_loop_hook(vars->mlx, &ft_loop_hook, vars);
+	mlx_loop(vars->mlx);
 }
 
 int	main(int argc, char *argv[])
@@ -56,11 +77,16 @@ int	main(int argc, char *argv[])
 	vars.mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!vars.mlx)
 		ft_exit(ERROR_MLX, &vars);
-	ft_get_textures(&vars);
+	if (ft_get_textures(&vars) < 0)
+	{
+		delete_texture_clean(&vars);
+		return (1);
+	}
 	init_after_mlx(&vars);
-	mlx_key_hook(vars.mlx, &ft_key_hook, &vars);
-	mlx_loop_hook(vars.mlx, &ft_loop_hook, &vars);
-	mlx_loop(vars.mlx);
+	call_mlx_function(&vars);  //added
+	// mlx_key_hook(vars.mlx, &ft_key_hook, &vars);
+	// mlx_loop_hook(vars.mlx, &ft_loop_hook, &vars);
+	// mlx_loop(vars.mlx);
 	clean_after_x(&vars);
 	return (0);
 }

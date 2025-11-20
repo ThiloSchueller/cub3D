@@ -6,35 +6,35 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:52:55 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/13 15:57:43 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/20 15:39:02 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-int	ft_strncmp_back(const char *s1, const char *s2, size_t n)
-{
-	int	i;
-	int	j;
+// int	ft_strncmp_back(const char *s1, const char *s2, size_t n)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	j = 0;
-	if (!s1 || !s2)
-		return (-1);
-	while (s1[i] != '\0')
-		i++;
-	while (s2[j] != '\0')
-		j++;
-	while (n > 0)
-	{
-		if (s1[i] != s2[j])
-			return (-1);
-		i--;
-		j--;
-		n--;
-	}
-	return (1);
-}
+// 	i = 0;
+// 	j = 0;
+// 	if (!s1 || !s2)
+// 		return (-1);
+// 	while (s1[i] != '\0')
+// 		i++;
+// 	while (s2[j] != '\0')
+// 		j++;
+// 	while (n > 0)
+// 	{
+// 		if (s1[i] != s2[j])
+// 			return (-1);
+// 		i--;
+// 		j--;
+// 		n--;
+// 	}
+// 	return (1);
+// }
 
 int	check_valid_path(char *path)
 {
@@ -43,13 +43,15 @@ int	check_valid_path(char *path)
 
 	i = 0;
 	valid_path = ft_strdup_no_newline(path);
-	if (ft_strncmp_back(valid_path, ".png", 3) == 1
-		&& access(valid_path, R_OK) == 0)
+	if (access(valid_path, R_OK) == 0)
+	// if (ft_strncmp_back(valid_path, ".png", 3) == 1
+	// 	&& access(valid_path, R_OK) == 0)
 	{
 		free(path);
 		free(valid_path);
 		return (1);
 	}
+	printf("la\n");
 	printf("Invalid_path\n");
 	free(path);
 	free(valid_path);

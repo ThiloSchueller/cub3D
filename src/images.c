@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:38:01 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/05 15:41:12 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:19:25 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	ft_get_textures(t_vars *vars)
+int	ft_get_textures(t_vars *vars) //modification_in_this_function -> from void to int
 {
 	vars->textures->east = mlx_load_png(vars->config->texture_ea);
 	vars->textures->west = mlx_load_png(vars->config->texture_we);
@@ -26,4 +26,8 @@ void	ft_get_textures(t_vars *vars)
 	vars->config->texture_we = NULL;
 	vars->config->texture_so = NULL;
 	vars->config->texture_no = NULL;
+	if (!vars->textures->east || !vars->textures->west ||    //added line
+			!vars->textures->south || !vars->textures->north) //added line
+		return (-1); //added line
+	return (1); //added line
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/18 13:05:11 by tschulle         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:17:44 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,9 @@ t_config		*check_arg_map(int argc, char *argv[]);
 //parser
 //main.c
 void			clean_after_x(t_vars *vars);
+void			delete_texture_clean(t_vars *vars);
 void			init_after_mlx(t_vars *vars);
+void			call_mlx_function(t_vars *vars);
 //parser_colours.c
 int				check_validity_input(char *str);
 int				color_to_hex(int red, int green, int blue);
@@ -174,7 +176,7 @@ int				player_position(char **map);
 int				zero_touch_space(char **map);
 int				player(char **map, t_config *data);
 //images.c
-void			ft_get_textures(t_vars *vars);
+int			ft_get_textures(t_vars *vars);
 //init.c
 void			init_data(t_config *data);
 void			free_data(t_config *data);
