@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:38:01 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/25 11:44:52 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/25 15:06:36 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	ft_get_textures(t_vars *vars)
 	vars->config->texture_we = NULL;
 	vars->config->texture_so = NULL;
 	vars->config->texture_no = NULL;
-	if (!vars->textures->east || !vars->textures->west ||
-			!vars->textures->south || !vars->textures->north)
+	if (!vars->textures->east || !vars->textures->west
+		|| !vars->textures->south || !vars->textures->north)
 		return (-1);
 	return (1);
 }

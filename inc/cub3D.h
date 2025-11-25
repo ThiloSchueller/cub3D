@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: tschulle <tschulle@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:37 by tschulle          #+#    #+#             */
-/*   Updated: 2025/11/20 15:17:44 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/25 14:49:14 by tschulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define WIDTH 800
 # define SCALE 10
 # define PI 3.1415926535
-# define FOV 120
+# define FOV 60
 # define MMSIZE 200.0
 # define EPSILON 0.001
 # define ERROR_MLX 10
@@ -176,7 +176,7 @@ int				player_position(char **map);
 int				zero_touch_space(char **map);
 int				player(char **map, t_config *data);
 //images.c
-int			ft_get_textures(t_vars *vars);
+int				ft_get_textures(t_vars *vars);
 //init.c
 void			init_data(t_config *data);
 void			free_data(t_config *data);
