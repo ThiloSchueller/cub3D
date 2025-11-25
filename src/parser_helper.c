@@ -6,7 +6,7 @@
 /*   By: lusimon <lusimon@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 13:51:42 by lusimon           #+#    #+#             */
-/*   Updated: 2025/11/06 15:25:07 by lusimon          ###   ########.fr       */
+/*   Updated: 2025/11/25 11:53:43 by lusimon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ char	*remove_space_tab_before(char *line)
 char	*remove_space_tab_between(char *line)
 {
 	char	*new_line;
-	int		i;
 	int		j;
 
-	i = 0;
 	j = 0;
 	new_line = remove_space_tab_before(line);
 	while (new_line[j] != '\0')
@@ -62,9 +60,7 @@ char	*ft_strdup_no_newline_map(const char *s1)
 {
 	char	*p;
 	int		len;
-	int		i;
 
-	i = 0;
 	len = ft_strlen(s1);
 	if (len > 0 && s1[len - 1] == '\n')
 		len--;
